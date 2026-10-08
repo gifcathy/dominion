@@ -7,3 +7,20 @@ Carte::Carte(const std::string& nom_carte, const int& valeur_carte, const std::s
         
 // destructeur 
 Carte::~Carte(){}; 
+
+// getter 
+const std::string& Carte::getNom() const{
+        return nom; 
+}
+
+const int& Carte::getValeur() const{
+        return valeur; 
+}
+
+const std::string& Carte::getType() const{
+        return type; 
+}
+
+const int& Carte::getCout() const{
+        return cout; 
+}

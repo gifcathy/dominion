@@ -4,6 +4,9 @@
 
 class Tresor : public Carte {
 
+public : 
+Tresor(const std::string& nom_carte, const int& valeur_carte, const int& cout_carte); 
+virtual ~Tresor(); 
 
 }; 
 

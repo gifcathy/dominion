@@ -4,6 +4,10 @@
 
 class Argent : public Tresor {
 
+public : 
+Argent(); 
+~Argent(); 
+
 }; 
 
 #endif 

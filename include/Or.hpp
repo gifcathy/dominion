@@ -4,6 +4,10 @@
 
 class Or : public Tresor {
 
+public : 
+Or(); 
+~Or(); 
+
 }; 
 
 #endif 

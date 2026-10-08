@@ -4,6 +4,10 @@
 
 class Victoire : public Carte {
 
+public : 
+Victoire(const std::string& nom_carte, const int& valeur_carte, const int& cout_carte); 
+~Victoire(); 
+
 }; 
 
 #endif 

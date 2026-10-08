@@ -4,6 +4,10 @@
 
 class Cuivre : public Tresor {
 
+public : 
+Cuivre(); 
+~Cuivre(); 
+
 }; 
 
 

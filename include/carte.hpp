@@ -1,6 +1,8 @@
 #ifndef CARTE_HPP
 #define CARTE_HPP
 
+#include <string> 
+
 class Carte{
 
 private : 
@@ -12,7 +14,14 @@ private :
 public :
     Carte(const std::string& nom_carte, const int& valeur_carte, const std::string& type_carte, 
         const int& cout_carte); 
-    ~Carte(); 
+    virtual ~Carte(); 
+
+    const std::string& getNom() const; 
+    const int& getValeur() const; 
+    const std::string& getType() const; 
+    const int& getCout() const; 
+
+    virtual void afficher() const = 0; 
 
 }; 
 

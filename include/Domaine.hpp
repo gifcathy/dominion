@@ -4,6 +4,10 @@
 
 class Domaine : public Victoire {
 
+public : 
+Domaine(); 
+~Domaine(); 
+
 }; 
 
 #endif
