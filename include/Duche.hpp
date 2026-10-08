@@ -4,6 +4,9 @@
 
 class Duche : public Victoire{
 
+public : 
+    Duche(); 
+    ~Duche(); 
 }; 
 
 #endif 

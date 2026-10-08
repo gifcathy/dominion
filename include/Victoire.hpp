@@ -4,9 +4,12 @@
 
 class Victoire : public Carte {
 
+private : 
+    int valeur; 
+
 public : 
-Victoire(const std::string& nom_carte, const int& valeur_carte, const int& cout_carte); 
-~Victoire(); 
+    Victoire(const std::string& nom_carte, const int& valeur_carte, const int& cout_carte); 
+    ~Victoire(); 
 
 }; 
 

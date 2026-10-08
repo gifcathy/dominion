@@ -4,6 +4,9 @@
 
 class Province : public Victoire {
 
+public :
+    Province(); 
+    ~Province(); 
 }; 
 
 #endif
