@@ -15,7 +15,6 @@ public :
     virtual ~Carte(); 
 
     const std::string& getNom() const; 
-    const int& getValeur() const; 
     const std::string& getType() const; 
     const int& getCout() const; 
 
