@@ -4,6 +4,10 @@
 
 class Voleur : public ActionActionAttaque {
 
+public : 
+    Voleur(); 
+    ~Voleur(); 
+    
 }; 
 
 #endif 

@@ -4,6 +4,10 @@
 
 class Village : public ActionActionAttaque{
 
+public :
+    Village(); 
+    ~Village(); 
+    
 }; 
 
 #endif 

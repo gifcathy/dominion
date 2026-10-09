@@ -4,6 +4,10 @@
 
 class Sorciere : public ActionActionAttaque {
 
+public : 
+    Sorciere(); 
+    ~Sorciere(); 
+    
 }; 
 
 #endif 

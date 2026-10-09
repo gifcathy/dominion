@@ -4,6 +4,10 @@
 
 class Atelier : public ActionActionAttaque{
 
+public : 
+    Atelier(); 
+    ~Atelier(); 
+
 }; 
 
 #endif

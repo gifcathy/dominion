@@ -4,6 +4,9 @@
 
 class Douves : public ActionReaction{
 
+public : 
+    Douves(); 
+    ~Douves(); 
 }; 
 
 #endif 

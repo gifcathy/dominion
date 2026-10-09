@@ -4,6 +4,9 @@
 
 class Laboratoire : public ActionActionAttaque {
 
+public :
+    Laboratoire(); 
+    ~Laboratoire(); 
 }; 
 
 #endif 

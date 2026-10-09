@@ -4,6 +4,10 @@
 
 class Festin : public ActionActionAttaque{
 
+public : 
+    Festin(); 
+    ~Festin(); 
+    
 }; 
 
 #endif

@@ -4,6 +4,10 @@
 
 class Chapelle : public ActionActionAttaque{
 
+public : 
+    Chapelle(); 
+    ~Chapelle(); 
+    
 }; 
 
 #endif
