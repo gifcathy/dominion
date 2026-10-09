@@ -7,3 +7,8 @@ Tresor::Tresor(const std::string& nom_carte, const int& valeur_carte, const int&
 
 // destructeur 
 Tresor::~Tresor(){}; 
+
+// getter
+const int& Tresor::getValeurTresor() const{
+    return valeur; 
+}

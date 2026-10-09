@@ -11,6 +11,8 @@ public :
     Tresor(const std::string& nom_carte, const int& valeur_carte, const int& cout_carte); 
     virtual ~Tresor(); 
 
+    const int& getValeurTresor() const; 
+
 }; 
 
 #endif
