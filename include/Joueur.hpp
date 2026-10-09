@@ -51,6 +51,7 @@ class Joueur {
         void reinitialiserRessources();
 
         void jouerTresor(std::size_t indice);
+        void jouerAction(std::size_t indice);
 
         void terminerTour();
 

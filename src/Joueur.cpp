@@ -192,3 +192,32 @@ void Joueur::terminerTour() {
     reinitialiserRessources();
     piocherNouvelleMain();
 }
+
+
+
+void Joueur::jouerAction(std::size_t indice) {
+    // Vérifier que l'indice correspond à une carte de la main.
+    if (indice >= main.size()) {
+        return;
+    }
+
+    // Vérifier qu'il s'agit d'une carte Action.
+    if (main[indice]->getType() != "Action") {
+        return;
+    }
+
+    // Vérifier que le joueur dispose d'une action.
+    if (!depenserAction()) {
+        return;
+    }
+
+    // Conserver un pointeur vers la carte avant de la déplacer.
+    Carte* carte = main[indice].get();
+
+    // Déplacer la carte de la main vers les cartes jouées.
+    carteJouer.push_back(std::move(main[indice]));
+    main.erase(main.begin() + indice);
+
+    // Appliquer les effets de la carte.
+    carte->jouer(*this);
+}
