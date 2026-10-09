@@ -6,22 +6,27 @@ Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction){
     piles["Argent"] = 40;
     piles["Or"] = 30;
 
-    // Piles de Victoire
+    // Piles de Victoire et Maledictions
     int nbVictoire = 0;
+    int nbMalediction = 0;
 
     if(nbJoueurs == 2){
         nbVictoire = 8;
+        nbMalediction = 10;
+    }
+    else if (nbJoueurs == 3){
+        nbVictoire = 12;
+        nbMalediction = 20;
     }
     else{
         nbVictoire = 12;
+        nbMalediction = 30;
     }
     piles["Domaine"] = nbVictoire;
     piles["Duche"] = nbVictoire;
     piles["Province"] = nbVictoire;
+    piles["Malediction"] = nbMalediction;
 
-    // Maledictions
-    // 10 cartes Malédiction à 2 joueurs, 20 cartes Malédiction à 3 joueurs et 30 cartes Malédiction à 4 joueurs
-    // Quantité adaptée au nombre de joueurs
 
     // Cartes Action choisies
     for (const auto& nom : cartesAction) {

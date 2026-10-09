@@ -4,7 +4,11 @@
 #include <algorithm> //contient std::shuffle
 #include <random>
 
-Joueur::Joueur(const std::vector<std::unique_ptr<Carte>>& deck) : deck(deck){}
+Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move(deckInitial)), argent(0), action(1), achat(1){
+    
+    melanger();
+    piocherNouvelleMain();
+}
 
 void Joueur::piocher(){
     if (deck.empty()) {
@@ -19,12 +23,21 @@ void Joueur::piocher(){
     deck.pop_back();
 }
 
-/*  nouvelle main
-for (int i = 0; i < 5; ++i) {
-    piocher();
+void Joueur::piocherPlusieurCarte(int nb){
+    for (int i = 0; i < nb; ++i) {
+        piocher();
+    }
 }
-*/
 
+/*
+Attention néanmoins : si tu appelles piocherNouvelleMain() alors que ta main contient encore des cartes, 
+celles-ci restent dans la main. Il faudra donc gérer la fin du tour avant de piocher la nouvelle main.
+*/
+void Joueur::piocherNouvelleMain(){
+    for (int i = 0; i < 5; ++i) {
+        piocher();
+    }
+}
 
 void Joueur::melanger(){
     std::random_device rd;
@@ -53,5 +66,72 @@ void Joueur::ajouterCarte(std::unique_ptr<Carte> carte){
     //Cela crée un Cuivre et transfère directement sa propriété au joueur.
 }
 
-//mettre une carte a la defause
-//defause.push_back(std::move(carte));
+void Joueur::defausserUneCarte(int indice) {
+    if (indice >= main.size()) {
+        return;
+    }
+
+    defausse.push_back(std::move(main[indice]));
+    // supprime l'emplacement sélectionné (vide) et décale les éléments suivants
+    main.erase(main.begin() + indice);
+}
+
+void Joueur::ecarterCarte(int indice){
+    if (indice >= main.size()) {
+        return;
+    }
+
+    // supprime l'emplacement sélectionné (la carte) et décale les éléments suivants
+    main.erase(main.begin() + indice);
+}
+
+void Joueur::ajouterArgent(int montant) {
+    if (montant > 0) {
+        argent += montant;
+    }
+}
+
+bool Joueur::depenserArgent(int montant) {
+    if (montant < 0 || argent < montant) {
+        return false;
+    }
+
+    argent -= montant;
+    return true;
+}
+
+void Joueur::ajouterActions(int nb) {
+    if (nb > 0) {
+        action += nb;
+    }
+}
+
+bool Joueur::depenserAction() {
+    if (action <= 0) {
+        return false;
+    }
+
+    --action;
+    return true;
+}
+
+void Joueur::ajouterAchats(int nb) {
+    if (nb > 0) {
+        achat += nb;
+    }
+}
+
+bool Joueur::depenserAchat() {
+    if (achat <= 0) {
+        return false;
+    }
+
+    --achat;
+    return true;
+}
+
+void Joueur::reinitialiserRessources() {
+    argent = 0;
+    action = 1;
+    achat = 1;
+}

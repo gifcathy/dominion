@@ -12,16 +12,36 @@ class Joueur {
         std::vector<std::unique_ptr<Carte>> deck;
         std::vector<std::unique_ptr<Carte>> main;
         std::vector<std::unique_ptr<Carte>> defausse;
+        std::vector<std::unique_ptr<Carte>> carteJouer;
+        int argent;
+        int action;
+        int achat;
 
     public:
-        Joueur(const std::vector<std::unique_ptr<Carte>>& deck);
-        ~Joueur();
+        Joueur(const std::vector<std::unique_ptr<Carte>> deckInitial);
+        ~Joueur() = default;;
 
         void piocher();
+        void piocherPlusieurCarte(int nb);
+        void piocherNouvelleMain();
         void melanger();
         void passerDefausseADeck();
 
         void ajouterCarte(std::unique_ptr<Carte> carte);
+
+        void defausserUneCarte(int indice);
+        void ecarterCarte(int indice);
+
+        void ajouterArgent(int montant);
+        bool depenserArgent(int montant);
+
+        void ajouterActions(int nb);
+        bool depenserAction();
+
+        void ajouterAchats(int nb);
+        bool depenserAchat();
+
+        void reinitialiserRessources();
 }; 
 
 #endif 
