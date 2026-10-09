@@ -2,11 +2,11 @@
 
 Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction){
     // Piles de Tresors
-    piles["Cuivre"] = 60 - 7*nbJoueurs;
+    piles["Cuivre"] = 60 - 7 * nbJoueurs;
     piles["Argent"] = 40;
     piles["Or"] = 30;
 
-    // Piles de Victoire ATTENTION A VERRIFIER
+    // Piles de Victoire
     int nbVictoire = 0;
 
     if(nbJoueurs == 2){
@@ -20,6 +20,7 @@ Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction){
     piles["Province"] = nbVictoire;
 
     // Maledictions
+    // 10 cartes Malédiction à 2 joueurs, 20 cartes Malédiction à 3 joueurs et 30 cartes Malédiction à 4 joueurs
     // Quantité adaptée au nombre de joueurs
 
     // Cartes Action choisies
