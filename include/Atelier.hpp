@@ -8,6 +8,8 @@ public :
     Atelier(); 
     ~Atelier(); 
 
+    void afficher() const override;
+
 }; 
 
 #endif

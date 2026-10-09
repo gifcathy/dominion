@@ -1,11 +1,12 @@
 #ifndef JOUEUR_HPP
 #define JOUEUR_HPP
-#include "Carte.hpp"
 
 #include <iostream> 
 #include <vector>
 #include <memory>
 #include <cstddef>
+
+class Carte;
 
 
 class Joueur {

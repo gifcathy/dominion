@@ -5,8 +5,10 @@
 class Argent : public Tresor {
 
 public : 
-Argent(); 
-~Argent(); 
+    Argent(); 
+    ~Argent(); 
+
+    void afficher() const override;
 
 }; 
 

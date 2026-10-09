@@ -9,6 +9,6 @@ Jardin::Jardin() : Victoire("Jardin", 0, 4){};
 Jardin::~Jardin(){}; 
 
 // getter 
-const int Jardin::getNbPointVictoireJardin(const int taille_deck) const{
+int Jardin::getNbPointVictoireJardin(const int taille_deck) const{
     return std::floor(taille_deck/10); 
 }

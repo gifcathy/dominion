@@ -7,3 +7,8 @@ Victoire::Victoire(const std::string& nom_carte, const int& valeur_carte, const 
 
 // destructeur 
 Victoire::~Victoire(){}; 
+
+// getter
+const int& Victoire::getValeurVictoire() const{
+    return valeur; 
+}

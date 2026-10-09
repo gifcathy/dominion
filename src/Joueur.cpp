@@ -1,4 +1,5 @@
 #include "Joueur.hpp"
+#include "Carte.hpp"
 #include "Tresor.hpp"
 
 #include <utility>
@@ -64,7 +65,8 @@ void Joueur::passerDefausseADeck(){
         deck.push_back(std::move(carte));
     }
 
-    // Après les déplacements, le vecteur defause contient toujours ses anciens emplacements, mais leurs unique_ptr sont vides
+    // Après les déplacements, le vecteur defause contient toujours ses anciens emplacements, 
+    // mais leurs unique_ptr sont vides
     defausse.clear();
 
     melanger();

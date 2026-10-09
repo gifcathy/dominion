@@ -5,8 +5,10 @@
 class Cuivre : public Tresor {
 
 public : 
-Cuivre(); 
-~Cuivre(); 
+    Cuivre(); 
+    ~Cuivre(); 
+
+    void afficher() const override;
 
 }; 
 
