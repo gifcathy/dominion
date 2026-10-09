@@ -5,6 +5,7 @@
 #include <iostream> 
 #include <vector>
 #include <memory>
+#include <cstddef>
 
 
 class Joueur {
@@ -18,23 +19,25 @@ class Joueur {
         int achat;
 
     public:
-        Joueur(const std::vector<std::unique_ptr<Carte>> deckInitial);
+        Joueur(std::vector<std::unique_ptr<Carte>> deckInitial);
         ~Joueur() = default;
 
-        const int getArgent() const;
-        const int getAction() const;
-        const int getAchat() const;
+        int getArgent() const;
+        int getAction() const;
+        int getAchat() const;
 
         void piocher();
         void piocherPlusieurCarte(int nb);
         void piocherNouvelleMain();
+
         void melanger();
+
         void passerDefausseADeck();
 
         void ajouterCarte(std::unique_ptr<Carte> carte);
 
-        void defausserUneCarte(int indice);
-        void ecarterCarte(int indice);
+        void defausserUneCarte(std::size_t indice);
+        void ecarterCarte(std::size_t indice);
 
         void ajouterArgent(int montant);
         bool depenserArgent(int montant);
@@ -48,6 +51,8 @@ class Joueur {
         void reinitialiserRessources();
 
         void jouerTresor(std::size_t indice);
+
+        void terminerTour();
 
 }; 
 

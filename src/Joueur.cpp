@@ -11,17 +11,16 @@ Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move
     piocherNouvelleMain();
 }
 
-const int Joueur::getArgent() const{
+int Joueur::getArgent() const{
     return argent;
 }
 
-const int Joueur::getAction() const{
+int Joueur::getAction() const{
     return action;
 }
 
-const int Joueur::getAchat() const{
-    return achat
-    ;
+int Joueur::getAchat() const{
+    return achat;
 }
 
 void Joueur::piocher(){
@@ -80,7 +79,7 @@ void Joueur::ajouterCarte(std::unique_ptr<Carte> carte){
     //Cela crée un Cuivre et transfère directement sa propriété au joueur.
 }
 
-void Joueur::defausserUneCarte(int indice) {
+void Joueur::defausserUneCarte(std::size_t indice) {
     if (indice >= main.size()) {
         return;
     }
@@ -90,7 +89,7 @@ void Joueur::defausserUneCarte(int indice) {
     main.erase(main.begin() + indice);
 }
 
-void Joueur::ecarterCarte(int indice){
+void Joueur::ecarterCarte(std::size_t indice){
     if (indice >= main.size()) {
         return;
     }
@@ -173,4 +172,23 @@ void Joueur::jouerTresor(std::size_t indice) {
     Attention : si tu joues plusieurs cartes de ta main successivement, les indices changent après chaque déplacement. 
     Il faudra donc tenir compte de ce comportement dans l'interface du jeu
     */
+}
+
+
+void Joueur::terminerTour() {
+    // Défausser les cartes encore en main.
+    for (auto& carte : main) {
+        defausse.push_back(std::move(carte));
+    }
+    main.clear();
+
+    // Défausser les cartes jouées.
+    for (auto& carte : carteJouer) {
+        defausse.push_back(std::move(carte));
+    }
+    carteJouer.clear();
+
+    // Préparer le nouveau tour.
+    reinitialiserRessources();
+    piocherNouvelleMain();
 }
