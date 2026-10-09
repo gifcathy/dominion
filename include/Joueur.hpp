@@ -19,7 +19,11 @@ class Joueur {
 
     public:
         Joueur(const std::vector<std::unique_ptr<Carte>> deckInitial);
-        ~Joueur() = default;;
+        ~Joueur() = default;
+
+        const int getArgent() const;
+        const int getAction() const;
+        const int getAchat() const;
 
         void piocher();
         void piocherPlusieurCarte(int nb);
@@ -42,6 +46,9 @@ class Joueur {
         bool depenserAchat();
 
         void reinitialiserRessources();
+
+        void jouerTresor(std::size_t indice);
+
 }; 
 
 #endif 

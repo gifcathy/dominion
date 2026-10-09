@@ -1,4 +1,5 @@
 #include "Joueur.hpp"
+#include "Tresor.hpp"
 
 #include <utility>
 #include <algorithm> //contient std::shuffle
@@ -8,6 +9,19 @@ Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move
     
     melanger();
     piocherNouvelleMain();
+}
+
+const int Joueur::getArgent() const{
+    return argent;
+}
+
+const int Joueur::getAction() const{
+    return action;
+}
+
+const int Joueur::getAchat() const{
+    return achat
+    ;
 }
 
 void Joueur::piocher(){
@@ -134,4 +148,29 @@ void Joueur::reinitialiserRessources() {
     argent = 0;
     action = 1;
     achat = 1;
+}
+
+void Joueur::jouerTresor(std::size_t indice) {
+    if (indice >= main.size()) {
+        return;
+    }
+
+    // indique si c bien un tresor 
+    Tresor* tresor = dynamic_cast<Tresor*>(main[indice].get());
+
+    if (tresor == nullptr) {
+        return;
+    }
+
+    int valeur = tresor->getValeurTresor();
+
+    carteJouer.push_back(std::move(main[indice]));
+    main.erase(main.begin() + indice);
+
+    argent += valeur;
+
+    /*
+    Attention : si tu joues plusieurs cartes de ta main successivement, les indices changent après chaque déplacement. 
+    Il faudra donc tenir compte de ce comportement dans l'interface du jeu
+    */
 }
