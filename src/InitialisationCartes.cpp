@@ -63,14 +63,6 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Sorciere());
     });
 
-    catalogue.enregistrer("Tresor", [] {
-        return std::unique_ptr<Carte>(new Tresor());
-    });
-
-    catalogue.enregistrer("Victoire", [] {
-        return std::unique_ptr<Carte>(new Victoire());
-    });
-
     catalogue.enregistrer("Village", [] {
         return std::unique_ptr<Carte>(new Village());
     });

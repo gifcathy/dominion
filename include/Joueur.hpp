@@ -21,6 +21,8 @@ class Joueur {
 
     public:
         Joueur(std::vector<std::unique_ptr<Carte>> deckInitial);
+        Joueur(Joueur&&) = default;
+        Joueur& operator=(Joueur&&) = default;
         ~Joueur() = default;
 
         int getArgent() const;
