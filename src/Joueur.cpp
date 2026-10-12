@@ -24,6 +24,10 @@ int Joueur::getAchat() const{
     return achat;
 }
 
+const std::vector<std::unique_ptr<Carte>>& Joueur::getMain() const{
+    return main;
+}
+
 void Joueur::piocher(){
     if (deck.empty()) {
         passerDefausseADeck();

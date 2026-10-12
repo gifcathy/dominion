@@ -1,18 +1,30 @@
-#include "InitialisationCartes.hpp"
+#include "Partie.hpp"
 
-int main() {
-    CatalogueCartes catalogue;
+#include <iostream>
+#include <string>
+#include <vector>
 
-    initialiserCatalogue(catalogue);
+int main()
+{
+    try {
+        int nombreJoueurs = 2;
 
-    auto cArgent = catalogue.creer("Argent");
-    cArgent->afficher();
+        // Cartes Action choisies pour cette partie
+        std::vector<std::string> cartesAction;
+        cartesAction.push_back("Atelier");
+        cartesAction.push_back("Bucheron");
+        cartesAction.push_back("Village");
 
-    auto cAtelier = catalogue.creer("Atelier");
-    cAtelier->afficher();
+        // Creation de la partie
+        Partie partie(nombreJoueurs, cartesAction);
 
-    auto cBucheron = catalogue.creer("Bucheron");
-    cBucheron->afficher();
+        // Lancement de la partie
+        partie.commencer();
+    }
+    catch (const std::exception& e) {
+        std::cerr << "Erreur : " << e.what() << std::endl;
+        return 1;
+    }
 
     return 0;
 }

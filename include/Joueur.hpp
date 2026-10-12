@@ -28,6 +28,7 @@ class Joueur {
         int getArgent() const;
         int getAction() const;
         int getAchat() const;
+        const std::vector<std::unique_ptr<Carte>>& getMain() const;
 
         void piocher();
         void piocherPlusieurCarte(int nb);

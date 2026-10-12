@@ -22,7 +22,7 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
     catalogue.enregistrer("Chapelle", [] {
         return std::unique_ptr<Carte>(new Chapelle());
     });
-
+*/
     catalogue.enregistrer("Cuivre", [] {
         return std::unique_ptr<Carte>(new Cuivre());
     });
@@ -30,7 +30,7 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
     catalogue.enregistrer("Domaine", [] {
         return std::unique_ptr<Carte>(new Domaine());
     });
-
+/*
     catalogue.enregistrer("Douves", [] {
         return std::unique_ptr<Carte>(new Douves());
     });

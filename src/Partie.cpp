@@ -69,8 +69,12 @@ void Partie::tour()
     bool tourEnCours = true;
 
     while (tourEnCours) {
-        //ATTENTION Il faut afficher les carte de la main du joueur
-        //ATTENTION A refaire car beaucoup de chose ne vons pas car oublie de carte jouer
+        /////-------- ATTENTION A refaire car beaucoup de chose ne vons pas car oublie de carte jouer
+        std::cout << "\nVotre main : ";
+        for (std::size_t i = 0; i < joueur.getMain().size(); i++) {
+            std::cout << "[" << i << "] " << joueur.getMain()[i]->getNom() << " | ";
+        }
+        std::cout << std::endl;
 
         std::cout << "\nArgent : " << joueur.getArgent()
                   << " | Actions : " << joueur.getAction()
@@ -126,7 +130,7 @@ void Partie::acheterCarte()
 {
     Joueur& joueur = joueurs[joueurActuel];
 
-    //ATTENTION il faudrait afficher toutes les carte et leur coup
+    /////--------ATTENTION il faudrait afficher toutes les carte et leur coup
 
     std::string nom;
     std::cout << "Nom de la carte a acheter : ";

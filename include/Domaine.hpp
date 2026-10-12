@@ -5,9 +5,10 @@
 class Domaine : public Victoire {
 
 public : 
-Domaine(); 
-~Domaine(); 
+    Domaine(); 
+    ~Domaine(); 
 
+    void afficher() const override;
 }; 
 
 #endif

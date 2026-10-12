@@ -33,3 +33,27 @@ Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction){
         piles[nom] = 10;
     }
 }
+
+
+//ATTENTION A REVOIR les deux fonction
+int Plateau::getNombreCartes(const std::string& nom) const
+{
+    std::map<std::string, int>::const_iterator it = piles.find(nom);
+
+    if (it == piles.end()) {
+        return 0;
+    }
+
+    return it->second;
+}
+bool Plateau::acheterCarte(const std::string& nom)
+{
+    std::map<std::string, int>::iterator it = piles.find(nom);
+
+    if (it == piles.end() || it->second <= 0) {
+        return false;
+    }
+
+    --it->second;
+    return true;
+}
