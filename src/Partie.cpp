@@ -48,7 +48,10 @@ std::vector<std::unique_ptr<Carte>> Partie::creerDeckInitial()
 // Lance la partie
 void Partie::commencer()
 {
+    std::cout << "--------------------" << std::endl;
     std::cout << "La partie commence !" << std::endl;
+    std::cout << "--------------------" << std::endl;
+    std::cout << "" << std::endl;
 
     while (!estTerminee()) {
         tour();
@@ -63,13 +66,13 @@ void Partie::tour()
 {
     Joueur& joueur = joueurs[joueurActuel];
 
-    std::cout << "\n--- Tour du joueur "
-              << joueurActuel + 1 << " ---\n";
+    std::cout << "\n--- Tour du joueur " << joueurActuel + 1 << " ---\n";
 
     bool tourEnCours = true;
 
     while (tourEnCours) {
         /////-------- ATTENTION A refaire car beaucoup de chose ne vons pas car oublie de carte jouer
+        ///// ---- AFFICHER LES PILES DES DIFFERENTES CARTE (le plateau)
         std::cout << "\nVotre main : ";
         for (std::size_t i = 0; i < joueur.getMain().size(); i++) {
             std::cout << "[" << i << "] " << joueur.getMain()[i]->getNom() << " | ";
@@ -81,10 +84,9 @@ void Partie::tour()
                   << " | Achats : " << joueur.getAchat()
                   << std::endl;
 
-        std::cout << "1. Jouer un Tresor\n"
-                  << "2. Jouer une Action\n"
-                  << "3. Acheter une carte\n"
-                  << "4. Terminer le tour\n"
+        std::cout << "1. Jouer une Action\n"
+                  << "2. Acheter une carte\n" // jouer un ou plusieur tresor
+                  << "3. Terminer le tour\n"
                   << "Choix : ";
 
         int choix;
@@ -99,6 +101,30 @@ void Partie::tour()
             continue;
         }
 
+        switch (choix)
+        { // ----ATTENTION voir si on ajoute le fait que la personne puisse annuler ce quel viens de faire (pas sur)
+        case 1 : 
+            //----ATTENTION verifier que c'est bien une carte action
+            //----Placer la carte dans le vecteur carteJouer du joueur
+            std::size_t indice;
+            std::cout << "Indice de l'Action dans votre main : ";
+            std::cin >> indice;
+            joueur.jouerAction(indice);
+            break;
+        
+        case 2 :
+            //----demander au joueur de selectionner les carte tresor qu'il veut utiliser pour acheter une carte
+            //----les tresor seront placer dans le vecteur carteJouer du joueur
+            acheterCarte();
+            break;
+        case 3 :
+            finTour();
+            tourEnCours = false;
+        default:
+            std::cout << "Choix invalide.\n";
+            break;
+        }
+        /*
         if (choix == 1) {
             std::size_t indice;
             std::cout << "Indice du Tresor dans votre main : ";
@@ -120,7 +146,7 @@ void Partie::tour()
         }
         else {
             std::cout << "Choix invalide.\n";
-        }
+        }*/
     }
 }
 
