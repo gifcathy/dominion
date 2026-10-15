@@ -5,8 +5,10 @@
 class Or : public Tresor {
 
 public : 
-Or(); 
-~Or(); 
+    Or(); 
+    ~Or() override; 
+
+    void afficher() const override; 
 
 }; 
 

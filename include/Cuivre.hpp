@@ -6,7 +6,7 @@ class Cuivre : public Tresor {
 
 public : 
     Cuivre(); 
-    ~Cuivre(); 
+    ~Cuivre() override; 
 
     void afficher() const override;
 

@@ -30,6 +30,8 @@ class Joueur {
         int getAchat() const;
         const std::vector<std::unique_ptr<Carte>>& getMain() const;
 
+        void afficherMain(); 
+
         void piocher();
         void piocherPlusieurCarte(int nb);
         void piocherNouvelleMain();

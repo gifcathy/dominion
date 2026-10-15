@@ -160,7 +160,7 @@ void Joueur::jouerTresor(std::size_t indice) {
         return;
     }
 
-    // indique si c bien un tresor 
+    // indique si c'est bien un tresor 
     Tresor* tresor = dynamic_cast<Tresor*>(main[indice].get());
 
     if (tresor == nullptr) {
@@ -226,4 +226,16 @@ void Joueur::jouerAction(std::size_t indice) {
 
     // Appliquer les effets de la carte.
     carte->jouer(*this);
+}
+
+
+
+// permet d'afficher la main du joueur 
+void Joueur::afficherMain(){
+    int nbCartesMainJoueur = static_cast<int>(main.size()); 
+    std::cout << "votre main :" << std::endl; 
+    for (std::size_t j; j < main.size(); j++){
+        std::cout << "[" << j << "]" << main[j]->getNom() << std::endl; 
+    }
+    
 }

@@ -6,7 +6,7 @@ class Argent : public Tresor {
 
 public : 
     Argent(); 
-    ~Argent(); 
+    ~Argent() override; 
 
     void afficher() const override;
 

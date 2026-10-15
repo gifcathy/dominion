@@ -8,9 +8,6 @@ Cuivre::Cuivre() : Tresor("Cuivre", 1, 0){};
 Cuivre::~Cuivre(){}; 
 
 void Cuivre::afficher() const {
-    std::cout << "Cuivre - Valeur : "
-              << getValeurTresor()
-              << ", Cout : "
-              << getCout()
-              << std::endl;
+    std::cout << "Cuivre - Valeur : " << getValeurTresor()
+              << ", Cout : " << getCout() << std::endl;
 }

@@ -8,9 +8,6 @@ Argent::Argent(): Tresor("Argent", 2, 3){};
 Argent::~Argent(){}; 
 
 void Argent::afficher() const {
-    std::cout << "Argent - Valeur : "
-              << getValeurTresor()
-              << ", Cout : "
-              << getCout()
-              << std::endl;
+    std::cout << "Argent - Valeur : " << getValeurTresor()
+              << ", Cout : " << getCout()<< std::endl;
 }
