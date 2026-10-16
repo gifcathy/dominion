@@ -12,6 +12,8 @@ public :
     ~Victoire(); 
 
     const int& getValeurVictoire() const; 
+
+    void jouer(Joueur& joueur) override;
 }; 
 
 #endif 

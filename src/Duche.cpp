@@ -6,3 +6,10 @@ Duche::Duche() : Victoire("Duché", 3, 5){};
 
 // destructeur 
 Duche::~Duche(){}; 
+
+void Duche::afficher() const {
+    std::cout << "Duché - Valeur : " << getValeurVictoire() << "\n"
+              << "Cout : " << getCout() << "\n"
+              << "Type de carte : Victoire \n"
+              << "Descirption : carte offrant 3 point de victoire" << std::endl;
+}

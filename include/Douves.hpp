@@ -7,6 +7,8 @@ class Douves : public ActionReaction{
 public : 
     Douves(); 
     ~Douves(); 
+
+    void afficher() const override; 
 }; 
 
 #endif 

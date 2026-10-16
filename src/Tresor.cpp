@@ -12,3 +12,8 @@ Tresor::~Tresor(){};
 const int& Tresor::getValeurTresor() const{
     return valeur; 
 }
+
+// jouer un trésor 
+void Tresor::jouer(Joueur& joueur){
+    joueur.ajouterArgent(valeur); 
+}

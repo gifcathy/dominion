@@ -8,6 +8,14 @@ Chapelle::Chapelle() : ActionActionAttaque("Chapelle", "Action", 2){};
 // destructeur 
 Chapelle::~Chapelle(){}; 
 
+
+// méthode d'affichage 
+void Chapelle::afficher() const{
+    std::cout << "Chapelle - Cout : " << getCout() << "\n"
+              << "Type de carte : Action \n" 
+              << "Description : écartez jusqu'à 4 cartes de votre main" << std::endl;
+}
+
 // jouer la carte 
 void Chapelle::jouer(Joueur& joueur){
     std::cout << "\n ---- Chapelle ----" << std::endl; 

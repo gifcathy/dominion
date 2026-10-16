@@ -8,6 +8,7 @@ public :
     Malediction(); 
     ~Malediction(); 
 
+    void afficher() const override; 
 }; 
 
 #endif

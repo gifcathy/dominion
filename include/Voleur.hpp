@@ -7,7 +7,8 @@ class Voleur : public ActionActionAttaque {
 public : 
     Voleur(); 
     ~Voleur(); 
-    
+
+    void afficher() const override; 
 }; 
 
 #endif 

@@ -6,7 +6,7 @@
 #include <algorithm> //contient std::shuffle
 #include <random>
 
-Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move(deckInitial)), argent(0), action(1), achat(1){
+Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move(deckInitial)), argent(0), action(1), achat(1), ptsVictoire(3){
     
     melanger();
     piocherNouvelleMain();
@@ -110,6 +110,10 @@ void Joueur::ajouterArgent(int montant) {
     }
 }
 
+void Joueur::ajouterPtsVictoire(int points){
+    ptsVictoire += points; 
+}
+
 bool Joueur::depenserArgent(int montant) {
     if (montant < 0 || argent < montant) {
         return false;
@@ -155,6 +159,7 @@ void Joueur::reinitialiserRessources() {
     achat = 1;
 }
 
+/* 
 void Joueur::jouerTresor(std::size_t indice) {
     if (indice >= main.size()) {
         return;
@@ -173,12 +178,34 @@ void Joueur::jouerTresor(std::size_t indice) {
     main.erase(main.begin() + indice);
 
     argent += valeur;
-
+    }
+*/
     /*
     Attention : si tu joues plusieurs cartes de ta main successivement, les indices changent après chaque déplacement. 
     Il faudra donc tenir compte de ce comportement dans l'interface du jeu
     */
+
+
+void Joueur::jouerTresor(std::size_t indice) {
+    if (indice >= main.size()) {
+        return;
+    }
+
+    Tresor* tresor = dynamic_cast<Tresor*>(main[indice].get());
+
+    if (tresor == nullptr) {
+        return;
+    }
+
+    // Appliquer l'effet du Trésor
+    tresor->jouer(*this);
+
+    // Déplacer la carte vers les cartes jouées
+    carteJouer.push_back(std::move(main[indice]));
+    main.erase(main.begin() + indice);
 }
+
+
 
 
 void Joueur::terminerTour() {

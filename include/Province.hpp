@@ -7,6 +7,8 @@ class Province : public Victoire {
 public :
     Province(); 
     ~Province(); 
+
+    void afficher() const override; 
 }; 
 
 #endif

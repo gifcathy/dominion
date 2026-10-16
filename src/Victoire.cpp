@@ -12,3 +12,8 @@ Victoire::~Victoire(){};
 const int& Victoire::getValeurVictoire() const{
     return valeur; 
 }
+
+// jouer une victoire
+void Victoire::jouer(Joueur& joueur){
+    joueur.ajouterPtsVictoire(valeur); 
+}

@@ -7,7 +7,8 @@ class Village : public ActionActionAttaque{
 public :
     Village(); 
     ~Village(); 
-    
+
+    void afficher() const override; 
 }; 
 
 #endif 

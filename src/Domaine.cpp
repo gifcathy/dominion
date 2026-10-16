@@ -7,8 +7,10 @@ Domaine::Domaine(): Victoire("Domaine", 1, 2){};
 // destructeur 
 Domaine::~Domaine(){}; 
 
+// méthode d'affichage
 void Domaine::afficher() const {
-    std::cout << "Domaine - Cout : "
-              << getCout()
-              << std::endl;
+    std::cout << "Domaine - Valeur : " << getValeurVictoire() << "\n"
+              << "Cout : " << getCout() << "\n"
+              << "Type de carte : Victoire \n"
+              << "Descirption : carte offrant 1 point de victoire" << std::endl;
 }

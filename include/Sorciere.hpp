@@ -7,7 +7,8 @@ class Sorciere : public ActionActionAttaque {
 public : 
     Sorciere(); 
     ~Sorciere(); 
-    
+
+    void afficher() const override; 
 }; 
 
 #endif 

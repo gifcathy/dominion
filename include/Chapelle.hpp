@@ -10,6 +10,7 @@ public :
     Chapelle(); 
     ~Chapelle() override;
     
+    void afficher() const override;
     void jouer(Joueur& joueur) override; 
 
 }; 

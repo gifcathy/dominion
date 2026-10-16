@@ -13,6 +13,8 @@ public :
 
     const int& getValeurTresor() const; 
 
+    void jouer(Joueur& joueur) override; 
+
 }; 
 
 #endif

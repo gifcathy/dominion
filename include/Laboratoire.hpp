@@ -7,6 +7,8 @@ class Laboratoire : public ActionActionAttaque {
 public :
     Laboratoire(); 
     ~Laboratoire(); 
+
+    void afficher() const override; 
 }; 
 
 #endif 

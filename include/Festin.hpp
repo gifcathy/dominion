@@ -7,7 +7,8 @@ class Festin : public ActionActionAttaque{
 public : 
     Festin(); 
     ~Festin(); 
-    
+
+    void afficher() const override; 
 }; 
 
 #endif

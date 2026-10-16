@@ -9,6 +9,7 @@ public :
     ~Jardin(); 
     
     int getNbPointVictoireJardin(const int taille_deck) const; 
+    void afficher() const override; 
 }; 
 
 #endif 

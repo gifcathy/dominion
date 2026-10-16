@@ -6,10 +6,11 @@ class Bucheron : public ActionActionAttaque{
 
 public : 
     Bucheron(); 
-    ~Bucheron(); // les destructeur héritent du destructeur virtuel de carte et donc saura dans 
+    ~Bucheron() override; // les destructeur héritent du destructeur virtuel de carte et donc saura dans 
     // quel ordre il faudra les appeler 
 
     void afficher() const override;
+    void jouer(Joueur& joueur) override;
 }; 
 
 #endif

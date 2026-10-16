@@ -9,6 +9,8 @@ Or::~Or(){};
 
 // méthode d'affichage 
 void Or::afficher() const {
-    std::cout << "Or - Valeur : " << getValeurTresor()
-              << ", Cout : " << getCout() << std::endl;
+    std::cout << "Or - Valeur : " << getValeurTresor() << "\n"
+              << "Cout : " << getCout() << "\n"
+              << "Type de carte : Trésor \n"
+              << "Description : pièce ayant une valeur de 3" << std::endl;
 }

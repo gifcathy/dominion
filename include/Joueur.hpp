@@ -18,6 +18,7 @@ class Joueur {
         int argent;
         int action;
         int achat;
+        int ptsVictoire; 
 
     public:
         Joueur(std::vector<std::unique_ptr<Carte>> deckInitial);
@@ -53,6 +54,8 @@ class Joueur {
 
         void ajouterAchats(int nb);
         bool depenserAchat();
+
+        void ajouterPtsVictoire(int points); 
 
         void reinitialiserRessources();
 
