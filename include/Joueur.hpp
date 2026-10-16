@@ -19,6 +19,8 @@ class Joueur {
         int action;
         int achat;
         int ptsVictoire; 
+        bool proteger;
+        bool verifierProtection;
 
     public:
         Joueur(std::vector<std::unique_ptr<Carte>> deckInitial);

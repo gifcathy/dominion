@@ -9,6 +9,8 @@
     // -----------------------------------------------------------------------
     // -----  ATTENTION les fonction tour() et acheterCarte on des soucie
     // -----------------------------------------------------------------------
+
+//fonction static qui creer et initialise le cataloque qui est avant la creation de partie
 static CatalogueCartes creerCatalogueInitialise(){
     CatalogueCartes catalogue;
     initialiserCatalogue(catalogue);
@@ -112,96 +114,82 @@ void Partie::tour(){
             std::cout << "Indice de l'Action dans votre main : ";
             std::cin >> indice;
             joueur.jouerAction(indice);
+            //---verifier si on joue une carte attaque 
+            //--- si oui regader quelle est elle et faire sont attauqe sur les autre joueur 
             break;
         
         case 2 :
             //----demander au joueur de selectionner les carte tresor qu'il veut utiliser pour acheter une carte
             //----les tresor seront placer dans le vecteur carteJouer du joueur
             //---- selectionne tout les tresor 
-            //selectionnerTresor();
+            jouerToutTresor(joueur);
             acheterCarte();
             break;
         case 3 :
             finTour();
             tourEnCours = false;
+            break;
         default:
             std::cout << "Choix invalide.\n";
             break;
         }
-        /*
-        if (choix == 1) {
-            std::size_t indice;
-            std::cout << "Indice du Tresor dans votre main : ";
-            std::cin >> indice;
-            joueur.jouerTresor(indice);
-        }
-        else if (choix == 2) {
-            std::size_t indice;
-            std::cout << "Indice de l'Action dans votre main : ";
-            std::cin >> indice;
-            joueur.jouerAction(indice);
-        }
-        else if (choix == 3) {
-            acheterCarte();
-        }
-        else if (choix == 4) {
-            finTour();
-            tourEnCours = false;
-        }
-        else {
-            std::cout << "Choix invalide.\n";
-        }*/
     }
 }
 
+void Partie::jouerToutTresor(Joueur& joueur)
+{
+    for (int i = static_cast<int>(joueur.getMain().size()) - 1; i >= 0; --i) {
+        if (joueur.getMain()[i]->getType() == "Tresor")
+        {
+            joueur.jouerTresor(static_cast<std::size_t>(i));
+        }
+    }
+}
 
 // Achete une carte choisie par le joueur actuel
 void Partie::acheterCarte(){
     Joueur& joueur = joueurs[joueurActuel];
 
+    // Afficher les cartes disponibles à l'achat
     plateau.afficherCartePourAchat();
 
     std::string nom;
     std::cout << "Nom de la carte a acheter : ";
     std::cin >> nom;
 
-    // Verifier que la carte existe dans le catalogue
-    if (!catalogue.contient(nom)) {
-        std::cout << "Cette carte n'existe pas dans le catalogue.\n";
+    // 1. Vérifier que la carte existe et que sa pile n'est pas vide
+    if (!plateau.contientCarte(nom)) {
+        std::cout << "Cette carte est inconnue ou indisponible.\n";
         return;
     }
 
-    // Verifier qu'il reste des cartes dans la pile
-    if (plateau.getNombreCartes(nom) <= 0) {
-        std::cout << "Cette pile est vide ou indisponible.\n";
-        return;
-    }
-
-    // Creer temporairement la carte pour connaitre son cout
-    std::unique_ptr<Carte> carte = catalogue.creer(nom);
-    int coutCarte = carte->getCout();
-
+    // 2. Vérifier que le joueur possède encore un achat
     if (joueur.getAchat() <= 0) {
         std::cout << "Vous n'avez plus d'achat disponible.\n";
         return;
     }
 
+    // 3. Récupérer le coût de la carte
+    int coutCarte = plateau.getCoutCarte(nom);
+
+    // 4. Vérifier que le joueur possède assez d'argent
     if (joueur.getArgent() < coutCarte) {
         std::cout << "Vous n'avez pas assez d'argent.\n";
         return;
     }
 
-    // Retirer une carte de la pile du plateau
+    // 5. Retirer une carte de la pile du plateau
     if (!plateau.acheterCarte(nom)) {
         std::cout << "Impossible d'acheter cette carte.\n";
         return;
     }
 
-    // Payer et consommer un achat
+    // 6. Payer et consommer un achat
     joueur.depenserArgent(coutCarte);
     joueur.depenserAchat();
 
-    // Ajouter la carte achetee a la defausse du joueur
+    // 7. Créer la carte achetée et l'ajouter à la défausse
+    std::unique_ptr<Carte> carte = catalogue.creer(nom);
     joueur.ajouterCarte(std::move(carte));
 
     std::cout << "Carte achetee : " << nom << std::endl;

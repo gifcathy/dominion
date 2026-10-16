@@ -22,6 +22,7 @@ public:
     void commencer();
 
     void tour();
+    void jouerToutTresor(Joueur& joueur);
     void acheterCarte();
     void finTour();
 

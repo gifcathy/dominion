@@ -108,8 +108,7 @@ void Plateau::afficherCartePourAchat() const{
     std::cout << std::endl;
 }
 
-void Plateau::afficherCarteCoutInfEgal(int coutMax) const
-{
+void Plateau::afficherCarteCoutInfEgal(int coutMax) const{
     for (const auto& element : piles)
     {
         // Vérifier qu'il reste des cartes dans la pile
@@ -126,4 +125,24 @@ void Plateau::afficherCarteCoutInfEgal(int coutMax) const
     }
 
     std::cout << std::endl;
+}
+
+bool Plateau::contientCarte(const std::string& nom) const{
+    std::map<std::string, int>::const_iterator it = piles.find(nom);
+
+    if (it == piles.end()) {
+        return false;
+    }
+
+    if (it->second <= 0) {
+        return false;
+    }
+
+    return true;
+}
+
+int Plateau::getCoutCarte(const std::string& nom) const{
+    std::unique_ptr<Carte> carte = catalogue.creer(nom);
+
+    return carte->getCout();
 }

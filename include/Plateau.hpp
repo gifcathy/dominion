@@ -26,6 +26,8 @@ class Plateau {
 
         void afficherCarteCoutInfEgal(int coutMax) const;
 
+        bool contientCarte(const std::string& nom) const;
+        int getCoutCarte(const std::string& nom) const;
 }; 
 
 #endif 
