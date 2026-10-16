@@ -20,6 +20,7 @@ public:
     Partie(int nombreJoueurs, const std::vector<std::string>& cartesAction);
 
     void commencer();
+
     void tour();
     void acheterCarte();
     void finTour();

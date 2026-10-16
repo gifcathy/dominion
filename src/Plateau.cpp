@@ -1,6 +1,6 @@
 #include "Plateau.hpp"
 
-Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction){
+Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction, const CatalogueCartes& catalogue) : catalogue(catalogue){
     // Piles de Tresors
     piles["Cuivre"] = 60 - 7 * nbJoueurs;
     piles["Argent"] = 40;
@@ -46,8 +46,7 @@ Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction){
 
 
 //ATTENTION A REVOIR les deux fonction
-int Plateau::getNombreCartes(const std::string& nom) const
-{
+int Plateau::getNombreCartes(const std::string& nom) const{
     // La méthode find() recherche une clé dans la map -> renvoie un itérateur
     // const_iterator est un itérateur qui permet de lire un élément, mais pas de modifier sa valeur
     std::map<std::string, int>::const_iterator it = piles.find(nom);
@@ -63,8 +62,7 @@ int Plateau::getNombreCartes(const std::string& nom) const
     return it->second;
 }
 
-bool Plateau::acheterCarte(const std::string& nom)
-{
+bool Plateau::acheterCarte(const std::string& nom){
     std::map<std::string, int>::iterator it = piles.find(nom);
 
     if (it == piles.end() || it->second <= 0) {
@@ -74,4 +72,58 @@ bool Plateau::acheterCarte(const std::string& nom)
     // decrémenter le nombre de carte dans la map
     --it->second;
     return true;
+}
+
+
+const std::map<std::string, int>& Plateau::getPiles() const{
+    return piles;
+}
+
+void Plateau::afficher() const{
+    for (const auto& element : piles)
+    {
+        std::cout << "\n----------------------\n";
+        std::cout << "Cartes disponibles : " << element.first << std::endl;
+        std::cout << "Cartes restantes : " << element.second << std::endl;
+
+        std::unique_ptr<Carte> carte = catalogue.creer(element.first);
+        carte->afficher();
+
+        std::cout << "----------------------\n";
+    }
+}
+
+void Plateau::afficherCartePourAchat() const{
+    for (const auto& element : piles)
+    {
+        if (element.second > 0)
+        {
+            std::unique_ptr<Carte> carte = catalogue.creer(element.first);
+
+            std::cout << carte->getNom() << " : "
+                      << carte->getCout() << "p  |  ";
+        }
+    }
+
+    std::cout << std::endl;
+}
+
+void Plateau::afficherCarteCoutInfEgal(int coutMax) const
+{
+    for (const auto& element : piles)
+    {
+        // Vérifier qu'il reste des cartes dans la pile
+        if (element.second > 0)
+        {
+            std::unique_ptr<Carte> carte = catalogue.creer(element.first);
+
+            // Vérifier que le coût est inférieur ou égal au maximum
+            if (carte->getCout() <= coutMax)
+            {
+                std::cout << carte->getNom() << " : " << carte->getCout() << "p | ";
+            }
+        }
+    }
+
+    std::cout << std::endl;
 }

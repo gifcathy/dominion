@@ -9,19 +9,23 @@
     // -----------------------------------------------------------------------
     // -----  ATTENTION les fonction tour() et acheterCarte on des soucie
     // -----------------------------------------------------------------------
+static CatalogueCartes creerCatalogueInitialise(){
+    CatalogueCartes catalogue;
+    initialiserCatalogue(catalogue);
+    return catalogue;
+}
 
 Partie::Partie(int nombreJoueurs, const std::vector<std::string>& cartesAction)
-                : catalogue(),
-                plateau(nombreJoueurs, cartesAction),
+                : catalogue(creerCatalogueInitialise()),
+                plateau(nombreJoueurs, cartesAction, catalogue),
                 joueurs(),
                 joueurActuel(0)
 {
     if (nombreJoueurs < 2 || nombreJoueurs > 4) {
-        throw std::invalid_argument("Le nombre de joueurs doit etre compris entre 2 et 4.");
+        throw std::invalid_argument(
+            "Le nombre de joueurs doit etre compris entre 2 et 4."
+        );
     }
-
-    // Enregistrer les fabriques de toutes les cartes concretes
-    initialiserCatalogue(catalogue);
 
     // Creer les joueurs avec leur deck de depart
     for (int i = 0; i < nombreJoueurs; ++i) {
@@ -30,8 +34,7 @@ Partie::Partie(int nombreJoueurs, const std::vector<std::string>& cartesAction)
 }
 
 // Cree un deck contenant 7 Cuivres et 3 Domaines
-std::vector<std::unique_ptr<Carte>> Partie::creerDeckInitial()
-{
+std::vector<std::unique_ptr<Carte>> Partie::creerDeckInitial(){
     std::vector<std::unique_ptr<Carte>> deck;
 
     for (int i = 0; i < 7; ++i) {
@@ -46,8 +49,7 @@ std::vector<std::unique_ptr<Carte>> Partie::creerDeckInitial()
 }
 
 // Lance la partie
-void Partie::commencer()
-{
+void Partie::commencer(){
     std::cout << "--------------------" << std::endl;
     std::cout << "La partie commence !" << std::endl;
     std::cout << "--------------------" << std::endl;
@@ -60,10 +62,8 @@ void Partie::commencer()
     std::cout << "La partie est terminee !" << std::endl;
 }
 
-
 // Gere le tour du joueur actuel
-void Partie::tour()
-{
+void Partie::tour(){
     Joueur& joueur = joueurs[joueurActuel];
 
     std::cout << "\n--- Tour du joueur " << joueurActuel + 1 << " ---\n";
@@ -73,6 +73,9 @@ void Partie::tour()
     while (tourEnCours) {
         /////-------- ATTENTION A refaire car beaucoup de chose ne vons pas car oublie de carte jouer
         ///// ---- AFFICHER LES PILES DES DIFFERENTES CARTE (le plateau)
+        std::cout << "\nLe plateau : ";
+        plateau.afficher();
+        
         std::cout << "\nVotre main : ";
         for (std::size_t i = 0; i < joueur.getMain().size(); i++) {
             std::cout << "[" << i << "] " << joueur.getMain()[i]->getNom() << " | ";
@@ -101,8 +104,7 @@ void Partie::tour()
             continue;
         }
 
-        switch (choix)
-        { // ----ATTENTION voir si on ajoute le fait que la personne puisse annuler ce quel viens de faire (pas sur)
+        switch (choix){ // ----ATTENTION voir si on ajoute le fait que la personne puisse annuler ce quel viens de faire (pas sur)
         case 1 : 
             //----ATTENTION verifier que c'est bien une carte action
             //----Placer la carte dans le vecteur carteJouer du joueur
@@ -115,6 +117,8 @@ void Partie::tour()
         case 2 :
             //----demander au joueur de selectionner les carte tresor qu'il veut utiliser pour acheter une carte
             //----les tresor seront placer dans le vecteur carteJouer du joueur
+            //---- selectionne tout les tresor 
+            //selectionnerTresor();
             acheterCarte();
             break;
         case 3 :
@@ -152,11 +156,10 @@ void Partie::tour()
 
 
 // Achete une carte choisie par le joueur actuel
-void Partie::acheterCarte()
-{
+void Partie::acheterCarte(){
     Joueur& joueur = joueurs[joueurActuel];
 
-    /////--------ATTENTION il faudrait afficher toutes les carte et leur coup
+    plateau.afficherCartePourAchat();
 
     std::string nom;
     std::cout << "Nom de la carte a acheter : ";
@@ -206,8 +209,7 @@ void Partie::acheterCarte()
 
 
 // Termine le tour et passe au joueur suivant
-void Partie::finTour()
-{
+void Partie::finTour(){
     joueurs[joueurActuel].terminerTour();
 
     joueurActuel = (joueurActuel + 1) % static_cast<int>(joueurs.size());
@@ -215,8 +217,7 @@ void Partie::finTour()
 
 
 // Verifie si la partie est terminee
-bool Partie::estTerminee() const
-{
+bool Partie::estTerminee() const{
     // Premiere condition : la pile de Provinces est vide
     return plateau.getNombreCartes("Province") <= 0;
 }
