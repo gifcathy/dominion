@@ -33,6 +33,7 @@ class Joueur {
         int getAchat() const;
         const std::vector<std::unique_ptr<Carte>>& getMain() const;
         const std::unique_ptr<Carte>& getCarte(std::size_t indice) const;
+        const std::vector<std::unique_ptr<Carte>>& getCartesJouees() const; 
 
         void afficherMain(); 
 
@@ -66,6 +67,8 @@ class Joueur {
         void jouerAction(std::size_t indice);
 
         void terminerTour();
+
+        void ecarterCarteJouee(const Carte* carte); 
 
 }; 
 

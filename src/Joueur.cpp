@@ -32,6 +32,10 @@ const std::unique_ptr<Carte>& Joueur::getCarte(std::size_t indice) const{
     return main.at(indice);  //main[indice]; avec at on a des execption qui sont lever si probleme dans indice
 }
 
+const std::vector<std::unique_ptr<Carte>>& Joueur::getCartesJouees() const{
+    return carteJouer; 
+}
+
 void Joueur::piocher(){
     if (deck.empty()) {
         passerDefausseADeck();
@@ -269,4 +273,15 @@ void Joueur::afficherMain(){
         std::cout << "[" << j << "]" << main[j]->getNom() << std::endl; 
     }
     
+}
+
+
+// permet d'écarter du jeu une carte qui a été jouée et est dans carteJouer
+void Joueur::ecarterCarteJouee(const Carte* carte) {
+    for (std::size_t i = 0; i < carteJouer.size(); ++i) {
+        if (carteJouer[i].get() == carte) {
+            carteJouer.erase(carteJouer.begin() + i);
+            return;
+        }
+    }
 }
