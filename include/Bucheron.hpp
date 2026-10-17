@@ -1,8 +1,8 @@
 #ifndef BUCHERON_HPP
 #define BUCHERON_HPP
-#include "ActionActionAttaque.hpp"
+#include "Action.hpp"
 
-class Bucheron : public ActionActionAttaque{
+class Bucheron : public Action{
 
 public : 
     Bucheron(); 

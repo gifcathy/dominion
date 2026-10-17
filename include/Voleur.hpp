@@ -1,8 +1,8 @@
 #ifndef VOLEUR_HPP
 #define VOLEUR_HPP
-#include "ActionActionAttaque.hpp"
+#include "ActionPlateau.hpp"
 
-class Voleur : public ActionActionAttaque {
+class Voleur : public ActionPlateau {
 
 public : 
     Voleur(); 

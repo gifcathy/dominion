@@ -1,14 +1,15 @@
 #ifndef VILLAGE_HPP
 #define VILLAGE_HPP
-#include "ActionActionAttaque.hpp"
+#include "Action.hpp"
 
-class Village : public ActionActionAttaque{
+class Village : public Action{
 
 public :
     Village(); 
     ~Village(); 
 
     void afficher() const override; 
+    void jouer(Joueur& joueur) override;
 }; 
 
 #endif 

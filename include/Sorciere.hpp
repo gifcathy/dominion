@@ -1,8 +1,8 @@
 #ifndef SORCIERE_HPP
 #define SORCIERE_HPP
-#include "ActionActionAttaque.hpp"
+#include "ActionPlateau.hpp"
 
-class Sorciere : public ActionActionAttaque {
+class Sorciere : public ActionPlateau {
 
 public : 
     Sorciere(); 

@@ -1,8 +1,8 @@
 #ifndef FESTIN_HPP
 #define FESTIN_HPP
-#include "ActionActionAttaque.hpp"
+#include "ActionPlateau.hpp"
 
-class Festin : public ActionActionAttaque{
+class Festin : public ActionPlateau{
 
 public : 
     Festin(); 

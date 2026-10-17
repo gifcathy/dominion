@@ -1,14 +1,16 @@
 #ifndef ATELIER_HPP
 #define ATELIER_HPP
-#include "ActionActionAttaque.hpp"
+#include "ActionPlateau.hpp"
 
-class Atelier : public ActionActionAttaque{
+class Atelier : public ActionPlateau{
 
 public : 
     Atelier(); 
     ~Atelier(); 
 
     void afficher() const override;
+    void jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, 
+        Plateau& plateau) override; 
 
 }; 
 

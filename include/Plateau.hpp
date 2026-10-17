@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <memory>
 
 class Plateau {
     private:
@@ -28,6 +29,8 @@ class Plateau {
 
         bool contientCarte(const std::string& nom) const;
         int getCoutCarte(const std::string& nom) const;
+
+        std::unique_ptr<Carte> creerCarte(const std::string& nom) const;
 }; 
 
 #endif 

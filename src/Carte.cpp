@@ -25,3 +25,7 @@ const int& Carte::getCout() const{
 
 // appliquer les effets de la carte sur le joueur, par défaut la carte ne fait rien 
 void Carte::jouer(Joueur&){}; 
+
+// applique les effets des cartes plus complexes 
+void Carte::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, 
+        Plateau& plateau){}; 

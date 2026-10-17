@@ -145,3 +145,8 @@ int Plateau::getCoutCarte(const std::string& nom) const{
 
     return carte->getCout();
 }
+
+// l'attribut catalogue est privé et donc on utilise cette méthode pour déléguer la création d'une carte
+std::unique_ptr<Carte> Plateau::creerCarte(const std::string& nom) const {
+    return catalogue.creer(nom);
+}
