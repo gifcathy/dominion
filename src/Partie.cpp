@@ -109,27 +109,39 @@ void Partie::tour(){
         }
 
         switch (choix){ // ----ATTENTION voir si on ajoute le fait que la personne puisse annuler ce quel viens de faire (pas sur)
-        case 1 : 
-            //----ATTENTION verifier que c'est bien une carte action
-            //----Placer la carte dans le vecteur carteJouer du joueur
-            std::size_t indice;
-            std::cout << "Indice de l'Action dans votre main : ";
-            std::cin >> indice;
+        case 1 : {
+                std::size_t indice;
+                std::cout << "Indice de l'Action dans votre main : ";
+                std::cin >> indice;
 
-            if (indice >= joueur.getMain().size()) {
-                std::cout << "Indice invalide.\n";
-                break;
+                if (indice >= joueur.getMain().size()) {
+                    std::cout << "Indice invalide.\n";
+                    break;
+                }
+
+                // Récupérer la carte avant de la déplacer.
+                Carte* carte = joueur.getMain()[indice].get();
+
+                std::string nomCarte = carte->getNom();
+                std::string typeCarte = carte->getType();
+
+                // Vérifier que c'est bien une carte Action.
+                if (typeCarte != "Action" && typeCarte != "Action-Réaction" && typeCarte != "ActionPlateau") {
+                    std::cout << "Cette carte n'est pas une Action.\n";
+                    break;
+                }
+
+                joueur.jouerAction(indice);
+
+                // Vérifier si elle possède un effet sur le plateau.
+                ActionPlateau* actionP = dynamic_cast<ActionPlateau*>(carte);
+
+                if (actionP != nullptr) {
+                    actionP->jouerPlateau(joueurs, joueurActuel, plateau);
+                }
             }
-            const std::unique_ptr<Carte>& carte = joueur.getCarte(indice);
-
-            if (carte->getType() == "Attaque") {
-                // ...
-            }
-
-            joueur.jouerAction(indice);
-            //---verifier si on joue une carte attaque 
-            //--- si oui regader quelle est elle et faire sont attauqe sur les autre joueur 
             break;
+        
         
         case 2 :
             //----demander au joueur de selectionner les carte tresor qu'il veut utiliser pour acheter une carte

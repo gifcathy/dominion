@@ -9,6 +9,10 @@ public :
     ~Sorciere(); 
 
     void afficher() const override; 
+    
+    void jouer(Joueur& joueur) override;
+
+    void jouerPlateau(std::vector<Joueur>& joueurs, int joueurActuel, Plateau& plateau) override;
 }; 
 
 #endif 

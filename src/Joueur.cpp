@@ -36,6 +36,16 @@ const std::vector<std::unique_ptr<Carte>>& Joueur::getCartesJouees() const{
     return carteJouer; 
 }
 
+// permet d'afficher la main du joueur 
+void Joueur::afficherMain(){
+    int nbCartesMainJoueur = static_cast<int>(main.size()); 
+    std::cout << "votre main :" << std::endl; 
+    for (std::size_t j; j < main.size(); j++){
+        std::cout << "[" << j << "]" << main[j]->getNom() << std::endl; 
+    }
+    
+}
+
 void Joueur::piocher(){
     if (deck.empty()) {
         passerDefausseADeck();
@@ -243,7 +253,7 @@ void Joueur::jouerAction(std::size_t indice) {
     }
 
     // Vérifier qu'il s'agit d'une carte Action.
-    if (main[indice]->getType() != "Action") {
+    if (main[indice]->getType() == "Trésor" || main[indice]->getType() == "Victoire") {
         return;
     }
 
@@ -261,18 +271,6 @@ void Joueur::jouerAction(std::size_t indice) {
 
     // Appliquer les effets de la carte.
     carte->jouer(*this);
-}
-
-
-
-// permet d'afficher la main du joueur 
-void Joueur::afficherMain(){
-    int nbCartesMainJoueur = static_cast<int>(main.size()); 
-    std::cout << "votre main :" << std::endl; 
-    for (std::size_t j; j < main.size(); j++){
-        std::cout << "[" << j << "]" << main[j]->getNom() << std::endl; 
-    }
-    
 }
 
 
