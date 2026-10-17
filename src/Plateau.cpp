@@ -123,7 +123,6 @@ void Plateau::afficherCarteCoutInfEgal(int coutMax) const{
             }
         }
     }
-
     std::cout << std::endl;
 }
 

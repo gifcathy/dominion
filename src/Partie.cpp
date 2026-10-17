@@ -89,6 +89,8 @@ void Partie::tour(){
                   << " | Achats : " << joueur.getAchat()
                   << std::endl;
 
+                  //peut etre plutot demander si il veut jouer une action puis si il veut acheter une carte 
+                  //car la sinon il peut d'abord acheter puis jouer une action alos que c pas se qu'on doit pouvoir faire
         std::cout << "1. Jouer une Action\n"
                   << "2. Acheter une carte\n" // jouer un ou plusieur tresor
                   << "3. Terminer le tour\n"
@@ -113,6 +115,17 @@ void Partie::tour(){
             std::size_t indice;
             std::cout << "Indice de l'Action dans votre main : ";
             std::cin >> indice;
+
+            if (indice >= joueur.getMain().size()) {
+                std::cout << "Indice invalide.\n";
+                break;
+            }
+            const std::unique_ptr<Carte>& carte = joueur.getCarte(indice);
+
+            if (carte->getType() == "Attaque") {
+                // ...
+            }
+
             joueur.jouerAction(indice);
             //---verifier si on joue une carte attaque 
             //--- si oui regader quelle est elle et faire sont attauqe sur les autre joueur 
