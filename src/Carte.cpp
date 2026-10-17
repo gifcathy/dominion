@@ -27,5 +27,4 @@ const int& Carte::getCout() const{
 void Carte::jouer(Joueur&){}; 
 
 // applique les effets des cartes plus complexes 
-void Carte::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, 
-        Plateau& plateau){}; 
+void Carte::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau){}; 

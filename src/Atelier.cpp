@@ -16,8 +16,7 @@ void Atelier::afficher() const {
 
 
 // jouer la carte 
-void Atelier::jouerPlateau(std::vector<Joueur>& listeJoueurs,int& indiceJoueurActuel,
-    Plateau& plateau){
+void Atelier::jouerPlateau(std::vector<Joueur>& listeJoueurs,int& indiceJoueurActuel, Plateau& plateau){
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
 
     // Afficher les cartes disponibles qui coûtent au maximum 4 pièces.

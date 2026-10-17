@@ -7,10 +7,8 @@
 class ActionPlateau : public Carte{
 
 public : 
-    ActionPlateau(const std::string& nom_carte, const std::string& type_carte, 
-        const int& cout_carte); 
-    //virtual ~ActionPlateau(); 
-    virtual void jouerPlateau(std::vector<Joueur>& joueurs, int joueurActuel, Plateau& plateau) = 0;
+    ActionPlateau(const std::string& nom_carte, const std::string& type_carte, const int& cout_carte); 
+    virtual ~ActionPlateau(); 
 
 }; 
 
