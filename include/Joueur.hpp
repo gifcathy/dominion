@@ -19,8 +19,8 @@ class Joueur {
         int action;
         int achat;
         int ptsVictoire; 
-        bool proteger;
-        bool verifierProtection;// verifier si elle existe  quand piocher carte verifier et quand ecarter remettre a
+        //bool proteger;
+        //bool verifierProtection;// verifier si elle existe  quand piocher carte verifier et quand ecarter remettre a
 
     public:
         Joueur(std::vector<std::unique_ptr<Carte>> deckInitial);

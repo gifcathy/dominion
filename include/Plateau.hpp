@@ -1,6 +1,6 @@
 #ifndef PLATEAU_HPP
 #define PLATEAU_HPP
-#include "Carte.hpp"
+//#include "Carte.hpp"
 #include "CatalogueCartes.hpp"
 
 #include <map>
@@ -8,6 +8,8 @@
 #include <vector>
 #include <iostream>
 #include <memory>
+
+class Carte;
 
 class Plateau {
     private:

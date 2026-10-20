@@ -1,6 +1,10 @@
 #include <iostream> 
 #include "Atelier.hpp"
 
+#include "Joueur.hpp"
+#include "Plateau.hpp"
+#include "Carte.hpp"
+
 // constructeur
 Atelier::Atelier() : ActionPlateau("Atelier", "Action", 3){}; 
 

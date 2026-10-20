@@ -1,5 +1,7 @@
 #include "Plateau.hpp"
 
+#include "Carte.hpp"
+
 Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction, const CatalogueCartes& catalogue) : catalogue(catalogue){
     // Piles de Tresors
     piles["Cuivre"] = 60 - 7 * nbJoueurs;

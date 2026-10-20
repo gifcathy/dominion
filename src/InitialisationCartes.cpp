@@ -35,6 +35,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Douves());
     });
 
+    catalogue.enregistrer("Duche", [] {
+        return std::unique_ptr<Carte>(new Duche());
+    });
+
     catalogue.enregistrer("Festin", [] {
         return std::unique_ptr<Carte>(new Festin());
     });

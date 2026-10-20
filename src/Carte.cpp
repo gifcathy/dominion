@@ -1,6 +1,8 @@
 #include <iostream> 
 #include "Carte.hpp"
+
 #include "Joueur.hpp"
+#include "Plateau.hpp"
 
 // constructeur 
 Carte::Carte(const std::string& nom_carte, const std::string& type_carte, const int& cout_carte) : 
@@ -27,4 +29,4 @@ const int& Carte::getCout() const{
 void Carte::jouer(Joueur&){}; 
 
 // applique les effets des cartes plus complexes 
-void Carte::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau){}; 
+void Carte::jouerPlateau(std::vector<Joueur>&, int&, Plateau&){}; 

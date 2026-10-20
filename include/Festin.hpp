@@ -2,6 +2,9 @@
 #define FESTIN_HPP
 #include "ActionPlateau.hpp"
 
+class Joueur;
+class Plateau;
+
 class Festin : public ActionPlateau{
 
 public : 

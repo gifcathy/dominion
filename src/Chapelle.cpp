@@ -21,12 +21,12 @@ void Chapelle::jouer(Joueur& joueur){
     std::cout << "\n ---- Chapelle ----" << std::endl; 
     std::cout << "Vous pouvez écarter jusqu'à 4 cartes de votre main" << std::endl; 
     int nbCartesMainJoueur = static_cast<int>(joueur.getMain().size()); 
-    int maximum; 
+    int maximum = nbCartesMainJoueur; 
     int nombreCartesAEcarter; 
 
     // on crée le maximum de telle sorte à ce qu'on ne puisse pas supprimer plus de cartes qu'on a
     if (nbCartesMainJoueur >= 4){
-        int maximum = 4; 
+        maximum = 4; 
     }
 
     // on montre la main pour savoir combien de cartes on veut écarter 

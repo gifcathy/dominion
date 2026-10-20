@@ -19,7 +19,7 @@ void Sorciere::jouer(Joueur& joueur){
     joueur.piocherPlusieurCarte(2);
 }
 
-void Sorciere::jouerPlateau(std::vector<Joueur>& joueurs, int joueurActuel, Plateau& plateau){
+void Sorciere::jouerPlateau(std::vector<Joueur>& joueurs, int& joueurActuel, Plateau&){
     for (std::size_t i = 0; i < joueurs.size(); ++i) {
         if (static_cast<int>(i) == joueurActuel) {
             continue;

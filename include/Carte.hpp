@@ -1,7 +1,7 @@
 #ifndef CARTE_HPP
 #define CARTE_HPP
 #include "Joueur.hpp"
-#include "Plateau.hpp"
+//#include "Plateau.hpp"
 
 #include <string> 
 
@@ -30,8 +30,7 @@ public :
 
     // permet de jouer la carte pour les cartes ayant des actions plus complexes en interraction
     // avec le plateau 
-    virtual void jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, 
-        Plateau& plateau); 
+    virtual void jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau); 
 }; 
 
 #endif 

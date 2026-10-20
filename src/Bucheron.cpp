@@ -7,9 +7,10 @@ Bucheron::Bucheron() : Action("Bucheron", "Action", 3){};
 // destructeur 
 Bucheron::~Bucheron(){}; 
 
+/*
 void Bucheron::afficher() const {
     std::cout << "Bucheron, Cout : " << getCout() << std::endl;
-}
+}*/
 
 // méthode d'affichage
 void Bucheron::afficher() const{

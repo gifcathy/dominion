@@ -4,6 +4,10 @@
 #include <utility>
 #include "Festin.hpp"
 
+#include "Joueur.hpp"
+#include "Plateau.hpp"
+#include "Carte.hpp"
+
 // constructeur 
 Festin::Festin() : ActionPlateau("Festin", "Action", 4){}; 
 

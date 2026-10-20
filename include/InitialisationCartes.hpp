@@ -10,6 +10,7 @@
 #include "Cuivre.hpp"
 #include "Domaine.hpp"
 #include "Douves.hpp"
+#include "Duche.hpp"
 #include "Festin.hpp"
 #include "Jardin.hpp"
 #include "Laboratoire.hpp"

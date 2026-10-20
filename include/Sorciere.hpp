@@ -12,7 +12,7 @@ public :
     
     void jouer(Joueur& joueur) override;
 
-    void jouerPlateau(std::vector<Joueur>& joueurs, int joueurActuel, Plateau& plateau) override;
+    void jouerPlateau(std::vector<Joueur>& joueurs, int& joueurActuel, Plateau& plateau) override;
 }; 
 
 #endif 
