@@ -125,6 +125,7 @@ void Joueur::ecarterCarte(std::size_t indice){
 void Joueur::ajouterArgent(int montant) {
     if (montant > 0) {
         argent += montant;
+        //std::cout<<"ajouter argent"<<std::endl;
     }
 }
 

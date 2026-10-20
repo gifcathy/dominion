@@ -70,6 +70,12 @@ void Partie::tour()
 {
     Joueur& joueur = joueurs[joueurActuel];
 
+    std::cout << "\nLe plateau : ";
+    plateau.afficher();
+
+    std::cout << "\n--- Tour du joueur " << joueurActuel + 1 << " ---\n";
+    joueur.afficherMain();
+
     // ==================================================
     // PHASE 1 : ACTION
     // ==================================================
@@ -111,16 +117,8 @@ void Partie::tour()
         // Afficher le plateau et la main du joueur.
         std::cout << "\n========== PHASE ACTION ==========\n";
 
-        std::cout << "\nLe plateau : ";
-        plateau.afficher();
-
-        std::cout << "\nVotre main :\n";
-
-        for (std::size_t i = 0; i < joueur.getMain().size(); i++)
-        {
-            std::cout << "[" << i << "] "
-                      << joueur.getMain()[i]->getNom() << "\n";
-        }
+        std::cout << "\n--- Tour du joueur " << joueurActuel + 1 << " ---\n";
+        joueur.afficherMain();
 
         std::cout << "\nActions disponibles : " << joueur.getAction()
                   << "\nArgent : " << joueur.getArgent()
@@ -218,27 +216,24 @@ void Partie::tour()
     // PHASE 2 : ACHAT
     // ==================================================
 
+    //--peut etre reaficher
+    //--std::cout << "\nLe plateau : ";
+    //--plateau.afficher();
+
     bool phaseAchat = true;
 
     while (phaseAchat)
     {
         std::cout << "\n========== PHASE ACHAT ==========\n";
 
-        std::cout << "\nLe plateau : ";
-        plateau.afficher();
-
-        std::cout << "\nVotre main :\n";
-
-        for (std::size_t i = 0; i < joueur.getMain().size(); i++)
-        {
-            std::cout << "[" << i << "] "
-                      << joueur.getMain()[i]->getNom() << "\n";
-        }
+        std::cout << "\n--- Tour du joueur " << joueurActuel + 1 << " ---\n";
+        joueur.afficherMain();
 
         std::cout << "\nArgent : " << joueur.getArgent()
                   << "\nAchats disponibles : " << joueur.getAchat()
                   << "\n";
 
+                  ///----- faire le teste ici pour savoir si il lui reste des achat
         std::cout << "\n1. Jouer ses tresors\n"
                   << "2. Acheter une carte\n"
                   << "3. Terminer le tour\n"
@@ -295,6 +290,7 @@ void Partie::jouerToutTresor(Joueur& joueur)
         if (joueur.getMain()[i]->getType() == "Tresor")
         {
             joueur.jouerTresor(static_cast<std::size_t>(i));
+            //std::cout<<"jouerToutTresor"<<std::endl;
         }
     }
 }
