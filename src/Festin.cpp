@@ -15,7 +15,7 @@ Festin::Festin() : ActionPlateau("Festin", "Action", 4){};
 Festin::~Festin(){}; 
 
 // méthode d'affichage 
-void Festin::afficher() const{
+void Festin::afficher() const {
     std::cout << "Festin - Cout : " << getCout() << "\n"
               << "Type de carte : Action \n" 
               << "Description : écartez cette carte, recevez une carte coûtant jusqu'à 5 pièces" 
@@ -24,7 +24,7 @@ void Festin::afficher() const{
 
 
 // jouer la carte 
-void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs,int& indiceJoueurActuel, Plateau& plateau){
+void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau){
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
 
     Carte* festin = nullptr;
