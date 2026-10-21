@@ -19,4 +19,5 @@ void Laboratoire::afficher() const{
 void Laboratoire::jouer(Joueur& joueur){
     joueur.piocherPlusieurCarte(2); 
     joueur.ajouterActions(1); 
+    std::cout << "Vous venez de jouer la carte Laboratoire" << std::endl;
 }

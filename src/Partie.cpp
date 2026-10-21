@@ -70,11 +70,15 @@ void Partie::tour()
 {
     Joueur& joueur = joueurs[joueurActuel];
 
-    std::cout << "\nLe plateau : ";
+    std::cout << "\n==================================";
+    std::cout << "\n========== Le plateau : ==========";
+    std::cout << "\n==================================";
     plateau.afficher();
 
-    std::cout << "\n--- Tour du joueur " << joueurActuel + 1 << " ---\n";
-    joueur.afficherMain();
+    std::cout << "\n==================================";
+    std::cout << "\n======== Tour du joueur " << joueurActuel + 1 << " ========";
+    std::cout << "\n==================================" << std::endl;
+    //joueur.afficherMain();
 
     // ==================================================
     // PHASE 1 : ACTION
@@ -82,8 +86,12 @@ void Partie::tour()
 
     bool phaseAction = true;
 
+    joueur.afficherMain();
+    
     while (phaseAction)
     {
+        
+
         // Vérifier si le joueur possède encore une action.
         if (joueur.getAction() <= 0)
         {
@@ -184,8 +192,7 @@ void Partie::tour()
                 // Jouer la carte.
                 // Cette fonction doit retirer une action disponible,
                 // déplacer la carte et appliquer son effet personnel.
-                ActionPlateau* actionP =
-                    dynamic_cast<ActionPlateau*>(carte);
+                ActionPlateau* actionP = dynamic_cast<ActionPlateau*>(carte);
 
                 joueur.jouerAction(indice);
 
@@ -193,9 +200,7 @@ void Partie::tour()
                 // ou les autres joueurs, si la carte en possède un.
                 if (actionP != nullptr)
                 {
-                    actionP->jouerPlateau(
-                        joueurs, joueurActuel, plateau
-                    );
+                    actionP->jouerPlateau(joueurs, joueurActuel, plateau);
                 }
 
                 break;
@@ -224,6 +229,12 @@ void Partie::tour()
 
     while (phaseAchat)
     {
+        if (joueur.getAchat() <= 0){
+            std::cout << "\nVous n'avez plus d'achat disponible.\n";
+            break;
+        }
+        //--voir si on ne verrifierai pas si il a une carte tresor dans la mains ou si il a de l'argent en main
+
         std::cout << "\n========== PHASE ACHAT ==========\n";
 
         std::cout << "\n--- Tour du joueur " << joueurActuel + 1 << " ---\n";
@@ -233,7 +244,6 @@ void Partie::tour()
                   << "\nAchats disponibles : " << joueur.getAchat()
                   << "\n";
 
-                  ///----- faire le teste ici pour savoir si il lui reste des achat
         std::cout << "\n1. Jouer ses tresors\n"
                   << "2. Acheter une carte\n"
                   << "3. Terminer le tour\n"

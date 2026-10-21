@@ -254,7 +254,7 @@ void Joueur::jouerAction(std::size_t indice) {
     }
 
     // Vérifier qu'il s'agit d'une carte Action.
-    if (main[indice]->getType() == "Trésor" || main[indice]->getType() == "Victoire") {
+    if (main[indice]->getType() == "Tresor" || main[indice]->getType() == "Victoire") {
         return;
     }
 

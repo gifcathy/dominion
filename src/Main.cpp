@@ -14,6 +14,9 @@ int main()
         cartesAction.push_back("Atelier");
         cartesAction.push_back("Bucheron");
         cartesAction.push_back("Village");
+        cartesAction.push_back("Chapelle");
+        cartesAction.push_back("Festin");
+        cartesAction.push_back("Laboratoire");
 
         // Creation de la partie
         Partie partie(nombreJoueurs, cartesAction);
