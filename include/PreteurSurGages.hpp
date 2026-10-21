@@ -2,7 +2,7 @@
 #define PRETEUR_SUR_GAGES_HPP
 #include "Action.hpp"
 
-class PreteurSurGages : public Action{
+class PreteurSurGages : public Action {
 
 public : 
     PreteurSurGages(); 

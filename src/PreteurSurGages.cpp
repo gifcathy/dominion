@@ -13,7 +13,7 @@ PreteurSurGages::~PreteurSurGages(){};
 void PreteurSurGages::afficher() const{
     std::cout << "PreteurSurGages (PSG) - Cout : " << getCout() << "\n"
               << "Type de carte : Action \n" 
-              << "Description : écartez jusqu'à 4 cartes de votre main" << std::endl;
+              << "Description : écartez une carte Cuivre de votre main et recevez +3 pièces" << std::endl;
 }
 
 // jouer la carte 

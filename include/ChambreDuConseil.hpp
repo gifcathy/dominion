@@ -2,6 +2,9 @@
 #define CHAMBRE_DU_CONSEIL_HPP
 #include "ActionPlateau.hpp"
 
+class Joueur;
+class Plateau;
+
 class ChambreDuConseil : public ActionPlateau {
 
 public : 
