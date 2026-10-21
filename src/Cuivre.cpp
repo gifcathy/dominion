@@ -9,8 +9,8 @@ Cuivre::~Cuivre(){};
 
 // méthode d'affichage 
 void Cuivre::afficher() const {
-    std::cout << "Cuivre - Valeur : " << getValeurTresor() << "\n"
-              << "Cout : " << getCout() << "\n"
+    std::cout << "Cuivre - Cout : " << getCout() << "\n"
+              << "Valeur : " << getValeurTresor() << "\n"
               << "Type de carte : Trésor \n"
               << "Description : pièce ayant une valeur de 1" << std::endl;
 }

@@ -9,8 +9,8 @@ Argent::~Argent(){};
 
 // méthode d'affichage 
 void Argent::afficher() const {
-    std::cout << "Argent - Valeur : " << getValeurTresor() << "\n"
-              << "Cout : " << getCout() << "\n"
+    std::cout << "Argent - Cout : " << getCout() << "\n"
+              << "Valeur : " << getValeurTresor() << "\n"
               << "Type de carte : Trésor \n" 
               << "Description : pièce ayant une valeur de 2"<<std::endl;
 }

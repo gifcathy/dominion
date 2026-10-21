@@ -9,8 +9,8 @@ Domaine::~Domaine(){};
 
 // méthode d'affichage
 void Domaine::afficher() const {
-    std::cout << "Domaine - Valeur : " << getValeurVictoire() << "\n"
-              << "Cout : " << getCout() << "\n"
+    std::cout << "Domaine - Cout : " << getCout() << "\n"
+              << "Valeur : " << getValeurVictoire() << "\n"
               << "Type de carte : Victoire \n"
               << "Descirption : carte offrant 1 point de victoire" << std::endl;
 }

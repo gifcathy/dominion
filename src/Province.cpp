@@ -9,8 +9,8 @@ Province::~Province(){};
 
 // méthode d'affichage
 void Province::afficher() const {
-    std::cout << "Province - Valeur : " << getValeurVictoire() << "\n"
-              << "Cout : " << getCout() << "\n"
+    std::cout << "Province - Cout : " << getCout() << "\n"
+              << "Valeur : " << getValeurVictoire() << "\n"
               << "Type de carte : Victoire \n"
               << "Descirption : carte offrant 6 point de victoire" << std::endl;
 }

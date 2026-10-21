@@ -290,7 +290,6 @@ void Partie::jouerToutTresor(Joueur& joueur)
         if (joueur.getMain()[i]->getType() == "Tresor")
         {
             joueur.jouerTresor(static_cast<std::size_t>(i));
-            //std::cout<<"jouerToutTresor"<<std::endl;
         }
     }
 }
