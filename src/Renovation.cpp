@@ -84,9 +84,9 @@ void Renovation::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoue
             continue;
         }
 
-        // Vérifier que la carte coûte au maximum 5 pièces.
-        if (plateau.getCoutCarte(nomCarte) > 5) {
-            std::cout << "Cette carte coûte plus de 5 pièces." << std::endl;
+        // Vérifier que la carte coûte au maximum coutMax pièces.
+        if (plateau.getCoutCarte(nomCarte) > coutMax) {
+            std::cout << "Cette carte coûte plus de " << coutMax << " pièces." << std::endl;
             continue;
         }
         choixValide = true; 
