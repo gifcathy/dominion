@@ -128,6 +128,24 @@ void Plateau::afficherCarteCoutInfEgal(int coutMax) const{
     std::cout << std::endl;
 }
 
+void Plateau::afficherTresorCoutInfEgal(int coutMax) const{
+    for (const auto& element : piles)
+    {
+        // Vérifier qu'il reste des cartes dans la pile
+        if (element.second > 0)
+        {
+            std::unique_ptr<Carte> carte = catalogue.creer(element.first);
+
+            // Vérifier que le coût est inférieur ou égal au maximum et que c un tresor
+            if (carte->getCout() <= coutMax && carte->getType() == "Tresor")
+            {
+                std::cout << carte->getNom() << " : " << carte->getCout() << "p | ";
+            }
+        }
+    }
+    std::cout << std::endl;
+}
+
 bool Plateau::contientCarte(const std::string& nom) const{
     std::map<std::string, int>::const_iterator it = piles.find(nom);
 

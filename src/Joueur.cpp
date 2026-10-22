@@ -103,6 +103,11 @@ void Joueur::ajouterCarte(std::unique_ptr<Carte> carte){
     //Cela crée un Cuivre et transfère directement sa propriété au joueur.
 }
 
+void Joueur::ajouterCarteMain(std::unique_ptr<Carte> carte){
+    main.push_back(std::move(carte));
+    std::cout << carte->getNom() << " a été ajouté à votre main" << std::endl;
+}
+
 void Joueur::defausserUneCarte(std::size_t indice) {
     if (indice >= main.size()) {
         return;

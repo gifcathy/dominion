@@ -48,6 +48,7 @@ class Joueur {
         void passerDefausseADeck();
 
         void ajouterCarte(std::unique_ptr<Carte> carte);
+        void ajouterCarteMain(std::unique_ptr<Carte> carte);
 
         void defausserUneCarte(std::size_t indice);
         void defausseDeck();
