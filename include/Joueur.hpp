@@ -19,6 +19,8 @@ class Joueur {
         int action;
         int achat;
         int ptsVictoire; 
+
+        //-- finalement pas utiliser on va juste verifier a chaque attauque les main des adverser avec une fonction
         //bool proteger;
         //bool verifierProtection;// verifier si elle existe  quand piocher carte verifier et quand ecarter remettre a
 
@@ -69,6 +71,8 @@ class Joueur {
         void terminerTour();
 
         void ecarterCarteJouee(const Carte* carte); 
+
+        bool possedeDouveEnMain() const;
 
 }; 
 

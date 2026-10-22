@@ -22,8 +22,8 @@ void ChambreDuConseil::jouer(Joueur& joueur){
 }
 
 void ChambreDuConseil::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&){
-    for(int i=0; i < listeJoueurs.size(); i++){
-        if(i != indiceJoueurActuel){
+    for(std::size_t i=0; i < listeJoueurs.size(); i++){
+        if(i != static_cast<std::size_t>(indiceJoueurActuel)){
             Joueur& joueur = listeJoueurs.at(i);
             joueur.piocher();
         }

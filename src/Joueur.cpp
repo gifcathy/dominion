@@ -284,3 +284,17 @@ void Joueur::ecarterCarteJouee(const Carte* carte) {
         }
     }
 }
+
+
+bool Joueur::possedeDouveEnMain() const
+{
+    for (std::size_t i = 0; i < main.size(); i++)
+    {
+        if (main[i]->getNom() == "Douve")
+        {
+            return true;
+        }
+    }
+
+    return false;
+}
