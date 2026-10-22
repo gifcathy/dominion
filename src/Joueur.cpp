@@ -113,6 +113,13 @@ void Joueur::defausserUneCarte(std::size_t indice) {
     main.erase(main.begin() + indice);
 }
 
+void Joueur::defausseDeck() {
+    for (std::size_t i = 0; i < deck.size(); i++) {
+        defausse.push_back(std::move(deck[i]));
+    }
+    deck.clear();
+}
+
 void Joueur::ecarterCarte(std::size_t indice){
     if (indice >= main.size()) {
         return;

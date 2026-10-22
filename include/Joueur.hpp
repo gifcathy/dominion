@@ -50,6 +50,7 @@ class Joueur {
         void ajouterCarte(std::unique_ptr<Carte> carte);
 
         void defausserUneCarte(std::size_t indice);
+        void defausseDeck();
         void ecarterCarte(std::size_t indice);
 
         void ajouterArgent(int montant);
