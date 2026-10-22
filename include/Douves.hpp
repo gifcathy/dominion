@@ -9,6 +9,7 @@ public :
     ~Douves(); 
 
     void afficher() const override; 
+    void jouer(Joueur& joueur) override;
 }; 
 
 #endif 

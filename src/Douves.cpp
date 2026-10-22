@@ -14,3 +14,9 @@ void Douves::afficher() const{
               << "Description : +2 Cartes, lorsqu'un adversaire joue une carte Attaque, vous pouvez dévoiler cette carte de votre main. Dans ce cas l'attaque n'a pas d'effet sur vous" 
               << std::endl;
 }
+
+// jouer la carte 
+void Douves::jouer(Joueur& joueur){
+    joueur.piocherPlusieurCarte(2); 
+    std::cout << "Vous venez de jouer la carte Douves" << std::endl;
+}
