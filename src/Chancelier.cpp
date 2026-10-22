@@ -20,5 +20,10 @@ void Chancelier::afficher() const{
 
 void Chancelier::jouer(Joueur& joueur) {
     joueur.ajouterArgent(2);
-    joueur.defausseDeck();
+    std::cout << "Voulez vous défausser votre deck ? (y ou n) : ";
+    char choix;
+    std::cin >> choix;
+    if(choix == 'y' || choix == 'Y'){
+        joueur.defausseDeck();
+    }
 }
