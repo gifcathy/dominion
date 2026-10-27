@@ -8,7 +8,7 @@
 #include <algorithm> //contient std::shuffle
 #include <random>
 
-Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move(deckInitial)), argent(7), action(1), achat(1), ptsVictoire(3){
+Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move(deckInitial)), argent(0), action(1), achat(1), ptsVictoire(0){
     
     melanger();
     piocherNouvelleMain();
