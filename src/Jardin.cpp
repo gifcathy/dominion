@@ -20,3 +20,6 @@ void Jardin::afficher() const{
               << "Description : Vaut 1 point de victoire pour chaque 10 cartes dans votre pioche (arrondi à l'unité inférieure)" 
               << std::endl;
 }
+
+// pas de méthode jouer parce qu'elle ne produit aucun effet quand on la joue
+// calculs des points en fin de partie ajoutés dans joueur 

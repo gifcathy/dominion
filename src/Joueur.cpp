@@ -1,6 +1,8 @@
 #include "Joueur.hpp"
 #include "Carte.hpp"
 #include "Tresor.hpp"
+#include "Jardin.hpp"
+#include "Victoire.hpp"
 
 #include <utility>
 #include <algorithm> //contient std::shuffle
@@ -309,4 +311,58 @@ bool Joueur::possedeDouveEnMain() const
     }
 
     return false;
+}
+
+
+int Joueur::getNombreTotalCartes() const {
+    return static_cast<int>(deck.size() + main.size() + defausse.size() + carteJouer.size());
+}
+
+
+// calculer le nombre total de point à la fin de la partie 
+int Joueur::calculerPointsVictoire() const {
+    int points = 0;
+    // Nombre total de cartes possédées par le joueur
+    int tailleDeck = getNombreTotalCartes();
+
+    // Fonction qui calcule les points d'une carte
+    // la fonction locale peut utiliser des les variables de la méthode extérieure par référence
+    auto compterCarte = [&](const std::unique_ptr<Carte>& carte) {
+        // Vérifier si la carte est un Jardin
+        const Jardin* jardin = dynamic_cast<const Jardin*>(carte.get());
+        // carte.get() permet d'obtenir le pointeur brut vers l'objet sans transferer sa propriété
+        // convertit le pointeur de Carte vers un Jardin si ça en est un 
+
+        // si la carte est bien un jardin 
+        if (jardin != nullptr) {
+            points += jardin->getNbPointVictoireJardin(tailleDeck);
+        }
+        else {
+            // Sinon, vérifier si c'est une autre carte Victoire
+            const Victoire* victoire = dynamic_cast<const Victoire*>(carte.get());
+            // si c'est bien une victoire on ajoute les points 
+            if (victoire != nullptr) {
+                points += victoire->getValeurVictoire();
+            }
+        }
+    };
+
+    // Compter les points des cartes dans chaque emplacement
+    for (const auto& carte : deck) {
+        compterCarte(carte);
+    }
+
+    for (const auto& carte : main) {
+        compterCarte(carte);
+    }
+
+    for (const auto& carte : defausse) {
+        compterCarte(carte);
+    }
+
+    for (const auto& carte : carteJouer) {
+        compterCarte(carte);
+    }
+
+    return points;
 }

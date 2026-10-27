@@ -76,6 +76,9 @@ class Joueur {
 
         bool possedeDouveEnMain() const;
 
+        int getNombreTotalCartes() const;
+        int calculerPointsVictoire() const;
+
 }; 
 
 #endif 
