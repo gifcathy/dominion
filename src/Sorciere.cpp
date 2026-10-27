@@ -33,18 +33,19 @@ void Sorciere::jouerPlateau(std::vector<Joueur>& joueurs, int& joueurActuel, Pla
         // Si le joueur possède une Douve en main, il peut se protéger contre l'attaque.
         // ici on ne lui laisse pas le choix d'utilise le pouvoir de la Douve en reaction
         if (joueurs[i].possedeDouveEnMain()){
-            std::cout << "Le joueur " << i + 1 << " peut révéler une Douve pour se protéger." << std::endl;
+            std::cout << "Le joueur " << i + 1 << " à révéler une Douve pour se protéger." << std::endl;
             continue;
         }
 
         // Vérifier que la pile de Malédictions n'est pas vide.
-        if (plateau.getNombreCartes("Malédiction") <= 0){
+        if (plateau.getNombreCartes("Malediction") <= 0){
             std::cout << "Le joueur " << i + 1 << " ne reçoit pas de Malédiction : " << "la pile est vide." << std::endl;
             continue;
         }
 
         // Créer une Malédiction et l'ajouter à la défausse.
-        std::unique_ptr<Carte> carte = plateau.creerCarte("Malédiction");
+        std::unique_ptr<Carte> carte = plateau.creerCarte("Malediction");
         joueurs[i].ajouterCarte(std::move(carte));
+        std::cout << "Le joueur " << i + 1 << " a recu une Malediction !" << std::endl;
     }
 }

@@ -8,7 +8,7 @@
 #include <algorithm> //contient std::shuffle
 #include <random>
 
-Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move(deckInitial)), argent(0), action(1), achat(1), ptsVictoire(3){
+Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move(deckInitial)), argent(7), action(1), achat(1), ptsVictoire(3){
     
     melanger();
     piocherNouvelleMain();
@@ -300,16 +300,12 @@ void Joueur::ecarterCarteJouee(const Carte* carte) {
 }
 
 
-bool Joueur::possedeDouveEnMain() const
-{
-    for (std::size_t i = 0; i < main.size(); i++)
-    {
-        if (main[i]->getNom() == "Douve")
-        {
+bool Joueur::possedeDouveEnMain() const {
+    for (std::size_t i = 0; i < main.size(); i++) {
+        if (main[i]->getNom() == "Douves") {
             return true;
         }
     }
-
     return false;
 }
 

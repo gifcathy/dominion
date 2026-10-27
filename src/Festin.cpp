@@ -27,6 +27,11 @@ void Festin::afficher() const {
 void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau){
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
 
+    std::cout << "\n========================================\n";
+    std::cout << "             CARTE : FESTIN\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : Gagnez une carte coutant au maximum 5 pieces.\n\n";
+
     Carte* festin = nullptr;
 
     // on met dans festin l'adresse de la carte dans la liste des cartes jouées 
@@ -43,49 +48,60 @@ void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
         return;
     }
 
-    // Afficher les cartes disponibles qui coûtent au maximum 5 pièces.
-    plateau.afficherCarteCoutInfEgal(5);
+    std::vector<std::string> cartesDisponibles;
 
-    // Demander au joueur quelle carte il souhaite gagner.
-    std::string nomCarte;
-    bool choixValide = false; 
+    std::cout << "Cartes disponibles :\n";
+    plateau.afficherCarteCoutInfEgal(5, cartesDisponibles);
 
-    while(!choixValide){
-        std::cout << "Quelle carte souhaitez-vous gagner ? ";
-        std::getline(std::cin >> std::ws, nomCarte);
-        // Vérifier que la carte existe sur le plateau.
-        if (!plateau.contientCarte(nomCarte)) {
-            std::cout << "Cette carte n'est pas disponible sur le plateau."
-                    << std::endl;
-            continue;
-        }
-
-        // Vérifier que la pile n'est pas vide.
-        if (plateau.getNombreCartes(nomCarte) <= 0) {
-            std::cout << "Cette pile est vide." << std::endl;
-            continue;
-        }
-
-        // Vérifier que la carte coûte au maximum 5 pièces.
-        if (plateau.getCoutCarte(nomCarte) > 5) {
-            std::cout << "Cette carte coûte plus de 5 pièces." << std::endl;
-            continue;
-        }
-        choixValide = true; 
+    // Verifier qu'il existe au moins une carte disponible.
+    if (cartesDisponibles.empty()) {
+        std::cout << "\nAucune carte disponible.\n";
+        return;
     }
-   
+
+    int choix;
+
+    // Demander un numero valide.
+    while (true) {
+        std::cout << "\nVotre choix (0 pour annuler) : ";
+
+        if (std::cin >> choix) {
+            if (choix >= 0 && static_cast<std::size_t>(choix) <= cartesDisponibles.size()) {
+                break;
+            }
+
+            std::cout << "[ERREUR] Choix invalide.\n";
+        }
+        else {
+            if (std::cin.eof())
+                return;
+
+            std::cin.clear();
+            std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+            std::cout << "[ERREUR] Entrez un numero valide.\n";
+        }
+    }
+
+    // Annuler le choix.
+    if (choix == 0) {
+        std::cout << "Vous n'avez gagne aucune carte.\n";
+        return;
+    }
+
+    // Recuperer le nom de la carte choisie.
+    const std::string& nomCarte = cartesDisponibles[static_cast<std::size_t>(choix - 1)];
 
     // Retirer une carte de la pile du plateau.
-    if (plateau.acheterCarte(nomCarte)) {
-        // on crée la carte que le joueur a choisi
-        std::unique_ptr<Carte> carte = plateau.creerCarte(nomCarte);
-
-        // Ajouter la carte gagnée à la défausse du joueur.
-        joueur.ajouterCarte(std::move(carte));
-
-        std::cout << "Vous avez gagné la carte " << nomCarte << " !" << std::endl;
+    if (!plateau.acheterCarte(nomCarte)) {
+        std::cout << "[ERREUR] Impossible de recuperer cette carte.\n";
+        return;
     }
 
-    // une fois que l'action de la carte est finie, on écarte la carte 
-    joueur.ecarterCarteJouee(festin);
+    // Creer la carte et l'ajouter a la defausse du joueur.
+    std::unique_ptr<Carte> carte = plateau.creerCarte(nomCarte);
+    joueur.ajouterCarte(std::move(carte));
+
+    std::cout << "\n[SUCCES] Vous avez gagne la carte " << nomCarte << " !\n";
+    std::cout << "========================================\n";
 }

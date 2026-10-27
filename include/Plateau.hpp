@@ -27,7 +27,8 @@ class Plateau {
         void afficher() const;
         void afficherCartePourAchat() const;
 
-        void afficherCarteCoutInfEgal(int coutMax) const;
+        void afficherCarteCoutInfEgal( int coutMax, std::vector<std::string>& cartesDisponibles) const;
+        //void afficherCarteCoutInfEgal(int coutMax) const;
         void afficherTresorCoutInfEgal(int coutMax) const;
 
         bool contientCarte(const std::string& nom) const;

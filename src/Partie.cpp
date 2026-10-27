@@ -65,7 +65,393 @@ void Partie::commencer(){
 }
 
 
+void Partie::tour()
+{
+    Joueur& joueur = joueurs[joueurActuel];
 
+    // Couleurs du terminal
+    const std::string RESET = "\033[0m";
+    const std::string BLEU = "\033[36m";
+    const std::string VERT = "\033[32m";
+    const std::string JAUNE = "\033[33m";
+    const std::string ROUGE = "\033[31m";
+    const std::string MAGENTA = "\033[1;35m";
+
+    ///--------
+    // Afficher un titre ------ATTENTION VOIR POUR LA SORTIR DE LA FONCTION TOUR
+    auto afficherTitre = [&](const std::string& titre) {
+        std::cout << "\n" << BLEU
+                  << "========================================\n"
+                  << "  " << titre << "\n"
+                  << "========================================"
+                  << RESET << "\n";
+    };
+
+    // Demander un nombre valide compris entre min et max.
+    // Retourne false si l'entree est fermee (EOF).
+    auto demanderChoix = [&](int& choix, int min, int max) -> bool {
+        while (true) {
+            std::cout << JAUNE << "Votre choix : " << RESET;
+
+            if (std::cin >> choix) {
+                if (choix >= min && choix <= max) {
+                    return true;
+                }
+
+                std::cout << ROUGE
+                          << "Choix invalide. Entrez un nombre entre "
+                          << min << " et " << max << ".\n"
+                          << RESET;
+            }
+            else {
+                if (std::cin.eof()) {
+                    return false;
+                }
+
+                std::cin.clear();
+                std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+                std::cout << ROUGE << "Saisie invalide. Entrez un nombre.\n" << RESET;
+            }
+        }
+    };
+
+    // ==================================================
+    // AFFICHAGE DU PLATEAU
+    // ==================================================
+
+    afficherTitre("DOMINION - PLATEAU");
+    std::cout << "\n" << MAGENTA;
+    plateau.afficher();
+    std::cout << RESET << "\n";
+
+    // ==================================================
+    // DEBUT DU TOUR
+    // ==================================================
+
+    afficherTitre("TOUR DU JOUEUR " + std::to_string(joueurActuel + 1));
+
+    std::cout << "Actions : " << joueur.getAction()
+              << " | Achats : " << joueur.getAchat()
+              << " | Argent : " << joueur.getArgent()
+              << " pieces\n";
+
+    // ==================================================
+    // PHASE 1 : ACTION
+    // ==================================================
+
+    bool phaseAction = true;
+
+    while (phaseAction) {
+        // Verifier les actions disponibles
+        if (joueur.getAction() <= 0) {
+            std::cout << JAUNE << "\nVous n'avez plus d'action disponible.\n" << RESET;
+            break;
+        }
+
+        // Rechercher les cartes Action en main
+        bool possedeAction = false;
+
+        for (std::size_t i = 0; i < joueur.getMain().size(); ++i) {
+            std::string type = joueur.getMain()[i]->getType();
+
+            if (type == "Action" || type == "Action-Réaction" || type == "ActionPlateau" || type == "Action-Attaque") {
+                possedeAction = true;
+                break;
+            }
+        }
+
+        if (!possedeAction) {
+            std::cout << JAUNE << "\nVous n'avez aucune carte Action en main.\n" << RESET;
+            break;
+        }
+
+        afficherTitre("PHASE D'ACTION");
+
+        joueur.afficherMain();
+
+        std::cout << "\nActions disponibles : " << joueur.getAction()
+                  << "\nArgent actuel : " << joueur.getArgent()
+                  << " pieces\n\n";
+
+        std::cout << "1. Jouer une carte Action\n"
+                  << "2. Passer a la phase d'achat\n";
+
+        int choix;
+
+        if (!demanderChoix(choix, 1, 2)) {
+            return;
+        }
+
+        switch (choix) {
+            case 1:
+            {
+                // Afficher les cartes Action avec leur indice
+                std::cout << "\nCartes Action jouables :\n";
+
+                for (std::size_t i = 0; i < joueur.getMain().size(); ++i) {
+                    Carte* carte = joueur.getMain()[i].get();
+                    std::string type = carte->getType();
+
+                    if (type == "Action" || type == "Action-Réaction" || type == "ActionPlateau" || type == "Action-Attaque") {
+                        std::cout << "  [" << i << "] " << carte->getNom() << "\n";
+                    }
+                }
+
+                std::cout << "  [" << joueur.getMain().size() << "] Annuler\n";
+
+                int indice;
+
+                if (!demanderChoix( indice, 0, static_cast<int>(joueur.getMain().size()) )) {
+                    return;
+                }
+
+                // L'indice correspondant a Annuler
+                if (static_cast<std::size_t>(indice) == joueur.getMain().size()) {
+                    break;
+                }
+
+                // Verifier que la carte choisie est une Action
+                Carte* carte = joueur.getMain()[indice].get();
+                std::string type = carte->getType();
+
+                if (type != "Action" && type != "Action-Réaction" && type != "ActionPlateau" && type != "Action-Attaque") {
+                    std::cout << ROUGE << "Cette carte n'est pas une Action.\n" << RESET;
+                    break;
+                }
+
+                std::cout << VERT << "\nVous jouez : " << carte->getNom() << "\n" << RESET;
+
+                // Conserver le pointeur vers l'objet carte
+                // avant de deplacer la carte hors de la main.
+                ActionPlateau* actionP = dynamic_cast<ActionPlateau*>(carte);
+
+                joueur.jouerAction(static_cast<std::size_t>(indice));
+
+                // Appliquer l'effet concernant le plateau
+                // ou les autres joueurs, si necessaire.
+                if (actionP != nullptr) {
+                    actionP->jouerPlateau(joueurs, joueurActuel, plateau);
+                }
+
+                break;
+            }
+
+            case 2:
+                phaseAction = false;
+                break;
+        }
+    }
+
+    // ==================================================
+    // PHASE 2 : ACHAT
+    // ==================================================
+
+    bool phaseAchat = true;
+
+    while (phaseAchat) {
+        jouerToutTresor(joueur);
+        if (joueur.getAchat() <= 0) {
+            std::cout << JAUNE << "\nVous n'avez plus d'achat disponible.\n" << RESET;
+            break;
+        }
+
+        afficherTitre("PHASE D'ACHAT");
+
+        joueur.afficherMain();
+
+        std::cout << "Argent disponible : " << VERT << joueur.getArgent() << " pieces" << RESET << "\n";
+
+        std::cout << "Achats disponibles : " << joueur.getAchat() << "\n\n";
+
+        std::cout << "1. Acheter une carte\n"
+                  << "2. Terminer le tour\n";
+
+        int choix;
+
+        if (!demanderChoix(choix, 1, 2)) {
+            return;
+        }
+
+        switch (choix) {
+            case 1:
+                acheterCarte();
+                break;
+
+            case 2:
+                phaseAchat = false;
+                break;
+        }
+    }
+
+    // ==================================================
+    // PHASE 3 : FIN DU TOUR
+    // ==================================================
+
+    afficherTitre("FIN DU TOUR");
+
+    std::cout << VERT << "Fin du tour du joueur " << joueurActuel + 1 << ".\n" << RESET;
+
+    // Laisser le temps au joueur de voir le resultat
+    std::cout << "\nAppuyez sur Entree pour passer l'ordinateur au joueur suivant...";
+
+    // Attendre que le joueur appuie sur Entree
+    std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    std::cin.get();
+
+    // Passer au joueur suivant
+    finTour();
+
+    // Ecran de transition avant le prochain joueur
+    std::cout << "\n\n\n";
+    std::cout << "========================================\n";
+    std::cout << "       Passez l'ordinateur !\n";
+    std::cout << "========================================\n";
+    std::cout << "Le joueur " << joueurActuel + 1 << " peut maintenant jouer.\n";
+    std::cout << "\nAppuyez sur Entree pour continuer...";
+
+    // Attendre que le joueur suivant soit pret
+    std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+    std::cin.get();
+}
+
+
+void Partie::jouerToutTresor(Joueur& joueur)
+{
+    for (int i = static_cast<int>(joueur.getMain().size()) - 1; i >= 0; --i) {
+        if (joueur.getMain()[i]->getType() == "Tresor")
+        {
+            joueur.jouerTresor(static_cast<std::size_t>(i));
+        }
+    }
+}
+
+
+
+void Partie::acheterCarte()
+{
+    Joueur& joueur = joueurs[joueurActuel];
+
+    // Verifier que le joueur peut encore acheter.
+    if (joueur.getAchat() <= 0) {
+        std::cout << "\nVous n'avez plus d'achat disponible.\n";
+        return;
+    }
+
+    // Afficher les informations du joueur.
+    std::cout << "\n========================================\n";
+    std::cout << "             MENU D'ACHAT\n";
+    std::cout << "========================================\n";
+    std::cout << "Argent disponible : " << joueur.getArgent() << " pieces\n";
+    std::cout << "Achats disponibles : " << joueur.getAchat() << "\n";
+    std::cout << "----------------------------------------\n";
+
+    // Afficher les cartes que le joueur peut acheter.
+    std::vector<std::string> cartesAchetable;
+
+    std::cout << "\nCartes que vous pouvez acheter :\n\n";
+
+    plateau.afficherCarteCoutInfEgal(joueur.getArgent(), cartesAchetable);
+
+    // Verifier qu'il existe des cartes achetables.
+    if (cartesAchetable.empty()) {
+        std::cout << "\nAucune carte disponible avec votre argent.\n";
+        std::cout << "Vous pouvez terminer votre tour.\n";
+        return;
+    }
+
+    std::cout << "\n[0] Annuler l'achat\n";
+
+    // Demander un choix valide.
+    int choix;
+
+    while (true) {
+        std::cout << "\nVotre choix : ";
+
+        if (std::cin >> choix) {
+            if (choix >= 0 && static_cast<std::size_t>(choix) <= cartesAchetable.size()) {
+                break;
+            }
+
+            std::cout << "Choix invalide. Choisissez un numero de 0 a " << cartesAchetable.size() << ".\n";
+        }
+        else {
+            if (std::cin.eof())
+                return;
+
+            std::cin.clear();
+            std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+            std::cout << "Saisie invalide. Entrez un nombre.\n";
+        }
+    }
+
+    // Gerer l'annulation.
+    if (choix == 0)
+    {
+        std::cout << "Achat annule.\n";
+        return;
+    }
+
+    // Recuperer le nom de la carte selectionnee.
+    const std::string& nom = cartesAchetable[static_cast<std::size_t>(choix - 1)];
+
+    int coutCarte = plateau.getCoutCarte(nom);
+
+    // Acheter la carte sur le plateau.
+    if (!plateau.acheterCarte(nom)) {
+        std::cout << "Impossible d'acheter cette carte.\n";
+        return;
+    }
+
+    // Payer et consommer un achat.
+    joueur.depenserArgent(coutCarte);
+    joueur.depenserAchat();
+
+    // Creer la carte et l'ajouter a la defausse.
+    std::unique_ptr<Carte> carte = catalogue.creer(nom);
+    joueur.ajouterCarte(std::move(carte));
+
+    std::cout << "\n[SUCCES] Carte achetee : " << nom << " !\n";
+    std::cout << "Argent restant : " << joueur.getArgent() << " pieces\n";
+    std::cout << "Achats restants : " << joueur.getAchat() << "\n";
+}
+
+
+
+// Termine le tour et passe au joueur suivant
+void Partie::finTour(){
+    joueurs[joueurActuel].terminerTour();
+
+    joueurActuel = (joueurActuel + 1) % static_cast<int>(joueurs.size());
+}
+
+
+// Verifie si la partie est terminee
+bool Partie::estTerminee() const {
+    // Premiere condition : la pile de Provinces est vide
+    if (plateau.getNombreCartes("Province") <= 0) {
+        return true;
+    }
+
+    // Deuxieme condition : au moins 3 piles sont vides
+    int pilesVides = 0;
+
+    // Parcourir toutes les piles du plateau
+    for (const auto& pile : plateau.getPiles()) {
+        if (pile.second <= 0) {
+            pilesVides++;
+        }
+    }
+
+    return pilesVides >= 3;
+}
+
+
+
+
+
+/*
 void Partie::tour()
 {
     Joueur& joueur = joueurs[joueurActuel];
@@ -294,15 +680,14 @@ void Partie::tour()
 }
 
 
-void Partie::jouerToutTresor(Joueur& joueur)
-{
-    for (int i = static_cast<int>(joueur.getMain().size()) - 1; i >= 0; --i) {
-        if (joueur.getMain()[i]->getType() == "Tresor")
-        {
-            joueur.jouerTresor(static_cast<std::size_t>(i));
-        }
-    }
-}
+
+
+
+
+
+
+
+
 
 // Achete une carte choisie par le joueur actuel
 void Partie::acheterCarte(){
@@ -354,121 +739,211 @@ void Partie::acheterCarte(){
 }
 
 
-// Termine le tour et passe au joueur suivant
-void Partie::finTour(){
-    joueurs[joueurActuel].terminerTour();
-
-    joueurActuel = (joueurActuel + 1) % static_cast<int>(joueurs.size());
-}
-
-
-// Verifie si la partie est terminee
-bool Partie::estTerminee() const{
-    // Premiere condition : la pile de Provinces est vide
-    return plateau.getNombreCartes("Province") <= 0;
-}
 
 
 
 
-/*
 
 
-// Gere le tour du joueur actuel
-void Partie::tour(){
+
+
+
+
+
+
+
+
+
+
+void Partie::acheterCarte()
+{
     Joueur& joueur = joueurs[joueurActuel];
 
-    std::cout << "\n--- Tour du joueur " << joueurActuel + 1 << " ---\n";
+    // 1. Verifier que le joueur peut encore acheter
+    if (joueur.getAchat() <= 0)
+    {
+        std::cout << "\nVous n'avez plus d'achat disponible.\n";
+        return;
+    }
 
-    bool tourEnCours = true;
+    // 2. Recuperer les cartes disponibles et abordables
+    std::vector<std::string> cartesAchetable;
 
-    while (tourEnCours) {
-        /////-------- ATTENTION A refaire car beaucoup de chose ne vons pas car oublie de carte jouer
-        ///// ---- AFFICHER LES PILES DES DIFFERENTES CARTE (le plateau)
-        std::cout << "\nLe plateau : ";
-        plateau.afficher();
-        
-        std::cout << "\nVotre main : ";
-        for (std::size_t i = 0; i < joueur.getMain().size(); i++) {
-            std::cout << "[" << i << "] " << joueur.getMain()[i]->getNom() << " | ";
+    for (const auto& pile : plateau.getPiles())
+    {
+        const std::string& nom = pile.first;
+        int nombreRestant = pile.second;
+        int coutCarte = plateau.getCoutCarte(nom);
+
+        if (nombreRestant > 0 && coutCarte <= joueur.getArgent())
+        {
+            cartesAchetable.push_back(nom);
         }
-        std::cout << std::endl;
+    }
 
-        std::cout << "\nArgent : " << joueur.getArgent()
-                  << " | Actions : " << joueur.getAction()
-                  << " | Achats : " << joueur.getAchat()
-                  << std::endl;
+    // 3. Afficher les informations du joueur
+    std::cout << "\n========================================\n";
+    std::cout << "             MENU D'ACHAT\n";
+    std::cout << "========================================\n";
 
-                  //peut etre plutot demander si il veut jouer une action puis si il veut acheter une carte 
-                  //car la sinon il peut d'abord acheter puis jouer une action alos que c pas se qu'on doit pouvoir faire
-        std::cout << "1. Jouer une Action\n"
-                  << "2. Acheter une carte\n" // jouer un ou plusieur tresor
-                  << "3. Terminer le tour\n"
-                  << "Choix : ";
+    std::cout << "Argent disponible : "
+              << joueur.getArgent() << " pieces\n";
 
-        int choix;
-        if (!(std::cin >> choix)) {
-            if (std::cin.eof()) {
+    std::cout << "Achats disponibles : "
+              << joueur.getAchat() << "\n";
+
+    std::cout << "----------------------------------------\n";
+
+    // 4. Verifier qu'il existe des cartes achetables
+    if (cartesAchetable.empty())
+    {
+        std::cout << "\nAucune carte disponible avec votre argent.\n";
+        std::cout << "Vous pouvez terminer votre tour.\n";
+        return;
+    }
+
+    // 5. Afficher le menu numerote
+    std::cout << "\nCartes que vous pouvez acheter :\n\n";
+
+    for (std::size_t i = 0; i < cartesAchetable.size(); ++i)
+    {
+        const std::string& nom = cartesAchetable[i];
+
+        std::cout << "[" << i + 1 << "] "
+                  << nom
+                  << " | Cout : " << plateau.getCoutCarte(nom)
+                  << " pieces"
+                  << " | Restantes : "
+                  << plateau.getNombreCartes(nom)
+                  << "\n";
+    }
+
+    std::cout << "\n[0] Annuler l'achat\n";
+
+    // 6. Demander un choix valide
+    int choix;
+
+    while (true)
+    {
+        std::cout << "\nVotre choix : ";
+
+        if (std::cin >> choix)
+        {
+            if (choix >= 0 &&
+                static_cast<std::size_t>(choix) <= cartesAchetable.size())
+            {
+                break;
+            }
+
+            std::cout << "Choix invalide. Choisissez un numero de 0 a "
+                      << cartesAchetable.size() << ".\n";
+        }
+        else
+        {
+            if (std::cin.eof())
+            {
                 return;
             }
 
-            std::cin.clear(); //réinitialise l'état d'erreur de la saisie
-            std::cin.ignore(10000, '\n'); //élimine les caractères invalides jusqu'à la fin de la ligne
-            std::cout << "Saisie invalide.\n";
-            continue;
-        }
+            std::cin.clear();
+            std::cin.ignore(
+                std::numeric_limits<std::streamsize>::max(),
+                '\n'
+            );
 
-        switch (choix){ // ----ATTENTION voir si on ajoute le fait que la personne puisse annuler ce quel viens de faire (pas sur)
-        case 1 : {
-                std::size_t indice;
-                std::cout << "Indice de l'Action dans votre main : ";
-                std::cin >> indice;
-
-                if (indice >= joueur.getMain().size()) {
-                    std::cout << "Indice invalide.\n";
-                    break;
-                }
-
-                // Récupérer la carte avant de la déplacer.
-                Carte* carte = joueur.getMain()[indice].get();
-
-                std::string nomCarte = carte->getNom();
-                std::string typeCarte = carte->getType();
-
-                // Vérifier que c'est bien une carte Action.
-                if (typeCarte != "Action" && typeCarte != "Action-Réaction" && typeCarte != "ActionPlateau") {
-                    std::cout << "Cette carte n'est pas une Action.\n";
-                    break;
-                }
-
-                joueur.jouerAction(indice);
-
-                // Vérifier si elle possède un effet sur le plateau.
-                ActionPlateau* actionP = dynamic_cast<ActionPlateau*>(carte);
-
-                if (actionP != nullptr) {
-                    actionP->jouerPlateau(joueurs, joueurActuel, plateau);
-                }
-            }
-            break;
-        
-        
-        case 2 :
-            //----demander au joueur de selectionner les carte tresor qu'il veut utiliser pour acheter une carte
-            //----les tresor seront placer dans le vecteur carteJouer du joueur
-            //---- selectionne tout les tresor 
-            jouerToutTresor(joueur);
-            acheterCarte();
-            break;
-        case 3 :
-            finTour();
-            tourEnCours = false;
-            break;
-        default:
-            std::cout << "Choix invalide.\n";
-            break;
+            std::cout << "Saisie invalide. Entrez un nombre.\n";
         }
     }
+
+    // 7. Gerer l'annulation
+    if (choix == 0)
+    {
+        std::cout << "Achat annule.\n";
+        return;
+    }
+
+    // 8. Recuperer le nom de la carte selectionnee
+    const std::string& nom = cartesAchetable[
+        static_cast<std::size_t>(choix - 1)
+    ];
+
+    int coutCarte = plateau.getCoutCarte(nom);
+
+    // 9. Acheter la carte sur le plateau
+    if (!plateau.acheterCarte(nom))
+    {
+        std::cout << "Impossible d'acheter cette carte.\n";
+        return;
+    }
+
+    // 10. Payer et consommer un achat
+    joueur.depenserArgent(coutCarte);
+    joueur.depenserAchat();
+
+    // 11. Creer la carte et l'ajouter a la defausse
+    std::unique_ptr<Carte> carte = catalogue.creer(nom);
+    joueur.ajouterCarte(std::move(carte));
+
+    std::cout << "\nCarte achetee avec succes : "
+              << nom << " !\n";
+
+    std::cout << "Argent restant : "
+              << joueur.getArgent() << " pieces\n";
+
+    std::cout << "Achats restants : "
+              << joueur.getAchat() << "\n";
 }
 
-*/
+
+
+
+
+
+
+
+
+// ==================================================
+    // PHASE 2 : ACHAT
+    // ==================================================
+
+    bool phaseAchat = true;
+
+    while (phaseAchat) {
+        if (joueur.getAchat() <= 0) {
+            std::cout << JAUNE << "\nVous n'avez plus d'achat disponible.\n" << RESET;
+            break;
+        }
+
+        afficherTitre("PHASE D'ACHAT");
+
+        joueur.afficherMain();
+
+        std::cout << "Argent disponible : " << VERT << joueur.getArgent() << " pieces" << RESET << "\n";
+
+        std::cout << "Achats disponibles : " << joueur.getAchat() << "\n\n";
+
+        std::cout << "1. Jouer ses tresors\n"
+                  << "2. Acheter une carte\n"
+                  << "3. Terminer le tour\n";
+
+        int choix;
+
+        if (!demanderChoix(choix, 1, 3)) {
+            return;
+        }
+
+        switch (choix) {
+            case 1:
+                jouerToutTresor(joueur);
+                break;
+
+            case 2:
+                acheterCarte();
+                break;
+
+            case 3:
+                phaseAchat = false;
+                break;
+        }
+    }
+    */

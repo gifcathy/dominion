@@ -110,6 +110,8 @@ void Plateau::afficherCartePourAchat() const{
     std::cout << std::endl;
 }
 
+/*
+//ATTENTION A ENLEVER SI AUTRE FONCTIONNZ
 void Plateau::afficherCarteCoutInfEgal(int coutMax) const{
     for (const auto& element : piles)
     {
@@ -127,6 +129,30 @@ void Plateau::afficherCarteCoutInfEgal(int coutMax) const{
     }
     std::cout << std::endl;
 }
+*/
+
+
+void Plateau::afficherCarteCoutInfEgal(int coutMax, std::vector<std::string>& cartesDisponibles) const {
+    cartesDisponibles.clear();
+
+    for (const auto& element : piles) {
+        // Verifier qu'il reste des cartes dans la pile.
+        if (element.second > 0) {
+            std::unique_ptr<Carte> carte = catalogue.creer(element.first);
+
+            // Verifier que le cout est inferieur ou egal au maximum.
+            if (carte->getCout() <= coutMax) {
+                cartesDisponibles.push_back(element.first);
+
+                std::cout << "  [" << cartesDisponibles.size() << "] " << carte->getNom()
+                          << " | Cout : " << carte->getCout() << " pieces"
+                          << " | Restantes : " << element.second
+                          << "\n";
+            }
+        }
+    }
+}
+
 
 void Plateau::afficherTresorCoutInfEgal(int coutMax) const{
     for (const auto& element : piles)
