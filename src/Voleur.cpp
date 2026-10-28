@@ -28,7 +28,7 @@ void Voleur::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
         for (int i=0; i<nombreJoueurs; i++){
             if(i != indiceJoueurActuel){
                 if(!listeJoueurs[i].possedeDouveEnMain()){
-                    std::cout << "le joueur " << i  << "révèle ses cartes" << std::endl; 
+                    std::cout << "le joueur " << i  << " révèle ses cartes" << std::endl; 
                     std::vector<std::unique_ptr<Carte>> cartesDeck; 
 
                     // on ajoute les deux premières cartes du deck dans un vecteur. 
@@ -50,9 +50,9 @@ void Voleur::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
                     // si il y a une ou plusieurs cartes tresor, on demande laquelle il veut prendre
                     if(aCarteTresor){
                         // affichage des cartes écartées du joueur i 
-                        std::cout << "Voici la ou les cartes du joueur " << i << std::endl; 
+                        std::cout << "Voici la ou les cartes du joueur " << i  << " :" << std::endl; 
                         for(std::size_t k=0; k < cartesDeck.size(); k++){
-                            std::cout << "[" << k << "]" << cartesDeck[k]->getNom(); 
+                            std::cout << "[" << k << "]" << cartesDeck[k]->getNom() << std::endl; 
                         }
 
                         int numCarteAEcarter; 
@@ -72,7 +72,7 @@ void Voleur::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
                                     break;
                             }
 
-                            std::cout << "saisie invalide, veuillez choisir un trésor" << std::endl; 
+                            std::cout << "Saisie invalide, veuillez choisir un trésor" << std::endl; 
                         }
 
                         // on déplace la carte vers les cartes écartées et on la supprime de cartesDeck
@@ -109,7 +109,7 @@ void Voleur::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
         // on affiche les cartes que le joueur a choisi d'écarter 
         std::string reponse; 
         while(!cartesEcartees.empty()){
-            std::cout << "Voici toutes les cartes que vous avez écartées :" << std::endl; 
+            std::cout << "\nVoici toutes les cartes que vous avez écartées :" << std::endl; 
             for(std::size_t i=0; i < cartesEcartees.size(); i++){
                 std::cout << "[" << i << "]" << " " << cartesEcartees[i]->getNom() << std::endl; 
             }
