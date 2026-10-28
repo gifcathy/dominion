@@ -48,14 +48,16 @@ std::size_t Joueur::getNbrCarteDefausse() const {
     return defausse.size();
 }
 
-void Joueur::afficherMain(){
-    int nbCartesMainJoueur = static_cast<int>(main.size()); 
-    std::cout << "votre main :" << std::endl; 
-    for (std::size_t j; j < main.size(); j++){
-        std::cout << "[" << j << "]" << main[j]->getNom() << std::endl; 
+
+void Joueur::afficherMain() {
+    std::cout << "Votre main :" << std::endl;
+
+    for (std::size_t j = 0; j < main.size(); j++) {
+        std::cout << "[" << j << "] "
+                  << main[j]->getNom() << std::endl;
     }
-    
 }
+
 
 void Joueur::piocher(){
     if (deck.empty()) {

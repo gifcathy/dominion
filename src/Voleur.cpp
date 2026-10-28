@@ -20,8 +20,7 @@ void Voleur::afficher() const{
 }
 
 // joueur la carte 
-void Voleur::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, 
-    Plateau& plateau) {
+void Voleur::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&) {
         int nombreJoueurs = static_cast<int>(listeJoueurs.size()); 
         std::vector<std::unique_ptr<Carte>> cartesEcartees; 
         bool aCarteTresor = false; 

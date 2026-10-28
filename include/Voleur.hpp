@@ -9,7 +9,7 @@ public :
     ~Voleur(); 
 
     void afficher() const override; 
-    void jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau) override;
+    void jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&) override;
 }; 
 
 #endif 
