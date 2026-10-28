@@ -9,7 +9,7 @@
 #include "Carte.hpp"
 
 // constructeur 
-Mine::Mine() : ActionPlateau("Mine", "Action", 4){}; 
+Mine::Mine() : ActionPlateau("Mine", "Action", 5){}; 
 
 // destructeur 
 Mine::~Mine(){}; 
@@ -66,49 +66,60 @@ void Mine::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActu
     joueur.ecarterCarte(static_cast<std::size_t>(indice));
 
     // 4. Afficher les Tresors disponibles.
-    plateau.afficherTresorCoutInfEgal(coutMax);
+    std::vector<std::string> tresorsDisponibles;
+    std::cout << "Trésors disponibles :\n";
+    plateau.afficherTresorCoutInfEgal(coutMax, tresorsDisponibles);
 
-    // 5. Choisir un Tresor a gagner.
-    std::string nomCarte;
-
-    while (true){
-        std::cout << "Nom du Tresor a gagner (cout maximal " << coutMax << ") : ";
-
-        if (!(std::cin >> nomCarte)) {
-            std::cin.clear();
-            std::cin.ignore(10000, '\n');
-            std::cout << "Saisie invalide." << std::endl;
-            continue;
-        }
-
-        // Verifier que la carte est un Tresor et qu'elle
-        // respecte le cout maximal.
-        if (nomCarte != "Cuivre" && nomCarte != "Argent" && nomCarte != "Or") {
-            std::cout << "Ce n'est pas un Tresor valide." << std::endl;
-            continue;
-        }
-
-        std::unique_ptr<Carte> carte = plateau.creerCarte(nomCarte);
-
-        if (carte->getType() != "Tresor") {
-            std::cout << "Vous devez choisir un Tresor." << std::endl;
-            continue;
-        }
-
-        if (carte->getCout() > coutMax) {
-            std::cout << "Cette carte depasse le cout maximal autorise." << std::endl;
-            continue;
-        }
-
-        // Retirer une carte de la pile.
-        if (!plateau.acheterCarte(nomCarte)) {
-            std::cout << "Cette pile est vide." << std::endl;
-            continue;
-        }
-
-        // Ajouter la carte directement a la main.
-        joueur.ajouterCarteMain(std::move(carte));
-
+    // Verifier qu'il existe au moins une carte disponible.
+    if (tresorsDisponibles.empty()) {
+        std::cout << "\nAucune trésor disponible.\n";
         return;
     }
+
+    // 5. Choisir un Tresor a gagner.
+    int choix;
+    
+
+    while (true){
+        std::cout << "Votre choix (0 pour annuler) : ";
+
+        if (std::cin >> choix) {
+            if (choix >= 0 && static_cast<std::size_t>(choix) <= tresorsDisponibles.size()) {
+                break;
+            }
+
+            std::cout << "[ERREUR] Choix invalide.\n";
+        }
+        else {
+            if (std::cin.eof())
+                return;
+
+            std::cin.clear();
+            std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+
+            std::cout << "[ERREUR] Entrez un numero valide.\n";
+        }
+    }
+
+    // Annuler le choix.
+    if (choix == 0) {
+        std::cout << "Vous n'avez gagne aucune carte.\n";
+        return;
+    }
+
+    // Recuperer le nom de la carte choisie.
+    const std::string& nomCarte = tresorsDisponibles[static_cast<std::size_t>(choix - 1)];
+
+    // Retirer une carte de la pile du plateau.
+    if (!plateau.acheterCarte(nomCarte)) {
+        std::cout << "[ERREUR] Impossible de recuperer cette carte.\n";
+        return;
+    }
+
+    // Creer la carte et l'ajouter a la defausse du joueur.
+    std::unique_ptr<Carte> carte = plateau.creerCarte(nomCarte);
+    joueur.ajouterCarte(std::move(carte));
+
+    std::cout << "\n[SUCCES] Vous avez gagne la carte " << nomCarte << " !\n";
+    std::cout << "========================================\n";
 }

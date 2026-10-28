@@ -38,6 +38,16 @@ const std::vector<std::unique_ptr<Carte>>& Joueur::getCartesJouees() const{
     return carteJouer; 
 }
 
+// Retourne le nombre de cartes dans le deck
+std::size_t Joueur::getNbrCarteDeck() const {
+    return deck.size();
+}
+
+// Retourne le nombre de cartes dans la defausse
+std::size_t Joueur::getNbrCarteDefausse() const {
+    return defausse.size();
+}
+
 // permet d'afficher la main du joueur 
 void Joueur::afficherMain(){
     //int nbCartesMainJoueur = static_cast<int>(main.size()); 

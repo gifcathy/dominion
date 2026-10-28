@@ -29,7 +29,7 @@ class Plateau {
 
         void afficherCarteCoutInfEgal( int coutMax, std::vector<std::string>& cartesDisponibles) const;
         //void afficherCarteCoutInfEgal(int coutMax) const;
-        void afficherTresorCoutInfEgal(int coutMax) const;
+        void afficherTresorCoutInfEgal(int coutMax, std::vector<std::string>& tresorsDisponibles) const;
 
         bool contientCarte(const std::string& nom) const;
         int getCoutCarte(const std::string& nom) const;

@@ -20,10 +20,16 @@ void Chancelier::afficher() const{
 
 void Chancelier::jouer(Joueur& joueur) {
     joueur.ajouterArgent(2);
+    std::cout << "AVANT " << std::endl;
+    std::cout << "Cartes dans le deck : " << joueur.getNbrCarteDeck() << std::endl;
+    std::cout << "Cartes dans la defausse : " << joueur.getNbrCarteDefausse() << std::endl;
     std::cout << "Voulez vous défausser votre deck ? (y ou n) : ";
     char choix;
     std::cin >> choix;
     if(choix == 'y' || choix == 'Y'){
         joueur.defausseDeck();
     }
+    std::cout << "APRES " << std::endl;
+    std::cout << "Cartes dans le deck : " << joueur.getNbrCarteDeck() << std::endl;
+    std::cout << "Cartes dans la defausse : " << joueur.getNbrCarteDefausse() << std::endl;
 }

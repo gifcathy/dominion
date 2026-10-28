@@ -6,9 +6,6 @@
 #include <utility>
 
 
-    // -----------------------------------------------------------------------
-    // -----  ATTENTION les fonction tour() et acheterCarte on des soucie
-    // -----------------------------------------------------------------------
 
 //fonction static qui creer et initialise le cataloque qui est avant la creation de partie
 static CatalogueCartes creerCatalogueInitialise(){
@@ -50,19 +47,91 @@ std::vector<std::unique_ptr<Carte>> Partie::creerDeckInitial(){
     return deck;
 }
 
-// Lance la partie
-void Partie::commencer(){
-    std::cout << "--------------------" << std::endl;
-    std::cout << "La partie commence !" << std::endl;
-    std::cout << "--------------------" << std::endl;
-    std::cout << "" << std::endl;
+
+void Partie::commencer()
+{
+    std::cout << "\n";
+    std::cout << "============================================\n";
+    std::cout << "                                            \n";
+    std::cout << "          BIENVENUE DANS DOMINION            \n";
+    std::cout << "                                            \n";
+    std::cout << "============================================\n";
+    std::cout << "\nLa partie commence ! Bonne chance a tous !\n";
 
     while (!estTerminee()) {
         tour();
     }
 
-    std::cout << "La partie est terminee !" << std::endl;
+    // Calculer les points de chaque joueur.
+    std::vector<std::pair<int, int>> classement;
+
+    for (std::size_t i = 0; i < joueurs.size(); ++i) {
+        int points = joueurs[i].calculerPointsVictoire();
+        classement.push_back(std::make_pair(static_cast<int>(i), points));
+    }
+
+    // Trier les joueurs du meilleur score au moins bon.
+    std::sort(classement.begin(), classement.end(), [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+            return a.second > b.second;
+        }
+    );
+
+    std::cout << "\n\n";
+    std::cout << "============================================\n";
+    std::cout << "                                            \n";
+    std::cout << "               FIN DE PARTIE                \n";
+    std::cout << "                                            \n";
+    std::cout << "============================================\n";
+
+    std::cout << "\n";
+    std::cout << "           RESULTATS FINAUX                 \n";
+    std::cout << "--------------------------------------------\n";
+
+    // Afficher le classement.
+    for (std::size_t i = 0; i < classement.size(); ++i) {
+        int numeroJoueur = classement[i].first + 1;
+        int points = classement[i].second;
+
+        if (i == 0) {
+            std::cout << "  [1er] ";
+        }
+        else if (i == 1) {
+            std::cout << "  [2e]  ";
+        }
+        else if (i == 2) {
+            std::cout << "  [3e]  ";
+        }
+        else {
+            std::cout << "  [" << i + 1 << "e]  ";
+        }
+
+        std::cout << "Joueur " << numeroJoueur << " : " << points << " points\n";
+    }
+
+    std::cout << "--------------------------------------------\n";
+
+    // Verifier s'il y a une egalite en premiere place.
+    if (classement.size() > 1 && classement[0].second == classement[1].second) {
+        std::cout << "\n";
+        std::cout << "============================================\n";
+        std::cout << "               EGALITE !                    \n";
+        std::cout << "============================================\n";
+        std::cout << "Plusieurs joueurs ont " << classement[0].second << " points !\n";
+    }
+    else if (!classement.empty()) {
+        std::cout << "\n";
+        std::cout << "============================================\n";
+        std::cout << "             VICTOIRE !                     \n";
+        std::cout << "============================================\n";
+        std::cout << " FELICITATIONS AU JOUEUR " << classement[0].first + 1 << " !\n";
+        std::cout << " Avec " << classement[0].second << " points de victoire !\n";
+        std::cout << "============================================\n";
+    }
+
+    std::cout << "\nMerci d'avoir joue a Dominion !\n";
+    std::cout << "A bientot pour une nouvelle partie !\n\n";
 }
+
 
 
 void Partie::tour()

@@ -37,6 +37,9 @@ class Joueur {
         const std::unique_ptr<Carte>& getCarte(std::size_t indice) const;
         const std::vector<std::unique_ptr<Carte>>& getCartesJouees() const; 
 
+        std::size_t getNbrCarteDeck() const;
+        std::size_t getNbrCarteDefausse() const;
+
         void afficherMain(); 
 
         void piocher();
