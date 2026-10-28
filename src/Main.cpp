@@ -28,6 +28,7 @@ int main()
         cartesAction.push_back("Mine");
         cartesAction.push_back("PSG");
         cartesAction.push_back("Renovation");
+        cartesAction.push_back("Voleur");
 
         // Creation de la partie
         Partie partie(nombreJoueurs, cartesAction);
