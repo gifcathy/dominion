@@ -4,6 +4,9 @@
 
 #include <vector>
 
+class Joueur; 
+class Plateau; 
+
 class ActionPlateau : public Carte{
 
 public : 
@@ -12,6 +15,8 @@ public :
     //virtual ~ActionPlateau(); 
     virtual void jouerPlateau(std::vector<Joueur>& joueurs, int joueurActuel, Plateau& plateau) = 0;
 
+    virtual void jouerPlateau(std::vector<Joueur>& listeJoueurs,int& indiceJoueurActuel,
+        Plateau& plateau) override;
 }; 
 
 #endif

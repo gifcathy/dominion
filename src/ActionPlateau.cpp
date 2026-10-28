@@ -7,3 +7,5 @@ ActionPlateau::ActionPlateau(const std::string& nom_carte, const std::string& ty
 
 // destructeur 
 ActionPlateau::~ActionPlateau(){}; 
+
+void ActionPlateau::jouerPlateau(std::vector<Joueur>&, int&, Plateau&) {}; 
