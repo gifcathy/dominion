@@ -98,7 +98,7 @@ void Joueur::passerDefausseADeck(){
 
 void Joueur::ajouterCarte(std::unique_ptr<Carte> carte){
     defausse.push_back(std::move(carte));
-    std::cout << "carte ajouter a la defause" << std::endl;
+    std::cout << "carte ajoutée à la defausse" << std::endl;
 
     //Pour utiliser cette fonction, tu ferais par exemple :
     //joueur.ajouterCarte(std::make_unique<Cuivre>());
@@ -361,4 +361,18 @@ int Joueur::calculerPointsVictoire() const {
     }
 
     return points;
+}
+
+
+std::unique_ptr<Carte> Joueur::prendreCarteDessusDeck(){
+    if(deck.empty()){
+        passerDefausseADeck(); 
+    }
+    // cas où le joueur n'aurait pas assez de cartes. 
+    if(deck.empty()){
+        return nullptr; 
+    }
+    std::unique_ptr<Carte> carte = std::move(deck.back()); 
+    deck.pop_back(); 
+    return carte; 
 }

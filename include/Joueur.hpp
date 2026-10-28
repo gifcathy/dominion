@@ -53,6 +53,7 @@ class Joueur {
         void defausserUneCarte(std::size_t indice);
         void defausseDeck();
         void ecarterCarte(std::size_t indice);
+        std::unique_ptr<Carte> prendreCarteDessusDeck(); 
 
         void ajouterArgent(int montant);
         bool depenserArgent(int montant);
