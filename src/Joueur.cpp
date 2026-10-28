@@ -48,11 +48,10 @@ std::size_t Joueur::getNbrCarteDefausse() const {
     return defausse.size();
 }
 
-// permet d'afficher la main du joueur 
 void Joueur::afficherMain(){
-    //int nbCartesMainJoueur = static_cast<int>(main.size()); 
+    int nbCartesMainJoueur = static_cast<int>(main.size()); 
     std::cout << "votre main :" << std::endl; 
-    for (std::size_t j = 0; j < main.size(); j++){
+    for (std::size_t j; j < main.size(); j++){
         std::cout << "[" << j << "]" << main[j]->getNom() << std::endl; 
     }
     
