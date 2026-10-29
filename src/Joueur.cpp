@@ -149,8 +149,9 @@ void Joueur::ajouterCarte(std::unique_ptr<Carte> carte){
 }
 
 void Joueur::ajouterCarteMain(std::unique_ptr<Carte> carte){
+    std::string nomCarte = carte->getNom(); 
     main.push_back(std::move(carte));
-    std::cout << carte->getNom() << " a été ajouté à votre main" << std::endl;
+    std::cout << nomCarte << " a été ajouté à votre main" << std::endl;
 }
 
 void Joueur::defausserUneCarte(std::size_t indice) {

@@ -14,6 +14,14 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Atelier());
     });
 
+    catalogue.enregistrer("Aventurier", []{
+        return std::unique_ptr<Carte>(new Aventurier()); 
+    }); 
+
+    catalogue.enregistrer("Bibliotheque", []{
+        return std::unique_ptr<Carte>(new Bibliotheque()); 
+    }); 
+
     catalogue.enregistrer("Bucheron", [] {
         //return std::make_unique<Bucheron>();
         return std::unique_ptr<Carte>(new Bucheron());
