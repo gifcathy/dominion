@@ -16,8 +16,17 @@ void ChambreDuConseil::afficher() const {
 
 
 // jouer la carte 
-void ChambreDuConseil::jouer(Joueur& joueur){
-    joueur.piocherPlusieurCarte(4); 
+void ChambreDuConseil::jouer(Joueur& joueur) {
+    // Piocher 4 cartes et récupérer leurs noms
+    std::vector<std::string> cartesPiochees = joueur.piocherDesCartes(4);
+    std::cout << "\nVous venez de jouer la carte Chambre du Conseil." << std::endl;
+    std::cout << "Vous avez pioche :" << std::endl;
+
+    for (const std::string& nomCarte : cartesPiochees) {
+        std::cout << "- " << nomCarte << std::endl;
+    }
+
+    // Ajouter 1 achat
     joueur.ajouterAchats(1);
 }
 

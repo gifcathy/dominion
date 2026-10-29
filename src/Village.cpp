@@ -23,6 +23,10 @@ void Village::jouer(Joueur& joueur){
     std::cout << "========================================\n";
     std::cout << "Effet : +1 carte, + 2 actions\n\n"; 
 
-    joueur.piocher(); 
+    std::vector<std::string> cartesPiochees = joueur.piocherDesCartes(1); 
+    std::cout << "Vous avez pioché : " << std::endl; 
+    for (const std::string& nomCarte : cartesPiochees) {
+        std::cout << "- " << nomCarte << std::endl;
+    } 
     joueur.ajouterActions(2); 
 }

@@ -23,7 +23,11 @@ void Laboratoire::jouer(Joueur& joueur){
     std::cout << "========================================\n";
     std::cout << "Effet : +2 cartes, +1 action\n\n"; 
 
-    joueur.piocherPlusieurCarte(2); 
+    std::vector<std::string> cartesPiochees = joueur.piocherDesCartes(2); 
+    std::cout << "Vous avez pioché : " << std::endl; 
+    for (const std::string& nomCarte : cartesPiochees) {
+        std::cout << "- " << nomCarte << std::endl;
+    }
     joueur.ajouterActions(1); 
     std::cout << "Vous venez de jouer la carte Laboratoire" << std::endl;
 }

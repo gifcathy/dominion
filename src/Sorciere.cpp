@@ -19,7 +19,11 @@ void Sorciere::afficher() const{
 }
 
 void Sorciere::jouer(Joueur& joueur){
-    joueur.piocherPlusieurCarte(2);
+    std::vector<std::string> cartesPiochees = joueur.piocherDesCartes(2); 
+    std::cout << "Vous avez pioché : " << std::endl; 
+    for (const std::string& nomCarte : cartesPiochees) {
+        std::cout << "- " << nomCarte << std::endl;
+    }
 }
 
 
@@ -39,7 +43,7 @@ void Sorciere::jouerPlateau(std::vector<Joueur>& joueurs, int& joueurActuel, Pla
         // Si le joueur possède une Douve en main, il peut se protéger contre l'attaque.
         // ici on ne lui laisse pas le choix d'utilise le pouvoir de la Douve en reaction
         if (joueurs[i].possedeDouveEnMain()){
-            std::cout << "Le joueur " << i + 1 << " à révéler une Douve pour se protéger." << std::endl;
+            std::cout << "Le joueur " << i + 1 << " à révélé une Douve pour se protéger." << std::endl;
             continue;
         }
 
