@@ -17,6 +17,12 @@ void Marche::afficher() const{
 
 // jouer la carte 
 void Marche::jouer(Joueur& joueur){
+
+    std::cout << "\n========================================\n";
+    std::cout << "           CARTE : MARCHE\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +1 carte, +1 Action, +1 achat, +1 pièce\n\n"; 
+
     joueur.piocher();
     joueur.ajouterActions(1);
     joueur.ajouterAchats(1);

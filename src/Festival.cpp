@@ -17,6 +17,12 @@ void Festival::afficher() const{
 
 // jouer la carte 
 void Festival::jouer(Joueur& joueur){
+
+    std::cout << "\n========================================\n";
+    std::cout << "            CARTE : FESTIVAL\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +2 actions, +1 achat, +2 pièces\n\n"; 
+
     joueur.ajouterActions(2); 
     joueur.ajouterAchats(1); 
     joueur.ajouterArgent(2);

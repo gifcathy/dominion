@@ -19,6 +19,12 @@ void Forgeron::afficher() const{
 
 // jouer la carte 
 void Forgeron::jouer(Joueur& joueur) {
+
+    std::cout << "\n========================================\n";
+    std::cout << "            CARTE : FORGERON\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +3 cartes\n\n"; 
+
     std::vector<std::string> cartesPiochees = joueur.piocherDesCartes(3);
     std::cout << "Vous venez de jouer la carte Forgeron." << std::endl;
 

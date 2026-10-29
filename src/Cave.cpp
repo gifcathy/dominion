@@ -18,6 +18,12 @@ void Cave::afficher() const{
 
 // jouer la carte 
 void Cave::jouer(Joueur& joueur){
+
+    std::cout << "\n========================================\n";
+    std::cout << "              CARTE : CAVE\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +1 Action, défaussez autant de cartes que vous voulez +1 carte par carte "
+              << "défaussée.\n\n"; 
     
     joueur.ajouterActions(1);
 

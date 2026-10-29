@@ -25,6 +25,13 @@ void Mine::afficher() const {
 
 // jouer la carte 
 void Mine::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau){
+    
+    std::cout << "\n========================================\n";
+    std::cout << "           CARTE : MINE\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : écartez une carte Tresor de votre main, recevez une carte Tresor coûtant "
+              << "jusqu'à 3 pièces de plus; ajoutez cette carte a votre main\n\n"; 
+    
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
 
     joueur.afficherMain();

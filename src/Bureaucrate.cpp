@@ -25,6 +25,13 @@ void Bureaucrate::afficher() const {
 // jouer la carte 
 void Bureaucrate::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau){
 
+    std::cout << "\n========================================\n";
+    std::cout << "           CARTE : BUREAUCRATE\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +1 carte Argent placez-la sur votre deck. Tous vos adversaires dévoilent "
+              << "1 carte Victoire et placent sur leur deck (sinon ils devoilent leur main afin que "
+              << "vous puissiez voir qu'ils n'ont pas de cartes Victoire).\n\n"; 
+
     // 1. Le joueur gagne un Argent sur le dessus de son deck
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
 

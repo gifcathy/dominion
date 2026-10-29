@@ -13,15 +13,17 @@ SalleDuTrone::~SalleDuTrone(){};
 void SalleDuTrone::afficher() const{
     std::cout << "SalleDuTrone - Cout : " << getCout() << "\n"
               << "Type de carte : Action \n" 
-              << "Description : Choisissze 1 carte Action de votre main. Jouez-la deux fois" << std::endl;
+              << "Description : Choisissez 1 carte Action de votre main. Jouez-la deux fois" << std::endl;
 }
 
 // jouer la carte 
 void SalleDuTrone::jouer(Joueur& joueur){
     std::vector<std::size_t> indicesActions;
 
-    std::cout << "\n--- Salle du trone ---\n";
-    std::cout << "Choisissez une carte Action a jouer deux fois :\n";
+    std::cout << "\n========================================\n";
+    std::cout << "       CARTE : SALLE DU TRONE\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : Choisissez 1 carte Action de votre main. Jouez-la deux fois\n\n"; 
 
     // Afficher uniquement les cartes Action
     for (std::size_t i = 0; i < joueur.getMain().size(); ++i) {

@@ -22,6 +22,12 @@ void ChambreDuConseil::jouer(Joueur& joueur){
 }
 
 void ChambreDuConseil::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&){
+
+    std::cout << "\n========================================\n";
+    std::cout << "       CARTE : CHAMBRE DU CONSEIL\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +4 cartes, +1 achat, tous vos adversaires piochent 1 carte\n\n"; 
+
     for(std::size_t i=0; i < listeJoueurs.size(); i++){
         if(i != static_cast<std::size_t>(indiceJoueurActuel)){
             Joueur& joueur = listeJoueurs.at(i);

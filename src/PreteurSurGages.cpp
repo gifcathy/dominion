@@ -18,6 +18,12 @@ void PreteurSurGages::afficher() const{
 
 // jouer la carte 
 void PreteurSurGages::jouer(Joueur& joueur){
+
+    std::cout << "\n========================================\n";
+    std::cout << "       CARTE : PRETEUR SUR GAGES\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : écartez une carte Cuivre de votre main et recevez +3 pièces\n\n"; 
+
     const std::vector<std::unique_ptr<Carte>>& main = joueur.getMain();
     bool possedeCuivre = false;
     int idxCuivre = 0;

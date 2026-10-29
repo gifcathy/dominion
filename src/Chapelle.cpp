@@ -20,8 +20,10 @@ void Chapelle::afficher() const{
 
 void Chapelle::jouer(Joueur& joueur)
 {
-    std::cout << "\n ---- Chapelle ----" << std::endl;
-    std::cout << "Vous pouvez écarter jusqu'à 4 cartes de votre main" << std::endl;
+    std::cout << "\n========================================\n";
+    std::cout << "            CARTE : CHAPELLE\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : écartez jusqu'à 4 cartes de votre main\n\n"; 
 
     int nbCartesMainJoueur = static_cast<int>(joueur.getMain().size());
     int maximum = nbCartesMainJoueur;

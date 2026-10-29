@@ -21,6 +21,13 @@ void Bucheron::afficher() const{
 
 // jouer la carte
 void Bucheron::jouer(Joueur& joueur){
+
+    std::cout << "\n========================================\n";
+    std::cout << "           CARTE : BUCHERON\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +1 achat et +2 pièces\n\n"; 
     joueur.ajouterAchats(1); 
     joueur.ajouterArgent(2); 
+    std::cout << "Vous avez gagné un achat" << std::endl; 
+    std::cout << "Vous avez gagné deux trésor" << std::endl; 
 }

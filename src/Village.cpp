@@ -17,6 +17,12 @@ void Village::afficher() const{
 
 // jouer la carte 
 void Village::jouer(Joueur& joueur){
+
+    std::cout << "\n========================================\n";
+    std::cout << "           CARTE : VILLAGE\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +1 carte, + 2 actions\n\n"; 
+
     joueur.piocher(); 
     joueur.ajouterActions(2); 
 }

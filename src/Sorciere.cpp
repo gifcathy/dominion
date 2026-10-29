@@ -24,6 +24,12 @@ void Sorciere::jouer(Joueur& joueur){
 
 
 void Sorciere::jouerPlateau(std::vector<Joueur>& joueurs, int& joueurActuel, Plateau& plateau){
+
+    std::cout << "\n========================================\n";
+    std::cout << "           CARTE : SORCIERE\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +2 cartes, tous vos adversaires piochent une malédiction et la place sur leur défausse\n\n"; 
+
     for (std::size_t i = 0; i < joueurs.size(); ++i){
         // Le joueur qui a joué la Sorcière n'est pas attaqué.
         if (static_cast<int>(i) == joueurActuel){

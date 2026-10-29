@@ -17,13 +17,21 @@ Espion::~Espion(){};
 void Espion::afficher() const {
     std::cout << "Espion - Cout : " << getCout() << "\n"
               << "Type de carte : Action-Attaque \n" 
-              << "Description : +1 carte, +1 action, Tous les joueur ainsi que vousdévoilent la 1er carte de leur deck. Vous décidez si chaque carte devoilée est déffaussée ou replacée sur son deck" 
+              << "Description : +1 carte, +1 action, Tous les joueur ainsi que vous dévoilent la 1er carte de leur deck. Vous décidez si chaque carte devoilée est déffaussée ou replacée sur son deck" 
               << std::endl;
 }
 
 
 // jouer la carte 
 void Espion::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&){
+
+    std::cout << "\n========================================\n";
+    std::cout << "            CARTE : ESPION\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +1 carte, +1 action, Tous les joueur ainsi que vous dévoilent la 1er "
+              << "carte de leur deck. Vous décidez si chaque carte devoilée est déffaussée ou "
+              << "replacée sur son deck \n\n"; 
+
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
 
     joueur.piocher();

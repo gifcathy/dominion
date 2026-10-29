@@ -21,6 +21,16 @@ void Voleur::afficher() const{
 
 // joueur la carte 
 void Voleur::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&) {
+        
+        std::cout << "\n========================================\n";
+        std::cout << "           CARTE : VOLEUR\n";
+        std::cout << "========================================\n";
+        std::cout << "Effet : Tous vos adversaires dévoilent les deux premières cartes de leur deck. "
+                  << "S'ils dévoilent des cartes Trésor, ils en écartent une de votre choix. "
+                  << "Parmi ces cartes Trésor écartées, recevez celles de votre choix. Les autres "
+                  << "cartes dévoilées sont défaussées.\n\n";  
+
+        
         int nombreJoueurs = static_cast<int>(listeJoueurs.size()); 
         std::vector<std::unique_ptr<Carte>> cartesEcartees; 
         bool aCarteTresor = false; 

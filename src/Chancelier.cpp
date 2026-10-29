@@ -19,6 +19,12 @@ void Chancelier::afficher() const{
 // jouer la carte 
 
 void Chancelier::jouer(Joueur& joueur) {
+
+    std::cout << "\n========================================\n";
+    std::cout << "           CARTE : CHANCELIER\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +2 pièces, vous pouvez immédiatement défausser votre deck\n\n"; 
+
     joueur.ajouterArgent(2);
     std::cout << "AVANT " << std::endl;
     std::cout << "Cartes dans le deck : " << joueur.getNbrCarteDeck() << std::endl;
