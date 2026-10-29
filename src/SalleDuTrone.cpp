@@ -49,6 +49,5 @@ void SalleDuTrone::jouer(Joueur& joueur){
     } while (choix == 0 || choix > indicesActions.size());
 
     // Jouer la carte choisie deux fois
-    joueur.jouerAction(indicesActions[choix - 1]);
-    joueur.jouerAction(indicesActions[choix - 1]);
+    joueur.jouerActionDeuxFois(indicesActions[choix - 1]);
 }

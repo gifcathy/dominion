@@ -332,6 +332,29 @@ void Joueur::jouerAction(std::size_t indice) {
     carte->jouer(*this);
 }
 
+void Joueur::jouerActionDeuxFois(std::size_t indice) {
+    if (indice >= main.size()) {
+        return;
+    }
+
+    // Vérifier que la carte est une carte Action
+    if (main[indice]->getType() == "Tresor" ||
+        main[indice]->getType() == "Victoire") {
+        return;
+    }
+
+    // Garder un pointeur vers la carte choisie
+    Carte* carte = main[indice].get();
+
+    // Déplacer la carte dans les cartes jouées
+    carteJouer.push_back(std::move(main[indice]));
+    main.erase(main.begin() + indice);
+
+    // Jouer la carte deux fois
+    carte->jouer(*this);
+    carte->jouer(*this);
+}
+
 
 // permet d'écarter du jeu une carte qui a été jouée et est dans carteJouer
 void Joueur::ecarterCarteJouee(const Carte* carte) {

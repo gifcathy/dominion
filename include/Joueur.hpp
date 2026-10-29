@@ -78,6 +78,7 @@ class Joueur {
 
         void jouerTresor(std::size_t indice);
         void jouerAction(std::size_t indice);
+        void jouerActionDeuxFois(std::size_t indice);
 
         void terminerTour();
 
