@@ -94,6 +94,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Marche());
     });
 
+    catalogue.enregistrer("Milice", []{
+        return std::unique_ptr<Carte>(new Milice()); 
+    }); 
+
     catalogue.enregistrer("Mine", [] {
         return std::unique_ptr<Carte>(new Mine());
     });

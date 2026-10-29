@@ -25,6 +25,7 @@
 #include "Laboratoire.hpp"
 #include "Malediction.hpp"
 #include "Marche.hpp"
+#include "Milice.hpp"
 #include "Mine.hpp"
 #include "Or.hpp"
 #include "PreteurSurGages.hpp"
