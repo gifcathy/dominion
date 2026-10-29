@@ -27,6 +27,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Bucheron());
     });
 
+    catalogue.enregistrer("Bureaucrate", [] {
+        return std::unique_ptr<Carte>(new Bureaucrate); 
+    }); 
+
     catalogue.enregistrer("Cave", [] {
         return std::unique_ptr<Carte>(new Cave());
     });
@@ -59,6 +63,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Duche());
     });
 
+    catalogue.enregistrer("Espion", []{
+        return std::unique_ptr<Carte>(new Espion()); 
+    }); 
+
     catalogue.enregistrer("Festin", [] {
         return std::unique_ptr<Carte>(new Festin());
     });
@@ -86,6 +94,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
     catalogue.enregistrer("Marche", [] {
         return std::unique_ptr<Carte>(new Marche());
     });
+
+    catalogue.enregistrer("Milice", []{
+        return std::unique_ptr<Carte>(new Milice()); 
+    }); 
 
     catalogue.enregistrer("Mine", [] {
         return std::unique_ptr<Carte>(new Mine());
