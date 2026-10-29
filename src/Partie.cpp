@@ -218,6 +218,7 @@ void Partie::tour()
             break;
         }
 
+<<<<<<< Updated upstream
         // Rechercher les cartes Action en main
         bool possedeAction = false;
 
@@ -232,6 +233,56 @@ void Partie::tour()
 
         if (!possedeAction) {
             std::cout << JAUNE << "\nVous n'avez aucune carte Action en main.\n" << RESET;
+=======
+        switch (choix){ // ----ATTENTION voir si on ajoute le fait que la personne puisse annuler ce quel viens de faire (pas sur)
+        case 1 : {
+                std::size_t indice;
+                std::cout << "Indice de l'Action dans votre main : ";
+                std::cin >> indice;
+
+                if (indice >= joueur.getMain().size()) {
+                    std::cout << "Indice invalide.\n";
+                    break;
+                }
+
+                // Récupérer la carte avant de la déplacer.
+                Carte* carte = joueur.getMain()[indice].get();
+
+                std::string nomCarte = carte->getNom();
+                std::string typeCarte = carte->getType();
+
+                // Vérifier que c'est bien une carte Action.
+                if (typeCarte != "Action" && typeCarte != "Action-Réaction" && typeCarte != "ActionPlateau") {
+                    std::cout << "Cette carte n'est pas une Action.\n";
+                    break;
+                }
+
+                joueur.jouerAction(indice);
+
+                // Vérifier si elle possède un effet sur le plateau.
+                ActionPlateau* actionP = dynamic_cast<ActionPlateau*>(carte);
+
+                if (actionP != nullptr) {
+                    actionP->jouerPlateau(joueurs, joueurActuel, plateau);
+                }
+            }
+            break;
+        
+        
+        case 2 :
+            //----demander au joueur de selectionner les carte tresor qu'il veut utiliser pour acheter une carte
+            //----les tresor seront placer dans le vecteur carteJouer du joueur
+            //---- selectionne tout les tresor 
+            jouerToutTresor(joueur);
+            acheterCarte();
+            break;
+        case 3 :
+            finTour();
+            tourEnCours = false;
+            break;
+        default:
+            std::cout << "Choix invalide.\n";
+>>>>>>> Stashed changes
             break;
         }
 
