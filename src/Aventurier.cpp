@@ -20,6 +20,13 @@ void Aventurier::afficher() const{
 
 // jouer la carte 
 void Aventurier::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&){
+    std::cout << "\n========================================\n";
+    std::cout << "           CARTE : AVENTURIER\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : Dévoilez des cartes de votre deck jusqu'à ce que 2 cartes Trésor "
+              << "soient dévoilées. ajoutez ces cartes Trésor à votre main et défaussez les autres "
+              << "cartes dévoilées.\n\n"; 
+    
     std::vector<std::unique_ptr<Carte>> cartesDevoilees; 
     int compteurTresorDevoile = 0; 
     Joueur& joueurActuel = listeJoueurs[indiceJoueurActuel]; 

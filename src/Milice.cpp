@@ -19,6 +19,12 @@ void Milice::afficher() const {
 
 // jouer la carte 
 void Milice::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&){
+    std::cout << "\n========================================\n";
+    std::cout << "             CARTE : MILICE\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +2 pièces. Tous vos adversaires défaussent leurs cartes de façon à "
+              << "n'avoir que 3 cartes en main. \n\n";
+
     Joueur& joueurActuel = listeJoueurs[indiceJoueurActuel]; 
     joueurActuel.ajouterArgent(2); 
 
