@@ -40,6 +40,11 @@ class Joueur {
         std::size_t getNbrCarteDeck() const;
         std::size_t getNbrCarteDefausse() const;
 
+        const Carte* getCarteDessusDeck() const;
+        void defausserCarteDessusDeck();
+        void ajouterCarteDessusDeck(std::unique_ptr<Carte> carte);
+        void mettreCarteMainDessusDeck(std::size_t indice); 
+
         void afficherMain(); 
 
         void piocher();

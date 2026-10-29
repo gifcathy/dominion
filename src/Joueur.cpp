@@ -48,6 +48,38 @@ std::size_t Joueur::getNbrCarteDefausse() const {
     return defausse.size();
 }
 
+const Carte* Joueur::getCarteDessusDeck() const {
+    if (deck.empty()) {
+        return nullptr;
+    }
+
+    return deck.back().get();
+}
+
+void Joueur::defausserCarteDessusDeck() {
+    if (deck.empty()) {
+        return;
+    }
+
+    defausse.push_back(std::move(deck.back()));
+    deck.pop_back();
+}
+
+void Joueur::ajouterCarteDessusDeck(std::unique_ptr<Carte> carte) {
+    if (carte != nullptr) {
+        deck.push_back(std::move(carte));
+    }
+}
+
+void Joueur::mettreCarteMainDessusDeck(std::size_t indice) {
+    if (indice >= main.size()) {
+        return;
+    }
+
+    deck.push_back(std::move(main[indice]));
+    main.erase(main.begin() + indice);
+}
+
 
 void Joueur::afficherMain() {
     std::cout << "Votre main :" << std::endl;
