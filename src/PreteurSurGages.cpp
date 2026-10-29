@@ -3,7 +3,7 @@
 #include "PreteurSurGages.hpp"
 
 // constructeur 
-PreteurSurGages::PreteurSurGages() : Action("PSG", "Action", 2){}; 
+PreteurSurGages::PreteurSurGages() : Action("PreteurSurGages", "Action", 2){}; 
 
 // destructeur 
 PreteurSurGages::~PreteurSurGages(){}; 
@@ -11,7 +11,7 @@ PreteurSurGages::~PreteurSurGages(){};
 
 // méthode d'affichage 
 void PreteurSurGages::afficher() const{
-    std::cout << "PreteurSurGages (PSG) - Cout : " << getCout() << "\n"
+    std::cout << "PreteurSurGages - Cout : " << getCout() << "\n"
               << "Type de carte : Action \n" 
               << "Description : écartez une carte Cuivre de votre main et recevez +3 pièces" << std::endl;
 }

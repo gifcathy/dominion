@@ -23,15 +23,18 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
     }); 
 
     catalogue.enregistrer("Bucheron", [] {
-        //return std::make_unique<Bucheron>();
         return std::unique_ptr<Carte>(new Bucheron());
+    });
+
+    catalogue.enregistrer("Bureaucrate", [] {
+        return std::unique_ptr<Carte>(new Bureaucrate());
     });
 
     catalogue.enregistrer("Cave", [] {
         return std::unique_ptr<Carte>(new Cave());
     });
 
-    catalogue.enregistrer("CDC", [] {
+    catalogue.enregistrer("ChambreDuConseil", [] {
         return std::unique_ptr<Carte>(new ChambreDuConseil());
     });
 
@@ -57,6 +60,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
 
     catalogue.enregistrer("Duche", [] {
         return std::unique_ptr<Carte>(new Duche());
+    });
+
+    catalogue.enregistrer("Espion", [] {
+        return std::unique_ptr<Carte>(new Espion());
     });
 
     catalogue.enregistrer("Festin", [] {
@@ -95,7 +102,7 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Or());
     });
 
-    catalogue.enregistrer("PSG", [] {
+    catalogue.enregistrer("PreteurSurGages", [] {
         return std::unique_ptr<Carte>(new PreteurSurGages());
     });
 
@@ -105,6 +112,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
 
     catalogue.enregistrer("Renovation", [] {
         return std::unique_ptr<Carte>(new Renovation());
+    });
+
+    catalogue.enregistrer("SalleDuTrone", [] {
+        return std::unique_ptr<Carte>(new SalleDuTrone());
     });
 
     catalogue.enregistrer("Sorciere", [] {

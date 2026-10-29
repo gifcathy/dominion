@@ -2,14 +2,14 @@
 #include "ChambreDuConseil.hpp"
 
 // constructeur 
-ChambreDuConseil::ChambreDuConseil() : ActionPlateau("CDC", "Action", 5){}; 
+ChambreDuConseil::ChambreDuConseil() : ActionPlateau("ChambreDuConseil", "Action", 5){}; 
 
 // destructeur 
 ChambreDuConseil::~ChambreDuConseil(){}; 
 
 // méthode d'affichage 
 void ChambreDuConseil::afficher() const {
-    std::cout << "Chambre du conseil (CDC) - Cout : " << getCout() << "\n"
+    std::cout << "Chambre du conseil - Cout : " << getCout() << "\n"
               << "Type de carte : Action \n" 
               << "Description : +4 cartes, +1 achat, tous vos adversaires piochent 1 carte" << std::endl;
 }
