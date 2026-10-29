@@ -1,4 +1,6 @@
 #include <iostream>
+#include <vector>
+#include <string>
 #include "Forgeron.hpp"
 
 // constructeur 
@@ -16,7 +18,13 @@ void Forgeron::afficher() const{
 
 
 // jouer la carte 
-void Forgeron::jouer(Joueur& joueur){
-    joueur.piocherPlusieurCarte(3);
-    std::cout << "Vous venez de jouer la carte Forgeron" << std::endl;
+void Forgeron::jouer(Joueur& joueur) {
+    std::vector<std::string> cartesPiochees = joueur.piocherDesCartes(3);
+    std::cout << "Vous venez de jouer la carte Forgeron." << std::endl;
+
+    std::cout << "Vous avez pioche :" << std::endl;
+
+    for (const std::string& nomCarte : cartesPiochees) {
+        std::cout << "- " << nomCarte << std::endl;
+    }
 }

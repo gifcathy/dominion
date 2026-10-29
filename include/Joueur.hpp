@@ -49,6 +49,7 @@ class Joueur {
 
         void piocher();
         void piocherPlusieurCarte(int nb);
+        std::vector<std::string> piocherDesCartes(int nb);
         void piocherNouvelleMain();
 
         void melanger();

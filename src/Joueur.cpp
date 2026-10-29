@@ -110,6 +110,22 @@ void Joueur::piocherPlusieurCarte(int nb){
     }
 }
 
+std::vector<std::string> Joueur::piocherDesCartes(int nb) {
+    std::vector<std::string> cartesPiochees;
+
+    for (int i = 0; i < nb; ++i) {
+        // Piocher une carte
+        piocher();
+
+        // Récupérer le nom de la carte qui vient d'être piochée
+        if (!main.empty()) {
+            cartesPiochees.push_back(main.back()->getNom());
+        }
+    }
+
+    return cartesPiochees;
+}
+
 /*
 Attention néanmoins : si tu appelles piocherNouvelleMain() alors que ta main contient encore des cartes, 
 celles-ci restent dans la main. Il faudra donc gérer la fin du tour avant de piocher la nouvelle main.
