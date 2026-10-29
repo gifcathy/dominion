@@ -33,8 +33,6 @@
 #include "Renovation.hpp"
 #include "SalleDuTrone.hpp"
 #include "Sorciere.hpp"
-#include "Tresor.hpp"
-#include "Victoire.hpp"
 #include "Village.hpp"
 #include "Voleur.hpp"
 

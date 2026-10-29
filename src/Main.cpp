@@ -212,9 +212,11 @@ int main() {
         cartesDisponibles.push_back("Jardin");
         cartesDisponibles.push_back("Laboratoire");
         cartesDisponibles.push_back("Marche");
+        cartesDisponibles.push_back("Milice");
         cartesDisponibles.push_back("Mine");
         cartesDisponibles.push_back("PreteurSurGages");
         cartesDisponibles.push_back("Renovation");
+        cartesDisponibles.push_back("SalleDuTrone");
         cartesDisponibles.push_back("Sorciere");
         cartesDisponibles.push_back("Village");
         cartesDisponibles.push_back("Voleur");
