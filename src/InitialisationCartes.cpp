@@ -55,7 +55,7 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
     }); 
 
     catalogue.enregistrer("Cour", []{
-        return std::unique_ptr<Carte>(new Comptoir()); 
+        return std::unique_ptr<Carte>(new Cour()); 
     }); 
 
     catalogue.enregistrer("Cuivre", [] {
