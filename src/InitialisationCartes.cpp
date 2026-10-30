@@ -78,6 +78,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Festival());
     });
 
+    catalogue.enregistrer("Fonderie", []{
+        return std::unique_ptr<Carte>(new Fonderie()); 
+    }); 
+
     catalogue.enregistrer("Forgeron", [] {
         return std::unique_ptr<Carte>(new Forgeron());
     });

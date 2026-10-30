@@ -21,6 +21,7 @@
 #include "Espion.hpp"
 #include "Festin.hpp"
 #include "Festival.hpp"
+#include "Fonderie.hpp"
 #include "Forgeron.hpp"
 #include "Jardin.hpp"
 #include "Laboratoire.hpp"
