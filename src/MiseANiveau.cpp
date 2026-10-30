@@ -12,7 +12,7 @@ MiseANiveau::~MiseANiveau(){};
 
 // méthode d'affichage 
 void MiseANiveau::afficher() const {
-    std::cout << "Chambre du conseil - Cout : " << getCout() << "\n"
+    std::cout << "Mise à niveau - Cout : " << getCout() << "\n"
               << "Type de carte : Action \n" 
               << "Description : +1 carte, +1 action, écartez une carte de vitre main et recevze une carte coûtant exactement une pièce de plus" << std::endl;
 }

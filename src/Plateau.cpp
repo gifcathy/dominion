@@ -40,12 +40,11 @@ Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction, co
             {
                 piles[nom] = 12;
             }
-            else
-            {
-                piles[nom] = 10;
-            }
         }
-        
+        else
+        {
+            piles[nom] = 10;
+        }
     }
 }
 

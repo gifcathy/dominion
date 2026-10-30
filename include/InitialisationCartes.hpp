@@ -29,6 +29,7 @@
 #include "Intendant.hpp"
 #include "Jardin.hpp"
 #include "Laboratoire.hpp"
+#include "Larbin.hpp"
 #include "Malediction.hpp"
 #include "Marche.hpp"
 #include "Milice.hpp"

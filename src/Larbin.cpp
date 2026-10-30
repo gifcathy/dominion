@@ -2,7 +2,7 @@
 #include "Larbin.hpp"
 
 // constructeur 
-Larbin::Larbin() : ActionPlateau("Larbin", "Action", 5){}; 
+Larbin::Larbin() : ActionPlateau("Larbin", "Action-Attaque", 5){}; 
 
 // destructeur 
 Larbin::~Larbin(){}; 
@@ -10,7 +10,7 @@ Larbin::~Larbin(){};
 // méthode d'affichage 
 void Larbin::afficher() const {
     std::cout << "Larbin - Cout : " << getCout() << "\n"
-              << "Type de carte : Action \n" 
+              << "Type de carte : Action-Attaque \n" 
               << "Description : +1 action, choisissez : +2 pièces OU défaussez vtre main, +4 cartes, et tous les autres joueurs qui ont au moins 5 cartes en main défaussent leur main et piochent 4 carte" << std::endl;
 }
 

@@ -8,6 +8,8 @@
 #include <utility>
 #include <algorithm> //contient std::shuffle
 #include <random>
+#include <vector>
+#include <memory>
 
 Joueur::Joueur(std::vector<std::unique_ptr<Carte>> deckInitial) : deck(std::move(deckInitial)), argent(0), action(1), achat(1), ptsVictoire(0){
     
@@ -54,11 +56,11 @@ std::size_t Joueur::getNbrCarteDefausse() const {
     return defausse.size();
 }
 
-// donne le nombre de carte d'une certaine carte passée en paramètre
+// Donne le nombre de cartes d'une certaine carte passée en paramètre
 int Joueur::getNombreCarte(const std::string& nom) const {
     int nombre = 0;
 
-    auto compter = [&](const auto& cartes) {
+    auto compter = [&](const std::vector<std::unique_ptr<Carte>>& cartes) {
         for (const auto& carte : cartes) {
             if (carte->getNom() == nom) {
                 nombre++;

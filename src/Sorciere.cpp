@@ -54,8 +54,21 @@ void Sorciere::jouerPlateau(std::vector<Joueur>& joueurs, int& joueurActuel, Pla
         }
 
         // Créer une Malédiction et l'ajouter à la défausse.
-        std::unique_ptr<Carte> carte = plateau.creerCarte("Malediction");
-        joueurs[i].ajouterCarte(std::move(carte));
+        // Verifier que la pile Argent n'est pas vide.
+        if (!plateau.contientCarte("Malediction")) {
+            std::cout << "La pile Malediction est vide. Le joueur na pas pu recevoir de Malediction.\n";
+            return;
+        }
+
+        // Retirer une Malediction de la pile du plateau.
+        if (!plateau.acheterCarte("Malediction")) {
+            std::cout << "Impossible de recuperer une Malediction.\n";
+            return;
+        }
+
+        // Creer l'Argent et l'ajouter directement dans la main.
+        joueurs[i].ajouterCarte(plateau.creerCarte("Malediction"));
+
         std::cout << "Le joueur " << i + 1 << " a recu une Malediction !" << std::endl;
     }
 }

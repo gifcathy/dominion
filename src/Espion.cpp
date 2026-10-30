@@ -47,6 +47,13 @@ void Espion::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
     for (size_t i = 0; i < listeJoueurs.size(); ++i) {
         Joueur& joueurCible = listeJoueurs.at(i);
 
+        // Si le joueur possède une Douve en main, il peut se protéger contre l'attaque.
+        // ici on ne lui laisse pas le choix d'utilise le pouvoir de la Douve en reaction
+        if (joueurCible.possedeDouveEnMain()){
+            std::cout << "Le joueur " << i + 1 << " à révélé une Douve pour se protéger." << std::endl;
+            continue;
+        }
+
         // Si le deck est vide, on essaie de le reconstituer
         if (joueurCible.getCarteDessusDeck() == nullptr) {
             joueurCible.passerDefausseADeck();

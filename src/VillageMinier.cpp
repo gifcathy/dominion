@@ -9,7 +9,7 @@ VillageMinier::~VillageMinier(){};
 
 // méthode d'affichage 
 void VillageMinier::afficher() const{
-    std::cout << "VillageMinier - Cout : " << getCout() << "\n"
+    std::cout << "Village Minier - Cout : " << getCout() << "\n"
               << "Type de carte : Action \n" 
               << "Description : +1 carte, + 2 actions, vous pouvez écarter immédiatement cette carte. Si vous l'écartez, +2 pièce" << std::endl;
 }
@@ -19,7 +19,7 @@ void VillageMinier::afficher() const{
 void VillageMinier::jouer(Joueur& joueur){
 
     std::cout << "\n========================================\n";
-    std::cout << "          CARTE : VillageMinier\n";
+    std::cout << "         CARTE : VILLAGE MINIER\n";
     std::cout << "========================================\n";
     std::cout << "Effet : +1 carte, + 2 actions, vous pouvez écartez la carte et si vous le faite vous gagnez +2 pièce\n\n"; 
 

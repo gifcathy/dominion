@@ -3,7 +3,7 @@
 #include "Plateau.hpp"
 
 // constructeur 
-Baron::Baron() : ActionPlateau("Baron", "Action", 3){}; 
+Baron::Baron() : ActionPlateau("Baron", "Action", 4){}; 
 
 // destructeur 
 Baron::~Baron(){}; 

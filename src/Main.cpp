@@ -179,6 +179,30 @@ std::vector<std::string> choisirPaquet() {
     return paquetDebutant;
 }
 
+bool choisirExtension() {
+    std::cout << "\nVoulez-vous jouer avec l'extension "
+              << "Dominion : L'Intrigue ?\n";
+
+    std::cout << "1. Oui\n";
+    std::cout << "2. Non\n";
+
+    int choix = lireChoix(1, 2);
+
+    return choix == 1;
+}
+
+std::vector<std::string> obtenirCartesDisponibles(const std::vector<std::string>& cartesBase, const std::vector<std::string>& cartesIntrigue, bool extensionActive) {
+    std::vector<std::string> cartesDisponibles = cartesBase;
+
+    if (extensionActive) {
+        for (std::size_t i = 0; i < cartesIntrigue.size(); ++i) {
+            cartesDisponibles.push_back(cartesIntrigue[i]);
+        }
+    }
+
+    return cartesDisponibles;
+}
+
 int main() {
     try {
         std::cout << "============================\n";
@@ -193,33 +217,48 @@ int main() {
 
         int nombreJoueurs = lireChoix(2, 4);
 
-        // Cartes disponibles dans le projet
-        std::vector<std::string> cartesDisponibles;
-        cartesDisponibles.push_back("Atelier");
-        cartesDisponibles.push_back("Aventurier");
-        cartesDisponibles.push_back("Bibliotheque");
-        cartesDisponibles.push_back("Bucheron");
-        cartesDisponibles.push_back("Bureaucrate");
-        cartesDisponibles.push_back("Cave");
-        cartesDisponibles.push_back("ChambreDuConseil");
-        cartesDisponibles.push_back("Chancelier");
-        cartesDisponibles.push_back("Chapelle");
-        cartesDisponibles.push_back("Douves");
-        cartesDisponibles.push_back("Espion");
-        cartesDisponibles.push_back("Festin");
-        cartesDisponibles.push_back("Festival");
-        cartesDisponibles.push_back("Forgeron");
-        cartesDisponibles.push_back("Jardin");
-        cartesDisponibles.push_back("Laboratoire");
-        cartesDisponibles.push_back("Marche");
-        cartesDisponibles.push_back("Milice");
-        cartesDisponibles.push_back("Mine");
-        cartesDisponibles.push_back("PreteurSurGages");
-        cartesDisponibles.push_back("Renovation");
-        cartesDisponibles.push_back("SalleDuTrone");
-        cartesDisponibles.push_back("Sorciere");
-        cartesDisponibles.push_back("Village");
-        cartesDisponibles.push_back("Voleur");
+        // Cartes de base dans le projet
+        std::vector<std::string> cartesBase;
+        cartesBase.push_back("Atelier");
+        cartesBase.push_back("Aventurier");
+        cartesBase.push_back("Bibliotheque");
+        cartesBase.push_back("Bucheron");
+        cartesBase.push_back("Bureaucrate");
+        cartesBase.push_back("Cave");
+        cartesBase.push_back("ChambreDuConseil");
+        cartesBase.push_back("Chancelier");
+        cartesBase.push_back("Chapelle");
+        cartesBase.push_back("Douves");
+        cartesBase.push_back("Espion");
+        cartesBase.push_back("Festin");
+        cartesBase.push_back("Festival");
+        cartesBase.push_back("Forgeron");
+        cartesBase.push_back("Jardin");
+        cartesBase.push_back("Laboratoire");
+        cartesBase.push_back("Marche");
+        cartesBase.push_back("Milice");
+        cartesBase.push_back("Mine");
+        cartesBase.push_back("PreteurSurGages");
+        cartesBase.push_back("Renovation");
+        cartesBase.push_back("SalleDuTrone");
+        cartesBase.push_back("Sorciere");
+        cartesBase.push_back("Village");
+        cartesBase.push_back("Voleur");
+
+        // Cartes de base dans le projet
+        std::vector<std::string> cartesIntrigue;
+        cartesIntrigue.push_back("Baron");
+        cartesIntrigue.push_back("Comptoir");
+        cartesIntrigue.push_back("Cour");
+        cartesIntrigue.push_back("Duc");
+        //cartesIntrigue.push_back("Escroc");
+        cartesIntrigue.push_back("Fonderie");
+        cartesIntrigue.push_back("Intendant");
+        cartesIntrigue.push_back("Larbin");
+        cartesIntrigue.push_back("MiseANiveau");
+        cartesIntrigue.push_back("Pion");
+        cartesIntrigue.push_back("PuitsAuxSouhaits");
+        cartesIntrigue.push_back("VillageMinier");
 
         // 2. Mode de choix des cartes
         std::cout << "\nComment voulez-vous choisir les cartes ?\n";
@@ -228,6 +267,10 @@ int main() {
 
         int mode = lireChoix(1, 2);
 
+        bool extensionActive = choisirExtension();
+
+        std::vector<std::string> cartesDisponibles = obtenirCartesDisponibles(cartesBase, cartesIntrigue, extensionActive);
+        
         std::vector<std::string> cartesAction;
 
         if (mode == 1) {
