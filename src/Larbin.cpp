@@ -17,8 +17,6 @@ void Larbin::afficher() const {
 
 // jouer la carte 
 void Larbin::jouer(Joueur& joueur) {
-    // Piocher 4 cartes et récupérer leurs noms
-    std::vector<std::string> cartesPiochees = joueur.piocherDesCartes(4);
     std::cout << "\n========================================\n";
     std::cout << "             CARTE : LARBIN\n";
     std::cout << "========================================\n";
