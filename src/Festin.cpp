@@ -24,7 +24,8 @@ void Festin::afficher() const {
 
 
 // jouer la carte 
-void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau){
+// Jouer la carte
+void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau) {
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
 
     std::cout << "\n========================================\n";
@@ -34,7 +35,7 @@ void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
 
     Carte* festin = nullptr;
 
-    // on met dans festin l'adresse de la carte dans la liste des cartes jouées 
+    // On recherche Festin dans la liste des cartes jouées.
     for (const auto& carte : joueur.getCartesJouees()) {
         if (carte->getNom() == "Festin") {
             festin = carte.get();
@@ -42,18 +43,21 @@ void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
         }
     }
 
-    // on vérifie qu'on a bien trouvé la carte dans la liste des cartes jouées 
+    // On vérifie qu'on a bien trouvé la carte.
     if (festin == nullptr) {
         std::cout << "Impossible de retrouver la carte Festin." << std::endl;
         return;
     }
+
+    // On écarte Festin du jeu.
+    joueur.ecarterCarteJouee(festin);
 
     std::vector<std::string> cartesDisponibles;
 
     std::cout << "Cartes disponibles :\n";
     plateau.afficherCarteCoutInfEgal(5, cartesDisponibles);
 
-    // Verifier qu'il existe au moins une carte disponible.
+    // Vérifier qu'il existe au moins une carte disponible.
     if (cartesDisponibles.empty()) {
         std::cout << "\nAucune carte disponible.\n";
         return;
@@ -61,7 +65,7 @@ void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
 
     int choix;
 
-    // Demander un numero valide.
+    // Demander un numéro valide.
     while (true) {
         std::cout << "\nVotre choix (0 pour annuler) : ";
 
@@ -73,11 +77,12 @@ void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
             std::cout << "[ERREUR] Choix invalide.\n";
         }
         else {
-            if (std::cin.eof())
+            if (std::cin.eof()) {
                 return;
+            }
 
             std::cin.clear();
-            std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 
             std::cout << "[ERREUR] Entrez un numero valide.\n";
         }
@@ -89,7 +94,7 @@ void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
         return;
     }
 
-    // Recuperer le nom de la carte choisie.
+    // Récupérer le nom de la carte choisie.
     const std::string& nomCarte = cartesDisponibles[static_cast<std::size_t>(choix - 1)];
 
     // Retirer une carte de la pile du plateau.
@@ -98,7 +103,7 @@ void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
         return;
     }
 
-    // Creer la carte et l'ajouter a la defausse du joueur.
+    // Créer la carte et l'ajouter à la défausse du joueur.
     std::unique_ptr<Carte> carte = plateau.creerCarte(nomCarte);
     joueur.ajouterCarte(std::move(carte));
 

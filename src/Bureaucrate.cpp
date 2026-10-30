@@ -35,7 +35,18 @@ void Bureaucrate::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJou
     // 1. Le joueur gagne un Argent sur le dessus de son deck
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
 
-    // je ne sais pas se que ca fait si il y a plus de carte argent
+    // Verifier que la pile Argent n'est pas vide.
+    if (!plateau.contientCarte("Argent")) {
+        std::cout << "La pile Argent est vide. Vous ne pouvez pas gagner cette carte.\n";
+        return;
+    }
+
+    // Retirer un Argent de la pile du plateau.
+    if (!plateau.acheterCarte("Argent")) {
+        std::cout << "Impossible de recuperer un Argent.\n";
+        return;
+    }
+
     joueur.ajouterCarteDessusDeck(plateau.creerCarte("Argent"));
 
     std::cout << "\nVous gagnez un Argent sur le dessus de votre deck.\n";
