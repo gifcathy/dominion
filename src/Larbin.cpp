@@ -100,6 +100,8 @@ void Larbin::jouerPlateau(std::vector<Joueur>& listeJoueurs,
 
                 std::cout << "\nLe joueur " << i + 1 << " possède au moins 5 cartes en main.\n";
 
+                std::cout << "\nPassez l'ordinateur au joueur " << i + 1 << std::endl;
+
                 // Vérifier si l'adversaire possède une Douve
                 if (adversaire.possedeDouveEnMain()) {
 
@@ -147,6 +149,14 @@ void Larbin::jouerPlateau(std::vector<Joueur>& listeJoueurs,
                     }
                 }
 
+                std::cout << "Vous n'avez pas de Douves !\n";
+
+                std::cout << "Redonnez l'ordinateur au joueur principale !\n";
+                std::cout << "\nAppuyez sur Entree remprendre la partie ...";
+                // Attendre que le joueur appuie sur Entree
+                std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
+                std::cin.get();
+                
                 // L'adversaire subit l'attaque
                 std::cout << "Le joueur " << i + 1 << " défausse toute sa main et pioche 4 cartes.\n";
 
