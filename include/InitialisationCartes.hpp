@@ -38,6 +38,7 @@
 #include "Pion.hpp"
 #include "PreteurSurGages.hpp"
 #include "Province.hpp"
+#include "PuitsAuxSouhaits.hpp"
 #include "Renovation.hpp"
 #include "SalleDuTrone.hpp"
 #include "Sorciere.hpp"

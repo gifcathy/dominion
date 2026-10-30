@@ -146,6 +146,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Province());
     });
 
+    catalogue.enregistrer("PuitsAuxSouhaits", []{
+        return std::unique_ptr<Carte>(new PuitsAuxSouhaits()); 
+    }); 
+
     catalogue.enregistrer("Renovation", [] {
         return std::unique_ptr<Carte>(new Renovation());
     });
