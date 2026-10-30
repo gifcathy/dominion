@@ -6,6 +6,7 @@
 #include "Argent.hpp"
 #include "Atelier.hpp"
 #include "Aventurier.hpp"
+#include "Baron.hpp"
 #include "Bibliotheque.hpp"
 #include "Bucheron.hpp"
 #include "Bureaucrate.hpp"

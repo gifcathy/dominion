@@ -18,6 +18,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Aventurier()); 
     }); 
 
+    catalogue.enregistrer("Baron", []{
+        return std::unique_ptr<Carte>(new Baron()); 
+    }); 
+
     catalogue.enregistrer("Bibliotheque", []{
         return std::unique_ptr<Carte>(new Bibliotheque()); 
     }); 
