@@ -39,6 +39,7 @@ class Joueur {
 
         std::size_t getNbrCarteDeck() const;
         std::size_t getNbrCarteDefausse() const;
+        int getNombreCarte(const std::string& nom) const;
 
         const Carte* getCarteDessusDeck() const;
         void defausserCarteDessusDeck();

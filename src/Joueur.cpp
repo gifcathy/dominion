@@ -3,6 +3,7 @@
 #include "Tresor.hpp"
 #include "Jardin.hpp"
 #include "Victoire.hpp"
+#include "Duc.hpp"
 
 #include <utility>
 #include <algorithm> //contient std::shuffle
@@ -46,6 +47,26 @@ std::size_t Joueur::getNbrCarteDeck() const {
 // Retourne le nombre de cartes dans la defausse
 std::size_t Joueur::getNbrCarteDefausse() const {
     return defausse.size();
+}
+
+// donne le nombre de carte d'une certaine carte passée en paramètre
+int Joueur::getNombreCarte(const std::string& nom) const {
+    int nombre = 0;
+
+    auto compter = [&](const auto& cartes) {
+        for (const auto& carte : cartes) {
+            if (carte->getNom() == nom) {
+                nombre++;
+            }
+        }
+    };
+
+    compter(deck);
+    compter(main);
+    compter(defausse);
+    compter(carteJouer);
+
+    return nombre;
 }
 
 const Carte* Joueur::getCarteDessusDeck() const {
@@ -421,7 +442,15 @@ int Joueur::calculerPointsVictoire() const {
             const Victoire* victoire = dynamic_cast<const Victoire*>(carte.get());
             // si c'est bien une victoire on ajoute les points 
             if (victoire != nullptr) {
-                points += victoire->getValeurVictoire();
+                // on vérifie si c'est un duc 
+                const Duc* duc = dynamic_cast<const Duc*>(carte.get());
+                if(duc != nullptr){
+                    points += duc->getNbPointVictoireDuc(*this); 
+                }
+                else{
+                    // pour les autres cartes victoire
+                    points += victoire->getValeurVictoire();
+                }
             }
         }
     };
