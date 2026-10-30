@@ -217,6 +217,15 @@ int main() {
 
         int nombreJoueurs = lireChoix(2, 4);
 
+        int choix;
+        std::cout << "\nSouhaitez-vous faire une partie rapide ? \n";
+        std::cout << "1. Oui\n";
+        std::cout << "2. Non\n";
+        std::cout << "\nVotre choix : ";
+        std::cin >> choix;
+        //int choix = lireChoix(1, 2);
+
+
         // Cartes de base dans le projet
         std::vector<std::string> cartesBase;
         cartesBase.push_back("Atelier");
@@ -272,7 +281,7 @@ int main() {
         if (mode == 1) {
             bool extensionActive = choisirExtension();
             std::vector<std::string> cartesDisponibles = obtenirCartesDisponibles(cartesBase, cartesIntrigue, extensionActive);
-            
+
             cartesAction = choisirCartes(cartesDisponibles);
         } else {
             cartesAction = choisirPaquet();
