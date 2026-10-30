@@ -30,6 +30,7 @@
 #include "Milice.hpp"
 #include "Mine.hpp"
 #include "Or.hpp"
+#include "Pion.hpp"
 #include "PreteurSurGages.hpp"
 #include "Province.hpp"
 #include "Renovation.hpp"

@@ -114,6 +114,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Or());
     });
 
+    catalogue.enregistrer("Pion", []{
+        return std::unique_ptr<Carte>(new Pion()); 
+    }); 
+
     catalogue.enregistrer("PreteurSurGages", [] {
         return std::unique_ptr<Carte>(new PreteurSurGages());
     });
