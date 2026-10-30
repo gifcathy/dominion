@@ -50,6 +50,14 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Chapelle());
     });
 
+    catalogue.enregistrer("Comptoir", []{
+        return std::unique_ptr<Carte>(new Comptoir()); 
+    }); 
+
+    catalogue.enregistrer("Cour", []{
+        return std::unique_ptr<Carte>(new Comptoir()); 
+    }); 
+
     catalogue.enregistrer("Cuivre", [] {
         return std::unique_ptr<Carte>(new Cuivre());
     });
@@ -61,6 +69,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
     catalogue.enregistrer("Douves", [] {
         return std::unique_ptr<Carte>(new Douves());
     });
+    
+    catalogue.enregistrer("Duc", []{
+        return std::unique_ptr<Carte>(new Duc()); 
+    }); 
 
     catalogue.enregistrer("Duche", [] {
         return std::unique_ptr<Carte>(new Duche());
@@ -86,6 +98,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
         return std::unique_ptr<Carte>(new Forgeron());
     });
 
+    catalogue.enregistrer("Intendant", [] {
+        return std::unique_ptr<Carte>(new Intendant()); 
+    });
+
     catalogue.enregistrer("Jardin", [] {
         return std::unique_ptr<Carte>(new Jardin());
     });
@@ -109,6 +125,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
     catalogue.enregistrer("Mine", [] {
         return std::unique_ptr<Carte>(new Mine());
     });
+
+    catalogue.enregistrer("MiseANiveau", []{
+        return std::unique_ptr<Carte>(new MiseANiveau()); 
+    }); 
 
     catalogue.enregistrer("Or", [] {
         return std::unique_ptr<Carte>(new Or());
@@ -141,6 +161,10 @@ void initialiserCatalogue(CatalogueCartes& catalogue) {
     catalogue.enregistrer("Village", [] {
         return std::unique_ptr<Carte>(new Village());
     });
+
+    catalogue.enregistrer("VillageMinier", []{
+        return std::unique_ptr<Carte>(new VillageMinier()); 
+    }); 
 
     catalogue.enregistrer("Voleur", [] {
         return std::unique_ptr<Carte>(new Voleur());
