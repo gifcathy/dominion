@@ -266,14 +266,13 @@ int main() {
         std::cout << "2. Utiliser un paquet predefini\n";
 
         int mode = lireChoix(1, 2);
-
-        bool extensionActive = choisirExtension();
-
-        std::vector<std::string> cartesDisponibles = obtenirCartesDisponibles(cartesBase, cartesIntrigue, extensionActive);
         
         std::vector<std::string> cartesAction;
 
         if (mode == 1) {
+            bool extensionActive = choisirExtension();
+            std::vector<std::string> cartesDisponibles = obtenirCartesDisponibles(cartesBase, cartesIntrigue, extensionActive);
+            
             cartesAction = choisirCartes(cartesDisponibles);
         } else {
             cartesAction = choisirPaquet();
