@@ -32,17 +32,20 @@ Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction, co
 
     // Cartes Action choisies
     for (const auto& nom : cartesAction) {
-        if(nom == "Jardin" && nbJoueurs == 2){
-            piles[nom] = 8;
+        if(nom == "Jardin" || nom == "Duc") {
+            if(nbJoueurs == 2){
+                piles[nom] = 8;
+            }
+            else if (nbJoueurs > 2)
+            {
+                piles[nom] = 12;
+            }
+            else
+            {
+                piles[nom] = 10;
+            }
         }
-        else if (nom == "Jardin" && nbJoueurs > 2)
-        {
-            piles[nom] = 12;
-        }
-        else
-        {
-            piles[nom] = 10;
-        }
+        
     }
 }
 
@@ -142,6 +145,27 @@ void Plateau::afficherCarteCoutInfEgal(int coutMax, std::vector<std::string>& ca
 
             // Verifier que le cout est inferieur ou egal au maximum.
             if (carte->getCout() <= coutMax) {
+                cartesDisponibles.push_back(element.first);
+
+                std::cout << "  [" << cartesDisponibles.size() << "] " << carte->getNom()
+                          << " | Cout : " << carte->getCout() << " pieces"
+                          << " | Restantes : " << element.second
+                          << "\n";
+            }
+        }
+    }
+}
+
+void Plateau::afficherCarteCoutEgal(int coutFixe, std::vector<std::string>& cartesDisponibles) const {
+    cartesDisponibles.clear();
+
+    for (const auto& element : piles) {
+        // Verifier qu'il reste des cartes dans la pile.
+        if (element.second > 0) {
+            std::unique_ptr<Carte> carte = catalogue.creer(element.first);
+
+            // Verifier que le cout est egal coutfixe.
+            if (carte->getCout() == coutFixe) {
                 cartesDisponibles.push_back(element.first);
 
                 std::cout << "  [" << cartesDisponibles.size() << "] " << carte->getNom()

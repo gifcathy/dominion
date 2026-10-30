@@ -19,7 +19,11 @@ void ChambreDuConseil::afficher() const {
 void ChambreDuConseil::jouer(Joueur& joueur) {
     // Piocher 4 cartes et récupérer leurs noms
     std::vector<std::string> cartesPiochees = joueur.piocherDesCartes(4);
-    std::cout << "\nVous venez de jouer la carte Chambre du Conseil." << std::endl;
+    std::cout << "\n========================================\n";
+    std::cout << "       CARTE : CHAMBRE DU CONSEIL\n";
+    std::cout << "========================================\n";
+    std::cout << "Effet : +4 cartes, +1 achat, tous vos adversaires piochent 1 carte\n\n"; 
+    
     std::cout << "Vous avez pioche :" << std::endl;
 
     for (const std::string& nomCarte : cartesPiochees) {
@@ -31,11 +35,6 @@ void ChambreDuConseil::jouer(Joueur& joueur) {
 }
 
 void ChambreDuConseil::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&){
-
-    std::cout << "\n========================================\n";
-    std::cout << "       CARTE : CHAMBRE DU CONSEIL\n";
-    std::cout << "========================================\n";
-    std::cout << "Effet : +4 cartes, +1 achat, tous vos adversaires piochent 1 carte\n\n"; 
 
     for(std::size_t i=0; i < listeJoueurs.size(); i++){
         if(i != static_cast<std::size_t>(indiceJoueurActuel)){

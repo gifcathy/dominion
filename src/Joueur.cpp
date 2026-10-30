@@ -31,6 +31,11 @@ const std::vector<std::unique_ptr<Carte>>& Joueur::getMain() const{
     return main;
 }
 
+// Accéder à la main pour la modifier.
+std::vector<std::unique_ptr<Carte>>& Joueur::getMain() {
+    return main;
+}
+
 const std::unique_ptr<Carte>& Joueur::getCarte(std::size_t indice) const{
     return main.at(indice);  //main[indice]; avec at on a des execption qui sont lever si probleme dans indice
 }

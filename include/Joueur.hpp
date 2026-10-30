@@ -33,7 +33,8 @@ class Joueur {
         int getArgent() const;
         int getAction() const;
         int getAchat() const;
-        const std::vector<std::unique_ptr<Carte>>& getMain() const;
+        const std::vector<std::unique_ptr<Carte>>& getMain() const;  // Accéder à la main en lecture seule.
+        std::vector<std::unique_ptr<Carte>>& getMain();              // Accéder à la main pour la modifier.
         const std::unique_ptr<Carte>& getCarte(std::size_t indice) const;
         const std::vector<std::unique_ptr<Carte>>& getCartesJouees() const; 
 

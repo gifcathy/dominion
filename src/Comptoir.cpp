@@ -22,19 +22,21 @@ void Comptoir::afficher() const {
               << std::endl;
 }
 
-// jouer la carte 
-void Comptoir::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau){
+// Jouer la carte
+void Comptoir::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau) {
 
     std::cout << "\n========================================\n";
-    std::cout << "           CARTE : Comptoir\n";
+    std::cout << "           CARTE : COMPTOIR\n";
     std::cout << "========================================\n";
-    std::cout << "Ecartez 2 cartes de votre main. Dans ce cas, recevez une carte Argent; ajouter cette carte à votre main\n\n"; 
+    std::cout << "Ecartez jusqu'a 2 cartes de votre main.\n";
+    std::cout << "Recevez ensuite une carte Argent dans votre main.\n\n";
 
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
 
+    // Ecarter jusqu'a 2 cartes.
     for (int i = 0; i < 2; i++) {
 
-        // Vérifier qu'il reste des cartes dans la main.
+        // Verifier qu'il reste des cartes dans la main.
         if (joueur.getMain().empty()) {
             std::cout << "Vous n'avez plus de cartes a ecarter.\n";
             break;
@@ -67,19 +69,25 @@ void Comptoir::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueur
             std::cout << "Indice invalide.\n";
         }
 
-        // Écarter définitivement la carte choisie.
+        // Ecarter definitivement la carte choisie.
         joueur.ecarterCarte(static_cast<std::size_t>(idxCarte));
     }
 
-    // Le joueur gagne un Argent a ca main
-    Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
+    // Verifier que la pile Argent n'est pas vide.
+    if (!plateau.contientCarte("Argent")) {
+        std::cout << "La pile Argent est vide. Vous ne pouvez pas gagner cette carte.\n";
+        return;
+    }
 
-    // je ne sais pas se que ca fait si il y a plus de carte argent
+    // Retirer un Argent de la pile du plateau.
+    if (!plateau.acheterCarte("Argent")) {
+        std::cout << "Impossible de recuperer un Argent.\n";
+        return;
+    }
+
+    // Creer l'Argent et l'ajouter directement dans la main.
     joueur.ajouterCarteMain(plateau.creerCarte("Argent"));
 
-    std::cout << "\nVous gagnez un Argent ajouté à votre main.\n";
-
+    std::cout << "\nVous gagnez un Argent ajoute a votre main.\n";
+    std::cout << "========================================\n";
 }
-
-
-
