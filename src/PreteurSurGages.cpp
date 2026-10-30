@@ -3,7 +3,7 @@
 #include "PreteurSurGages.hpp"
 
 // constructeur 
-PreteurSurGages::PreteurSurGages() : Action("PreteurSurGages", "Action", 2){}; 
+PreteurSurGages::PreteurSurGages() : Action("PreteurSurGages", "Action", 4){}; 
 
 // destructeur 
 PreteurSurGages::~PreteurSurGages(){}; 

@@ -3,7 +3,7 @@
 #include "Chancelier.hpp"
 
 // constructeur 
-Chancelier::Chancelier() : Action("Chancelier", "Action", 2){}; 
+Chancelier::Chancelier() : Action("Chancelier", "Action", 3){}; 
 
 // destructeur 
 Chancelier::~Chancelier(){}; 
