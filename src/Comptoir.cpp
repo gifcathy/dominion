@@ -28,10 +28,12 @@ void Comptoir::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueur
     std::cout << "\n========================================\n";
     std::cout << "           CARTE : COMPTOIR\n";
     std::cout << "========================================\n";
-    std::cout << "Ecartez jusqu'a 2 cartes de votre main.\n";
+    std::cout << "Ecartez 2 cartes de votre main.\n";
     std::cout << "Recevez ensuite une carte Argent dans votre main.\n\n";
 
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
+
+    int cpt = 0;
 
     // Ecarter jusqu'a 2 cartes.
     for (int i = 0; i < 2; i++) {
@@ -71,23 +73,29 @@ void Comptoir::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueur
 
         // Ecarter definitivement la carte choisie.
         joueur.ecarterCarte(static_cast<std::size_t>(idxCarte));
+        cpt++;
     }
 
-    // Verifier que la pile Argent n'est pas vide.
-    if (!plateau.contientCarte("Argent")) {
-        std::cout << "La pile Argent est vide. Vous ne pouvez pas gagner cette carte.\n";
-        return;
+    
+
+    if(cpt == 2){
+        // Verifier que la pile Argent n'est pas vide.
+        if (!plateau.contientCarte("Argent")) {
+            std::cout << "La pile Argent est vide. Vous ne pouvez pas gagner cette carte.\n";
+            return;
+        }
+
+        // Retirer un Argent de la pile du plateau.
+        if (!plateau.acheterCarte("Argent")) {
+            std::cout << "Impossible de recuperer un Argent.\n";
+            return;
+        }
+
+        // Creer l'Argent et l'ajouter directement dans la main.
+        joueur.ajouterCarteMain(plateau.creerCarte("Argent"));
+
+        std::cout << "\nVous gagnez un Argent ajoute a votre main.\n";
+        std::cout << "========================================\n";
     }
-
-    // Retirer un Argent de la pile du plateau.
-    if (!plateau.acheterCarte("Argent")) {
-        std::cout << "Impossible de recuperer un Argent.\n";
-        return;
-    }
-
-    // Creer l'Argent et l'ajouter directement dans la main.
-    joueur.ajouterCarteMain(plateau.creerCarte("Argent"));
-
-    std::cout << "\nVous gagnez un Argent ajoute a votre main.\n";
-    std::cout << "========================================\n";
+    
 }
