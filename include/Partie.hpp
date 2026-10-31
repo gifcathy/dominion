@@ -17,7 +17,7 @@ private:
     std::vector<std::unique_ptr<Carte>> creerDeckInitial();
 
 public:
-    Partie(int nombreJoueurs, const std::vector<std::string>& cartesAction);
+    Partie(int nombreJoueurs, const std::vector<std::string>& cartesAction, int vitessePartie);
 
     void commencer();
 

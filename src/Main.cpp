@@ -217,13 +217,12 @@ int main() {
 
         int nombreJoueurs = lireChoix(2, 4);
 
-        int choix;
         std::cout << "\nSouhaitez-vous faire une partie rapide ? \n";
         std::cout << "1. Oui\n";
         std::cout << "2. Non\n";
-        std::cout << "\nVotre choix : ";
-        std::cin >> choix;
-        //int choix = lireChoix(1, 2);
+        //std::cout << "\nVotre choix : ";
+        //std::cin >> choix;
+        int vitessePartie = lireChoix(1, 2);
 
 
         // Cartes de base dans le projet
@@ -290,11 +289,18 @@ int main() {
         // 3. Recapitulatif
         std::cout << "\n=== Recapitulatif de la partie ===\n";
         std::cout << "Nombre de joueurs : " << nombreJoueurs << '\n';
+        std::cout << "Partie rapide : ";
+        if(vitessePartie==1){
+            std::cout << "Oui" << std::endl;
+        }
+        else{
+            std::cout << "Non" << std::endl;
+        }
         std::cout << "Cartes Action :\n";
         afficherCartes(cartesAction);
 
         // 4. Creation et lancement de la partie
-        Partie partie(nombreJoueurs, cartesAction);
+        Partie partie(nombreJoueurs, cartesAction, vitessePartie);
         partie.commencer();
     }
     catch (const std::exception& e) {

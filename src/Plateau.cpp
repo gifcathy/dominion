@@ -2,48 +2,63 @@
 
 #include "Carte.hpp"
 
-Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction, const CatalogueCartes& catalogue) : catalogue(catalogue){
-    // Piles de Tresors
-    piles["Cuivre"] = 60 - 7 * nbJoueurs;
-    piles["Argent"] = 40;
-    piles["Or"] = 30;
-
-    // Piles de Victoire et Maledictions
-    int nbVictoire = 0;
-    int nbMalediction = 0;
-
-    if(nbJoueurs == 2){
-        nbVictoire = 8;
-        nbMalediction = 10;
-    }
-    else if (nbJoueurs == 3){
-        nbVictoire = 12;
-        nbMalediction = 20;
+Plateau::Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction, const CatalogueCartes& catalogue, int vitessePartie) : catalogue(catalogue){
+    if(vitessePartie == 1){
+        piles["Cuivre"] = 1;
+        piles["Argent"] = 1;
+        piles["Or"] = 1;
+        piles["Domaine"] = 1;
+        piles["Duche"] = 1;
+        piles["Province"] = 1;
+        piles["Malediction"] = 1;
+        // Cartes Action choisies
+        for (const auto& nom : cartesAction) {
+            piles[nom] = 1;
+        }
     }
     else{
-        nbVictoire = 12;
-        nbMalediction = 30;
-    }
-    piles["Domaine"] = nbVictoire;
-    piles["Duche"] = nbVictoire;
-    piles["Province"] = nbVictoire;
-    piles["Malediction"] = nbMalediction;
+        // Piles de Tresors
+        piles["Cuivre"] = 60 - 7 * nbJoueurs;
+        piles["Argent"] = 40;
+        piles["Or"] = 30;
 
+        // Piles de Victoire et Maledictions
+        int nbVictoire = 0;
+        int nbMalediction = 0;
 
-    // Cartes Action choisies
-    for (const auto& nom : cartesAction) {
-        if(nom == "Jardin" || nom == "Duc") {
-            if(nbJoueurs == 2){
-                piles[nom] = 8;
-            }
-            else if (nbJoueurs > 2)
-            {
-                piles[nom] = 12;
-            }
+        if(nbJoueurs == 2){
+            nbVictoire = 8;
+            nbMalediction = 10;
         }
-        else
-        {
-            piles[nom] = 10;
+        else if (nbJoueurs == 3){
+            nbVictoire = 12;
+            nbMalediction = 20;
+        }
+        else{
+            nbVictoire = 12;
+            nbMalediction = 30;
+        }
+        piles["Domaine"] = nbVictoire;
+        piles["Duche"] = nbVictoire;
+        piles["Province"] = nbVictoire;
+        piles["Malediction"] = nbMalediction;
+
+
+        // Cartes Action choisies
+        for (const auto& nom : cartesAction) {
+            if(nom == "Jardin" || nom == "Duc") {
+                if(nbJoueurs == 2){
+                    piles[nom] = 8;
+                }
+                else if (nbJoueurs > 2)
+                {
+                    piles[nom] = 12;
+                }
+            }
+            else
+            {
+                piles[nom] = 10;
+            }
         }
     }
 }

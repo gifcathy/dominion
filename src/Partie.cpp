@@ -14,9 +14,9 @@ static CatalogueCartes creerCatalogueInitialise(){
     return catalogue;
 }
 
-Partie::Partie(int nombreJoueurs, const std::vector<std::string>& cartesAction)
+Partie::Partie(int nombreJoueurs, const std::vector<std::string>& cartesAction, int vitessePartie)
                 : catalogue(creerCatalogueInitialise()),
-                plateau(nombreJoueurs, cartesAction, catalogue),
+                plateau(nombreJoueurs, cartesAction, catalogue, vitessePartie),
                 joueurs(),
                 joueurActuel(0)
 {

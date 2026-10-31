@@ -17,7 +17,7 @@ class Plateau {
         std::map<std::string, int> piles;
 
     public:
-        Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction, const CatalogueCartes& catalogue);
+        Plateau(int nbJoueurs, const std::vector<std::string>& cartesAction, const CatalogueCartes& catalogue, int vitessePartie);
 
         int getNombreCartes(const std::string& nom) const;
         bool acheterCarte(const std::string& nom);
