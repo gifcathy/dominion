@@ -54,7 +54,7 @@ void Renovation::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoue
             continue;
         }
 
-        if (idxCarte >= 0 && static_cast<std::size_t>(idxCarte) < joueur.getMain().size()) {
+        if (static_cast<int>(idxCarte) >= 0 && idxCarte < joueur.getMain().size()) {
             break;
         }
 
