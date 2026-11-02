@@ -13,6 +13,7 @@ public :
 
     void afficher() const override; 
     void jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau) override; 
+    
 }; 
 
 #endif

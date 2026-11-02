@@ -7,7 +7,7 @@
 class Joueur; 
 class Plateau; 
 
-class ActionPlateau : public Carte{
+class ActionPlateau : public Carte {
 
 public :
 

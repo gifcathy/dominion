@@ -5,7 +5,7 @@
 class Joueur;
 class Plateau;
 
-class Atelier : public ActionPlateau{
+class Atelier : public ActionPlateau { 
 
 public : 
     Atelier(); 

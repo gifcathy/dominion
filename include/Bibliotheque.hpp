@@ -2,7 +2,7 @@
 #define BIBLIOTHEQUE_HPP
 #include "ActionPlateau.hpp"
 
-class Bibliotheque : public ActionPlateau{
+class Bibliotheque : public ActionPlateau {
 
 public: 
     Bibliotheque(); 
@@ -10,6 +10,7 @@ public:
 
     void afficher() const override; 
     void jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau&) override;
+    
 }; 
 
 

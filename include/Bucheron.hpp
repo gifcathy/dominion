@@ -2,7 +2,7 @@
 #define BUCHERON_HPP
 #include "Action.hpp"
 
-class Bucheron : public Action{
+class Bucheron : public Action {
 
 public : 
     Bucheron(); 
@@ -11,6 +11,7 @@ public :
 
     void afficher() const override;
     void jouer(Joueur& joueur) override;
+    
 }; 
 
 #endif
