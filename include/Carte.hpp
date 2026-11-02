@@ -4,7 +4,6 @@
 //#include "Plateau.hpp"
 
 #include <string> 
-#include <limits>
 
 class Joueur;
 class Plateau; 

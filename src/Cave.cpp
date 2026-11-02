@@ -72,7 +72,7 @@ void Cave::jouer(Joueur& joueur){
                 continue;
             }
 
-            if (indiceEcarte >= 0 && static_cast<std::size_t>(indiceEcarte) < joueur.getMain().size()) {
+            if (static_cast<int>(indiceEcarte) >= 0 && indiceEcarte < joueur.getMain().size()) {
                 break;
             }
             std::cout << "Indice invalide" << std::endl;
