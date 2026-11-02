@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include <utility>
+#include <limits>
 #include "Festin.hpp"
 
 #include "Joueur.hpp"

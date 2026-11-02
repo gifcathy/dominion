@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "Intendant.hpp"
 
 // constructeur 

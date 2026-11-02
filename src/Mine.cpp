@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include <utility>
+#include <limits>
 #include "Mine.hpp"
 
 #include "Joueur.hpp"

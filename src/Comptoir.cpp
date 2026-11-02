@@ -2,6 +2,7 @@
 #include <string>
 #include <memory>
 #include <utility>
+#include <limits>
 #include "Comptoir.hpp"
 
 #include "Joueur.hpp"

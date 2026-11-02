@@ -1,4 +1,5 @@
 #include <iostream>
+#include <limits>
 #include "MiseANiveau.hpp"
 
 #include "Plateau.hpp"
