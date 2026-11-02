@@ -50,6 +50,7 @@ std::vector<std::unique_ptr<Carte>> Partie::creerDeckInitial(){
 }
 
 
+
 void Partie::commencer()
 {
     std::cout << "\n";
@@ -58,53 +59,162 @@ void Partie::commencer()
     std::cout << "          BIENVENUE DANS DOMINION            \n";
     std::cout << "                                            \n";
     std::cout << "============================================\n";
+
     std::cout << "\nLa partie commence ! Bonne chance a tous !\n";
 
+    // Jouer jusqu'a ce que la partie soit terminee
     while (!estTerminee()) {
         tour();
     }
 
-    // Calculer les points de chaque joueur.
+    // ==========================================
+    // CALCUL DES POINTS DE VICTOIRE
+    // ==========================================
+
     std::vector<std::pair<int, int>> classement;
 
     for (std::size_t i = 0; i < joueurs.size(); ++i) {
         int points = joueurs[i].calculerPointsVictoire();
-        classement.push_back(std::make_pair(static_cast<int>(i), points));
+
+        classement.push_back(
+            std::make_pair(static_cast<int>(i), points)
+        );
     }
 
-    // Trier les joueurs du meilleur score au moins bon.
-    std::sort(classement.begin(), classement.end(), [](const std::pair<int, int>& a, const std::pair<int, int>& b) {
-            return a.second > b.second;
+    if (classement.empty()) {
+        return;
+    }
+
+    // ==============================================
+    // DETERMINER LES JOUEURS AYANT UN TOUR DE MOINS
+    // ==============================================
+
+    // joueurActuel correspond au prochain joueur qui aurait du jouer.
+    // Si joueurActuel == 0, tous les joueurs ont joue le meme nombre de tours.
+
+    /*
+     * Cette fonction permet de savoir si un joueur a joue un tour de moins que les autres. 
+     * Elle prend en parametre l'indice du joueur. 
+     * Exemple : aUnTourDeMoins(2) -> verifie le joueur 3. 
+     * joueurActuel correspond au prochain joueur qui aurait du jouer. 
+     * Si joueurActuel == 0 : tous les joueurs ont joue le meme nombre de tours. 
+     * Si joueurActuel == 2 : les joueurs 3 et 4 ont un tour de moins.
+     */
+    auto aUnTourDeMoins = [this](int indiceJoueur) {
+        return joueurActuel != 0 && indiceJoueur >= joueurActuel;
+    };
+
+    // ==========================================
+    // TRI DU CLASSEMENT
+    // ==========================================
+
+    /*
+     * std::sort permet de trier le vecteur classement.
+     *
+     * classement.begin() : premier element du classement.
+     * classement.end()   : fin du classement.
+     *
+     * La fonction suivante explique comment comparer deux joueurs pour savoir lequel doit etre devant.
+     *
+     * a et b sont deux joueurs compares par std::sort.
+     *
+     * a.first  = indice du joueur A.
+     * a.second = points du joueur A.
+     *
+     * b.first  = indice du joueur B.
+     * b.second = points du joueur B.
+     *
+     * [&aUnTourDeMoins] permet d'utiliser la fonction aUnTourDeMoins definie juste au-dessus.
+     */
+    
+    std::sort(classement.begin(), classement.end(), [&aUnTourDeMoins](const std::pair<int, int>& a, const std::pair<int, int>& b) {
+
+            // Priorite aux points de victoire
+            if (a.second != b.second) {
+                return a.second > b.second;
+            }
+
+            // En cas d'egalite de points,
+            // les joueurs ayant joue moins de tours passent devant
+            return aUnTourDeMoins(a.first) && !aUnTourDeMoins(b.first);
         }
     );
 
+    // ==========================================
+    // AFFICHAGE DU CLASSEMENT
+    // ==========================================
+
     std::cout << "\n\n";
     std::cout << "============================================\n";
-    std::cout << "                                            \n";
     std::cout << "               FIN DE PARTIE                \n";
-    std::cout << "                                            \n";
     std::cout << "============================================\n";
 
     std::cout << "\n";
     std::cout << "           RESULTATS FINAUX                 \n";
     std::cout << "--------------------------------------------\n";
 
-    // Afficher le classement.
+    // Calculer le nombre de joueurs ayant la premiere place
+    int pointsMax = classement[0].second;
+
+    // Indiquer si le premier joueur du classement a joue un tour de moins.
+    // 0 = il a un tour de moins, 1 = il a joue autant de tours que les autres.
+    int toursMin = aUnTourDeMoins(classement[0].first) ? 0 : 1;
+
+    int nombreDePremiers = 0;
+
+    for (const auto& joueur : classement) {
+
+        if (joueur.second != pointsMax) {
+            break;
+        }
+
+        int toursJoueur = aUnTourDeMoins(joueur.first) ? 0 : 1;
+
+        if (toursJoueur == toursMin) {
+            nombreDePremiers++;
+        }
+    }
+
+    // Afficher le classement
+    int rang = 1;
+
     for (std::size_t i = 0; i < classement.size(); ++i) {
+
         int numeroJoueur = classement[i].first + 1;
         int points = classement[i].second;
 
-        if (i == 0) {
+        // Determiner si le joueur est a egalite avec le precedent
+        if (i > 0) {
+
+            // Recuperer les points de victoire du joueur precedent dans le classement
+            int pointsPrecedent = classement[i - 1].second;
+
+            // Determiner si le joueur precedent a joue un tour de moins 0 = un tour de moins, 1 = autant de tours
+            int toursPrecedent = aUnTourDeMoins(classement[i - 1].first) ? 0 : 1;
+
+            // Determiner si le joueur actuel a joue un tour de moins 0 = un tour de moins, 1 = autant de tours
+            int toursJoueur = aUnTourDeMoins(classement[i].first) ? 0 : 1;
+
+            // Si les points ou le nombre de tours sont differents, le joueur actuel obtient un nouveau rang
+            if (points != pointsPrecedent || toursJoueur != toursPrecedent) {
+
+                // Le rang correspond a la position du joueur dans le classement
+                rang = static_cast<int>(i) + 1;
+            }
+        }
+
+        // Afficher le rang
+        if (rang == 1) {
             std::cout << "  [1er] ";
         }
-        else if (i == 1) {
+        else if (rang == 2) {
             std::cout << "  [2e]  ";
         }
-        else if (i == 2) {
+        else if (rang == 3) {
             std::cout << "  [3e]  ";
         }
         else {
-            std::cout << "  [" << i + 1 << "e]  ";
+            std::cout << "  [" << rang << "e]  ";
         }
 
         std::cout << "Joueur " << numeroJoueur << " : " << points << " points\n";
@@ -112,27 +222,52 @@ void Partie::commencer()
 
     std::cout << "--------------------------------------------\n";
 
-    // Verifier s'il y a une egalite en premiere place.
-    if (classement.size() > 1 && classement[0].second == classement[1].second) {
+    // ==========================================
+    // AFFICHAGE DU OU DES VAINQUEURS
+    // ==========================================
+
+    if (nombreDePremiers > 1) {
+
         std::cout << "\n";
         std::cout << "============================================\n";
-        std::cout << "               EGALITE !                    \n";
+        std::cout << "          VICTOIRE PARTAGEE !               \n";
         std::cout << "============================================\n";
-        std::cout << "Plusieurs joueurs ont " << classement[0].second << " points !\n";
+
+        std::cout << "Les joueurs suivants remportent la partie :\n";
+
+        for (const auto& joueur : classement) {
+
+            if (joueur.second != pointsMax) {
+                break;
+            }
+
+            if (aUnTourDeMoins(joueur.first) == 
+                aUnTourDeMoins(classement[0].first)) {
+
+                std::cout << " Joueur " << joueur.first + 1 << "\n";
+            }
+        }
+
+        std::cout << "\nAvec " << pointsMax << " points de victoire !\n";
     }
-    else if (!classement.empty()) {
+    else {
+
         std::cout << "\n";
         std::cout << "============================================\n";
         std::cout << "             VICTOIRE !                     \n";
         std::cout << "============================================\n";
+
         std::cout << " FELICITATIONS AU JOUEUR " << classement[0].first + 1 << " !\n";
+
         std::cout << " Avec " << classement[0].second << " points de victoire !\n";
+
         std::cout << "============================================\n";
     }
 
     std::cout << "\nMerci d'avoir joue a Dominion !\n";
     std::cout << "A bientot pour une nouvelle partie !\n\n";
 }
+
 
 
 
@@ -148,8 +283,8 @@ void Partie::tour()
     const std::string ROUGE = "\033[31m";
     const std::string MAGENTA = "\033[1;35m";
 
-    ///--------
-    // Afficher un titre ------ATTENTION VOIR POUR LA SORTIR DE LA FONCTION TOUR
+    
+    // Afficher un titre
     auto afficherTitre = [&](const std::string& titre) {
         std::cout << "\n" << BLEU
                   << "========================================\n"
@@ -158,30 +293,38 @@ void Partie::tour()
                   << RESET << "\n";
     };
 
-    // Demander un nombre valide compris entre min et max.
-    // Retourne false si l'entree est fermee (EOF).
+    // Demander un nombre valide compris entre min et max
+    // Retourne false si l'entree est fermee (EOF)
     auto demanderChoix = [&](int& choix, int min, int max) -> bool {
         while (true) {
+
+            // Afficher le message de saisie
             std::cout << JAUNE << "Votre choix : " << RESET;
 
+            // Verifier si la saisie est un nombre entier
             if (std::cin >> choix) {
+
+                // Verifier si le nombre est compris dans l'intervalle autorise
                 if (choix >= min && choix <= max) {
                     return true;
                 }
 
-                std::cout << ROUGE
-                          << "Choix invalide. Entrez un nombre entre "
-                          << min << " et " << max << ".\n"
-                          << RESET;
+                // Afficher un message si le nombre est hors de l'intervalle
+                std::cout << ROUGE << "Choix invalide. Entrez un nombre entre " << min << " et " << max << ".\n" << RESET;
             }
             else {
+                // Arreter la saisie si l'entree est fermee (EOF)
                 if (std::cin.eof()) {
                     return false;
                 }
 
+                // Reinitialiser l'etat de cin apres une erreur de saisie
                 std::cin.clear();
-                std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
 
+                // Ignorer les caracteres invalides jusqu'a la fin de la ligne
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+
+                // Afficher un message si la saisie n'est pas un nombre
                 std::cout << ROUGE << "Saisie invalide. Entrez un nombre.\n" << RESET;
             }
         }
