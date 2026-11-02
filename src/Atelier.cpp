@@ -1,4 +1,5 @@
 #include <iostream> 
+#include <limits>
 #include "Atelier.hpp"
 
 #include "Joueur.hpp"
