@@ -32,7 +32,17 @@ void Chancelier::jouer(Joueur& joueur) {
     std::cout << "Voulez vous défausser votre deck ? (y ou n) : ";
     char choix;
     std::cin >> choix;
-    if(choix == 'y' || choix == 'Y'){
+    do {
+        std::cout << "Voulez-vous défausser votre deck ? (y ou n) : ";
+        std::cin >> choix;
+
+        if (choix != 'y' && choix != 'Y' && choix != 'n' && choix != 'N') {
+            std::cout << "Erreur : veuillez entrer y ou n.\n";
+        }
+
+    } while (choix != 'y' && choix != 'Y' && choix != 'n' && choix != 'N');
+
+    if (choix == 'y' || choix == 'Y') {
         joueur.defausseDeck();
     }
     std::cout << "APRES " << std::endl;

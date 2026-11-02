@@ -31,8 +31,17 @@ void VillageMinier::jouer(Joueur& joueur){
     joueur.ajouterActions(2); 
 
     char choix;
-    std::cout << "Voulez vous écarter cette carte ? (y ou n) :";
-    std::cin >> choix;
+
+    do {
+        std::cout << "Voulez vous écarter cette carte ? (y ou n) :";
+        std::cin >> choix;
+
+        if (choix != 'y' && choix != 'Y' && choix != 'n' && choix != 'N') {
+            std::cout << "Erreur : veuillez entrer y ou n.\n";
+        }
+
+    } while (choix != 'y' && choix != 'Y' && choix != 'n' && choix != 'N');
+
     if(choix == 'y' || choix == 'Y'){
         Carte* carteVM = nullptr;
 
