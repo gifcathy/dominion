@@ -280,32 +280,6 @@ void Joueur::reinitialiserRessources() {
     achat = 1;
 }
 
-/* 
-void Joueur::jouerTresor(std::size_t indice) {
-    if (indice >= main.size()) {
-        return;
-    }
-
-    // indique si c'est bien un tresor 
-    Tresor* tresor = dynamic_cast<Tresor*>(main[indice].get());
-
-    if (tresor == nullptr) {
-        return;
-    }
-
-    int valeur = tresor->getValeurTresor();
-
-    carteJouer.push_back(std::move(main[indice]));
-    main.erase(main.begin() + indice);
-
-    argent += valeur;
-    }
-*/
-    /*
-    Attention : si tu joues plusieurs cartes de ta main successivement, les indices changent après chaque déplacement. 
-    Il faudra donc tenir compte de ce comportement dans l'interface du jeu
-    */
-
 
 void Joueur::jouerTresor(std::size_t indice) {
     if (indice >= main.size()) {

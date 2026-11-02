@@ -16,5 +16,4 @@ const int& Tresor::getValeurTresor() const{
 // jouer un trésor 
 void Tresor::jouer(Joueur& joueur){
     joueur.ajouterArgent(valeur); 
-    //std::cout<<"tresor::jouer"<<std::endl;
 }

@@ -24,7 +24,6 @@ void Festin::afficher() const {
 }
 
 
-// jouer la carte 
 // Jouer la carte
 void Festin::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurActuel, Plateau& plateau) {
     Joueur& joueur = listeJoueurs.at(indiceJoueurActuel);
