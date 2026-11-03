@@ -70,7 +70,7 @@ int Plateau::getNombreCartes(const std::string& nom) const{
     // const_iterator est un itérateur qui permet de lire un élément, mais pas de modifier sa valeur
     std::map<std::string, int>::const_iterator it = piles.find(nom);
 
-    //end() n'est la dernière carte, c une position spéciale située après tous les éléments de la collection
+    //end() n'est la dernière carte, c'est une position spéciale située après tous les éléments de la collection
     if (it == piles.end()) {
         return 0;
     }

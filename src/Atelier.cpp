@@ -54,10 +54,13 @@ void Atelier::jouerPlateau( std::vector<Joueur>& listeJoueurs, int& indiceJoueur
             std::cout << "[ERREUR] Choix invalide.\n";
         }
         else {
+            // si toute la ligne a été lue
             if (std::cin.eof())
                 return;
 
             std::cin.clear();
+            // permet de vider la ligne, prend le nombre max de caractères à enlever et le caractère 
+            // auquel il doit s'arrêter 
             std::cin.ignore( std::numeric_limits<std::streamsize>::max(), '\n' );
 
             std::cout << "[ERREUR] Entrez un numero valide.\n";

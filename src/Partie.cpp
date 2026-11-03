@@ -30,6 +30,8 @@ Partie::Partie(int nombreJoueurs, const std::vector<std::string>& cartesAction, 
 
     // Creer les joueurs avec leur deck de depart
     for (int i = 0; i < nombreJoueurs; ++i) {
+        // on crée et ajoute le deck à joueurs, pas besoin de le créer avant et de l'ajouter
+        // ensuite avec push_back
         joueurs.emplace_back(creerDeckInitial());
     }
 }

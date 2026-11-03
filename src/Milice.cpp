@@ -36,7 +36,7 @@ void Milice::jouerPlateau(std::vector<Joueur>& listeJoueurs, int& indiceJoueurAc
         }
 
         // Si le joueur possède une Douve en main, il peut se protéger contre l'attaque.
-        // ici on ne lui laisse pas le choix d'utilise le pouvoir de la Douve en reaction
+        // ici on ne lui laisse pas le choix d'utiliser le pouvoir de la Douve en reaction
         if (joueur.possedeDouveEnMain()){
             std::cout << "Le joueur " << i + 1 << " à révélé une Douve pour se protéger." << std::endl;
             continue;

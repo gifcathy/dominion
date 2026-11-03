@@ -165,9 +165,12 @@ void Joueur::piocherNouvelleMain(){
 }
 
 void Joueur::melanger(){
+    // on crée une source aléatoire 
     std::random_device rd;
+    // on génère une suite de nombres aléatoires, gen le nom du générateur
     std::mt19937 gen(rd());
 
+    // fait le mélange en modifiant les indices des cartes 
     std::shuffle(deck.begin(), deck.end(), gen);
 }
 
